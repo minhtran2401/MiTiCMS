@@ -58,10 +58,10 @@
                 <li class="submenu">
                     <a href="#"><i class="fa fa-user"></i> <span> Tên Miền </span> <span class="menu-arrow"></span></a>
                     <ul style="display: none;">
-                        <li><a href="employees.html">Employees List</a></li>
-                        <li><a href="leaves.html">Leaves</a></li>
-                        <li><a href="holidays.html">Holidays</a></li>
-                        <li><a href="attendance.html">Attendance</a></li>
+                        <li><a href="{{route('domain.index')}}">Bảng giá</a></li>
+                        <li><a href="{{route('checkdomain.view')}}">Kiểm tra tên miền</a></li>
+                        <li><a href="leaves.html">Đăng kí tên miền</a></li>
+                       
                     </ul>
                 </li>
            
