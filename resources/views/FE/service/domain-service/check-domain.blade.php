@@ -65,15 +65,33 @@
 								<tr width="20%">
 								<td class="dm_khung_td ">
 									<input title="Click chọn hoặc bỏ tất cả domain phổ biến..!" id="phobien" class="phobien" name="phobien" type="checkbox" value="-1" />
-									<label for="phobien">Phổ biến</label>
+									<label for="phobien"> <b>Phổ Biến</b> </label>
 								</td>
 								<td class="dm_khung_com" width="80%">
-									<input title=".com" class="pb" name="com" type="checkbox" value=".com" />.com
-									<input title=".net" class="pb" name="net" type="checkbox" value=".net" />.net
-									<input title=".org" class="pb" name="org" type="checkbox" value=".org" />.org
-									<input title=".vn" class="pb" name="vn" type="checkbox" value=".vn" />.vn
-									<input title=".com.vn" class="pb" name="comvn" type="checkbox" value=".com.vn" />.com.vn
-									<input title=".net.vn" class="pb" name="netvn" type="checkbox" value=".net.vn" />.net.vn
+									<div style="display: inline-block; margin: 0 5px;">
+										<input id="com" title=".com" class="pb" name="com" type="checkbox" value=".com" />
+										<label for="com">.com</label>
+									</div>
+									<div style="display: inline-block; margin: 10px 5px;">
+										<input id="net" title=".net" class="pb" name="net" type="checkbox" value=".net" />
+										<label for="net">.net</label>
+									</div>
+									<div style="display: inline-block; margin: 0 5px;">
+										<input id="org" title=".org" class="pb" name="org" type="checkbox" value=".org" />
+										<label for="org">.org</label>
+									</div>
+									<div style="display: inline-block; margin: 0 5px;">
+										<input id="vn" title=".vn" class="pb" name="vn" type="checkbox" value=".vn" />
+										<label for="vn">.vn</label>
+									</div>
+									<div style="display: inline-block; margin: 0 5px;">
+										<input id="comvn" title=".com.vn" class="pb" name="comvn" type="checkbox" value=".com.vn" />
+										<label for="comvn">.com.vn</label>
+									</div>
+									<div style="display: inline-block; margin: 0 5px;">
+										<input id="netvn" title=".net.vn" class="pb" name="netvn" type="checkbox" value=".net.vn" />
+										<label for="netvn">.net.vn</label>
+									</div>
 								</td>
 							  </tr>
 							  <tr>
@@ -133,8 +151,7 @@
 								<input type="submit" class="dm_khung_nut btn btn-primary" value="Tìm Kiếm">
 								</td>
 								<td class="dm_khung_com">
-									<input style="border-inline-color: blue" class="dm_domain_text form-control" type="text" name="domain" id="">
-									{{-- <textarea class="dm_domain_text form-control" name="domain" placeholder="Domain cách nhau bằng dấu phẩy(,) nếu bạn nhập domain có domain.(*) thì hệ thống chỉ check domain.(*) đó, nếu domain không .(*) thì hệ thống check theo .(*) bạn chọn phía trên."></textarea> --}}
+									<input type="text" class="dm_domain_text form-control" name="domain" placeholder="Domain cách nhau bằng dấu phẩy(,) nếu bạn nhập domain có domain.(*) thì hệ thống chỉ check domain.(*) đó, nếu domain không .(*) thì hệ thống check theo .(*) bạn chọn phía trên."></textarea>
 								</td>
 							  </tr>
 							</table>
