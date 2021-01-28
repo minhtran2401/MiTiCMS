@@ -1,0 +1,50 @@
+Người Dùng
+
+Liên Hệ
+    Email người Dùng
+    Chủ đề
+    Nội dung
+    Thời gian (Create At)
+
+Giới Thiệu
+    Tiêu đề (Về chúng tôi)
+    Nội dung giới Thiệu
+
+Thông Tin
+    Logo website
+    Tên site (MiTi)
+    Số điện thoại liên hệ
+    Email liên hệ 
+    Thời gian hoạt động
+
+Dịch Vụ Hosting
+    Mã dịch vụ
+    Tên gói
+    Giá hosting
+    Cấu hình
+    Hiển thị
+
+Thông tin cấu hình Hosting 
+    Mã cấu hình
+    Tên gói hosting
+    Dung lượng đĩa 
+    Băng thông
+    ....
+
+Thông tin giá hosting 
+    Mã
+    Tên gói
+    Giá 1 tháng
+    Giá 3 tháng
+    Giá 6 tháng
+    ...
+
+
+
+service_groups
+    service_group_id                int (11) AI [PK],               mã nhóm dịch vụ
+    service_group_name              varchar (60) utf-8 unicode ci,  tên nhóm dịch vụ
+    display                         int (1) dafault (1)             hiển thị (yes/no)
+
+product_types
+    pt_id               

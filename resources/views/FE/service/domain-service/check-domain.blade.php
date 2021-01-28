@@ -352,7 +352,7 @@ $(document).ready(function() {
 			//xu ly ket noi vao server bang getJSON
 			$.getJSON(esco_xuly,function(esco_data_xuly){
 				$.each(esco_data_xuly, function(num,domain){
-					$(".esco_check_domain").append('<tr class="esco_doshow" id="esco_doshow'+num+'" val='+domain+'><td>'+domain+'<img src="'+host_link+'/flugins/imgs/loading.gif" width="16"/></td></tr>');// hien loading check khi check
+					$(".esco_check_domain").append('<li class="esco_doshow" id="esco_doshow'+num+'" val='+domain+'>'+domain+'<img src="'+host_link+'/flugins/imgs/loading.gif" width="16"/></li>');// hien loading check khi check
 				});
 				esco_kq(esco_data_xuly.length);
 			});
