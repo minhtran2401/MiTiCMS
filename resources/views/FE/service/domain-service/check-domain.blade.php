@@ -30,8 +30,8 @@
                     <div class="container">
                         <div class="row d-flex align-items-center pt-5">
                             <div class="col-lg-5 heading-white mb-4 mb-sm-4 mb-lg-0 ftco-animate">
-                                <h2>Search Your Domain Name</h2>
-                                <p>A small river named Duden flows by their place</p>
+                                <h2>TÌM KIẾM TÊN MIỀN</h2>
+                                <p>Chọn một tên miền thật đẹp theo ý của bạn</p>
                             </div>
                             <div class="col-lg-7 py-lg-5 ftco-wrap ftco-wrap-2 ftco-animate">
                                 <form id="check-domain-form" method="POST" action="{{route('domain.check')}}" class="domain-form d-flex mb-3">
@@ -50,7 +50,8 @@
                             <span><small>.biz</small> $8.95</span> 
                             <span><small>.co</small> $7.80</span>
                             <span><small>.me</small> $7.95</span>
-                        </p>
+						</p>
+						<div id="mutext" class="mutex mb-2"><p id="alert-domain"></p></div>
                             </div>
                         </div>
                     </div>
@@ -137,7 +138,9 @@
 							  </tr>
 							</table>
 						</div>
-						<ul class="esco_check_domain"></ul>
+						<table class="esco_check_domain">
+							
+						</table>
 					</div>
 				</section>
 				
@@ -229,8 +232,6 @@
 
 @endsection
 @section('script')
-<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
     <script>
 // this is the id of the form
@@ -254,20 +255,23 @@ $.ajax({
 						'Tên miền bạn vừa nhập không chính xác!',
 						'error'
 						);
+			$("#alert-domain").text("Tên miền " + data + " không đúng định dạng, hãy thử lại ✘").css('color', 'red');
 			}
-			else if(response['status']==2){
+			else if(response['domain_registered']=="yes"){
 				Swal.fire(
 						'Không Thể Mua',
 						'Tên miền bạn vừa nhập đã được sử dụng, hãy thử lại tên khác !',
 						'warning'
 						);
+			$("#alert-domain").text("Tên miền " + data + " không khả dụng, hãy thử lại ✘").css('color', 'orange');
 			}
-			else if(response['status']==1){
+			else if(response['domain_registered']=="no"){
 				Swal.fire(
 						'Có Thể Mua',
 						'Tên miền bạn vừa nhập có thể mua , thanh toán ngay !',
 						'success'
 						);
+			$("#alert-domain").text("Bạn có thể mua tên miền " + data +  " ✔").css('color', 'green');
 			}
 		});
        }
@@ -348,7 +352,7 @@ $(document).ready(function() {
 			//xu ly ket noi vao server bang getJSON
 			$.getJSON(esco_xuly,function(esco_data_xuly){
 				$.each(esco_data_xuly, function(num,domain){
-					$(".esco_check_domain").append('<li class="esco_doshow" id="esco_doshow'+num+'" val='+domain+'>'+domain+'<img src="'+host_link+'/flugins/imgs/loading.gif" width="16"/></li>');// hien loading check khi check
+					$(".esco_check_domain").append('<tr class="esco_doshow" id="esco_doshow'+num+'" val='+domain+'><td>'+domain+'<img src="'+host_link+'/flugins/imgs/loading.gif" width="16"/></td></tr>');// hien loading check khi check
 				});
 				esco_kq(esco_data_xuly.length);
 			});
