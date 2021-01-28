@@ -15,7 +15,7 @@
 					<div class="container">
 						<div class="row justify-content-center ">
 					  <div class="col-md-12 text-center heading-section ftco-animate">
-						<h1 >KIỂM TRA TÊN MIỀN</h1>
+						<h1 style="font-weight: 900">KIỂM TRA TÊN MIỀN</h1>
 					  </div>
 					</div>
 					
@@ -26,7 +26,7 @@
                     <div class="container">
                         <div class="row d-flex align-items-center pt-5">
                             <div class="col-lg-6 heading-white mb-4 mb-sm-4 mb-lg-0 ftco-animate">
-                                <h2>TÌM KIẾM TÊN MIỀN</h2>
+                                <h2 >TÌM KIẾM TÊN MIỀN</h2>
                                 <p>Chọn một tên miền thật đẹp theo ý của bạn</p>
                             </div>
                             <div class="col-lg-6 py-lg-6 ftco-wrap ftco-wrap-2 ftco-animate">
@@ -61,7 +61,7 @@
 									<h2>NHANH HƠN VỚI KIỂM TRA MỘT LÚC NHIỀU TÊN MIỀN</h2>
 									<p>Nhập tên miền và chọn đuôi miền, hệ thống sẽ tìm cho bạn những tên miền khả dụng.</p>
 								</div>
-							<table class="table" border="2" cellpadding="3" cellspacing="3">
+							<table class="table" border="4" cellpadding="3" cellspacing="3">
 								<tr width="20%">
 								<td class="dm_khung_td ">
 									<input title="Click chọn hoặc bỏ tất cả domain phổ biến..!" id="phobien" class="phobien" name="phobien" type="checkbox" value="-1" />
@@ -133,11 +133,12 @@
 								<input type="submit" class="dm_khung_nut btn btn-primary" value="Tìm Kiếm">
 								</td>
 								<td class="dm_khung_com">
-									<textarea class="dm_domain_text form-control" name="domain" placeholder="Domain cách nhau bằng dấu phẩy(,) nếu bạn nhập domain có domain.(*) thì hệ thống chỉ check domain.(*) đó, nếu domain không .(*) thì hệ thống check theo .(*) bạn chọn phía trên."></textarea>
+									<input style="border-inline-color: blue" class="dm_domain_text form-control" type="text" name="domain" id="">
+									{{-- <textarea class="dm_domain_text form-control" name="domain" placeholder="Domain cách nhau bằng dấu phẩy(,) nếu bạn nhập domain có domain.(*) thì hệ thống chỉ check domain.(*) đó, nếu domain không .(*) thì hệ thống check theo .(*) bạn chọn phía trên."></textarea> --}}
 								</td>
 							  </tr>
 							</table>
-							<table class="table table-striped" border="1" cellpadding="5" cellspacing="5">
+							<table class="table table-striped" border="5" cellpadding="5" cellspacing="5">
 								<thead>
 									<tr>
 									  <th>Tên domain </th>
