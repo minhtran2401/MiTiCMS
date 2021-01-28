@@ -4,36 +4,32 @@
 
 @endsection
 @section('css')
-<style>
-	.dm_khung{width:100%; height:auto; border:solid 1px #CCCCCC; font-size:14px;}
-	.dm_khung table{width:98%; margin:10px auto 10px auto; border:none;}
-	.dm_khung_td{width:90px; padding:10px; font-weight:bold; text-align:left;}
-	.dm_khung_com{padding:10px; font-weight:bold;text-align:left;}
-	.dm_domain_text{width:98%; height:60px; padding:10px;}
-	.dm_khung_nut{ width:80px; border:solid 1px #CCCCCC; line-height:80px; text-align:center; font-weight:bold; font-size:24px; background-color:#F3F3F3;}
-	.hightlight{background-color:#FF6;}
-	.esco_check_domain li{list-style:decimal;}
-	.esco_check_domain li a{text-decoration:none;color:#00F;}
-	.esco_check_domain .domain_roi{color:#F00; font-weight:bold; text-decoration:none; text-decoration:line-through;}
-	.esco_check_domain .domain_chua{color:#3C0; font-weight:bold; text-decoration:none;}
-	.by{ width:300px; bottom:5px; right:5px; position:absolute;}
-	.by a{color:#06F; text-decoration:none;}
-	.by a:hover{color:#F00; text-decoration:underline;}
-</style>
+
 @endsection
 @section('content')
 <div class="page-wrapper">
     <div class="content">
         <div class="row">
             <div class="col-sm-12">
+				<section class="ftco-section">
+					<div class="container">
+						<div class="row justify-content-center ">
+					  <div class="col-md-12 text-center heading-section ftco-animate">
+						<h1 >KIỂM TRA TÊN MIỀN</h1>
+					  </div>
+					</div>
+					
+					</div>
+				</section>
+				
                 <section class="ftco-domain">
                     <div class="container">
                         <div class="row d-flex align-items-center pt-5">
-                            <div class="col-lg-5 heading-white mb-4 mb-sm-4 mb-lg-0 ftco-animate">
+                            <div class="col-lg-6 heading-white mb-4 mb-sm-4 mb-lg-0 ftco-animate">
                                 <h2>TÌM KIẾM TÊN MIỀN</h2>
                                 <p>Chọn một tên miền thật đẹp theo ý của bạn</p>
                             </div>
-                            <div class="col-lg-7 py-lg-5 ftco-wrap ftco-wrap-2 ftco-animate">
+                            <div class="col-lg-6 py-lg-6 ftco-wrap ftco-wrap-2 ftco-animate">
                                 <form id="check-domain-form" method="POST" action="{{route('domain.check')}}" class="domain-form d-flex mb-3">
                                     @csrf
                           <div class="form-group domain-name">
@@ -59,15 +55,19 @@
 				
 				<section class="ftco-section">
 					<div class="container">
-						<div class="dm_khung">
+						<div class="dm_khung row">
 						
-							<table cellpadding="0" cellspacing="0">
-								<tr>
-								<td class="dm_khung_td">
-									<input title="Click chọn hoặc bỏ tất cả domain phổ biến..!" class="phobien" name="phobien" type="checkbox" value="-1" />
-									Phổ biến
+								<div class="col-lg-12 heading-white mb-4 mb-sm-4 mb-lg-0 ftco-animate">
+									<h2>NHANH HƠN VỚI KIỂM TRA MỘT LÚC NHIỀU TÊN MIỀN</h2>
+									<p>Nhập tên miền và chọn đuôi miền, hệ thống sẽ tìm cho bạn những tên miền khả dụng.</p>
+								</div>
+							<table class="table" border="2" cellpadding="3" cellspacing="3">
+								<tr width="20%">
+								<td class="dm_khung_td ">
+									<input title="Click chọn hoặc bỏ tất cả domain phổ biến..!" id="phobien" class="phobien" name="phobien" type="checkbox" value="-1" />
+									<label for="phobien">Phổ biến</label>
 								</td>
-								<td class="dm_khung_com">
+								<td class="dm_khung_com" width="80%">
 									<input title=".com" class="pb" name="com" type="checkbox" value=".com" />.com
 									<input title=".net" class="pb" name="net" type="checkbox" value=".net" />.net
 									<input title=".org" class="pb" name="org" type="checkbox" value=".org" />.org
@@ -78,8 +78,8 @@
 							  </tr>
 							  <tr>
 								<td class="dm_khung_td">
-									<input title="Click chọn hoặc bỏ tất cả domain Việt Nam..!" class="vietnam" name="vietnam" type="checkbox" value="-2" />
-									Việt Nam
+									<input id="vietnam" title="Click chọn hoặc bỏ tất cả domain Việt Nam..!" class="vietnam" name="vietnam" type="checkbox" value="-2" />
+									<label for="vietnam">Việt Nam</label>
 								</td>
 								<td class="dm_khung_com">
 									<input title="ac.vn" class="dvn" name="acvn" type="checkbox" value=".ac.vn" />.ac.vn
@@ -95,8 +95,8 @@
 							  </tr>
 							  <tr>
 								<td class="dm_khung_td">
-									<input title="Click chọn hoặc bỏ tất cả domain quốc tế..!" class="quocte" name="quocte" type="checkbox" value="-3" />
-									Quốc tế
+									<input id="quocte" title="Click chọn hoặc bỏ tất cả domain quốc tế..!" class="quocte" name="quocte" type="checkbox" value="-3" />
+									<label for="quocte">Quốc tế</label>
 								</td>
 								<td class="dm_khung_com">
 									<input title=".asia" class="qt" name="asia" type="checkbox" value=".asia" />.asia
@@ -129,18 +129,28 @@
 								</td>
 							  </tr>
 							  <tr>
-								<td class="dm_khung_td">
-									<div class="dm_khung_nut" title="Click kiểm tra domain..!">Check</div>
+								<td class="dm_khung_td">	
+								<input type="submit" class="dm_khung_nut btn btn-primary" value="Tìm Kiếm">
 								</td>
 								<td class="dm_khung_com">
-									<textarea class="dm_domain_text" name="domain" placeholder="Domain cách nhau bằng dấu phẩy(,) nếu bạn nhập domain có domain.(*) thì hệ thống chỉ check domain.(*) đó, nếu domain không .(*) thì hệ thống check theo .(*) bạn chọn phía trên."></textarea>
+									<textarea class="dm_domain_text form-control" name="domain" placeholder="Domain cách nhau bằng dấu phẩy(,) nếu bạn nhập domain có domain.(*) thì hệ thống chỉ check domain.(*) đó, nếu domain không .(*) thì hệ thống check theo .(*) bạn chọn phía trên."></textarea>
 								</td>
 							  </tr>
 							</table>
+							<table class="table table-striped" border="1" cellpadding="5" cellspacing="5">
+								<thead>
+									<tr>
+									  <th>Tên domain </th>
+									  <th>Thông tin</th>
+									  <th>Trạng thái</th>
+									</tr>
+								  </thead>
+								  <tbody id="esco_check_domain">
+	
+								  </tbody>
+							</table>
 						</div>
-						<table class="esco_check_domain">
-							
-						</table>
+					
 					</div>
 				</section>
 				
@@ -280,7 +290,8 @@ $.ajax({
 
 });    
 </script>
-<script type="text/javascript" src="https://escovietnam.vn/esco-jquery/"></script>
+<script src="{{asset('assets')}}/js/escovietnam.js"></script>
+
 <script>
 //luu y phai chen thu vien jquey moi su dung dc.
 var link_whois="{{route('index')}}"; 
@@ -335,7 +346,14 @@ $(document).ready(function() {
 	
 	$(".dm_khung_nut").click(function(){
 		var dm_nd=$(".dm_domain_text").attr('value');//domain da nhap
-		if(dm_nd==''){alert("Bạn chưa nhập domain để kiểm tra..!");}// kiem tra gia tri da dc nhap chua
+		if(dm_nd=='')
+		{
+			Swal.fire(
+						'Lỗi',
+						'Bạn chưa nhập tên miền',
+						'error'
+						);
+		}// kiem tra gia tri da dc nhap chua
 		else{
 			//xu ly lay mang .(*) da chon
 			var listid="";
@@ -343,7 +361,7 @@ $(document).ready(function() {
 			$("input[class='dvn']").each(function(){if (this.checked) listid = listid+","+this.value;});
 			$("input[class='qt']").each(function(){if (this.checked) listid = listid+","+this.value;});
 			listid=listid.substr(1);var mang_com=listid;var mang_domain=dm_nd;
-			$(".esco_check_domain").empty()
+			$("#esco_check_domain").empty()
 			
 			//server check
 			var host_link='http://escovietnam.vn';
@@ -352,7 +370,7 @@ $(document).ready(function() {
 			//xu ly ket noi vao server bang getJSON
 			$.getJSON(esco_xuly,function(esco_data_xuly){
 				$.each(esco_data_xuly, function(num,domain){
-					$(".esco_check_domain").append('<tr class="esco_doshow" id="esco_doshow'+num+'" val='+domain+'><td>'+domain+'<img src="'+host_link+'/flugins/imgs/loading.gif" width="16"/></td></tr>');// hien loading check khi check
+					$("#esco_check_domain").append('<tr id="esco_doshow'+num+'" val='+domain+'><td>'+domain+'</td></tr>');// hien loading check khi check
 				});
 				esco_kq(esco_data_xuly.length);
 			});
@@ -363,7 +381,8 @@ $(document).ready(function() {
 					var esco_kq=host_link+"/flugins/check_domain/get_domain.php?re_kq=?&num="+$i+"&domain="+esco_domain;
 					$.getJSON(esco_kq,function(esco_data_kq){
 						$.each(esco_data_kq, function(num1,kq){
-							$("#esco_doshow"+num1).html(kq);// tra ra ket qua khi check xong
+
+							$("#esco_doshow"+num1).append('<td>'+kq+'</td><td>Đã kiểm tra xong ✔</td>');// tra ra ket qua khi check xong
 						});
 						replace_whois(link_whois);
 						replace_dk(link_dk);	
