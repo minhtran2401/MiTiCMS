@@ -17,8 +17,11 @@ class CreateMitiInfoTable extends Migration
             $table->id();
             $table->string('logo')->nullable();
             $table->string('name');
-            $table->string('phone');
-            $table->string('email');
+            $table->string('phone1');
+            $table->string('phone2');
+            $table->string('email1');
+            $table->string('email2');
+            $table->integer('protect');
             $table->integer('status')->default(0); // [1] bảo trì | [2] tạm đóng cửa | [3] countdown for event
             $table->timestamps();
         });

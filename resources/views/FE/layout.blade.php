@@ -18,14 +18,17 @@
 @yield('css')
 <style>
     body{
-        font-family: font-family: 'Roboto', sans-serif !important;
+        font-family: 'Roboto', sans-serif !important;
     }
 </style>
 <body>
     <div class="main-wrapper">
         @include('FE.header')
         @include('FE.menu')
+        
+      
         @yield('content')
+       
         <div class="notification-box">
             <div class="msg-sidebar notifications msg-noti">
                 <div class="topnav-dropdown-header">
