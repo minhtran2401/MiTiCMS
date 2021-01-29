@@ -23,11 +23,13 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/', [App\Http\Controllers\DomainController::class, 'index'])->name('domain.index');
     Route::get('/kiem-tra-ten-mien', [App\Http\Controllers\DomainController::class, 'view_check_domain'])->name('checkdomain.view');
     Route::post('/kiem-tra-ten-mien', [App\Http\Controllers\DomainController::class, 'check_domain'])->name('domain.check');
-
-
-
-});
-
-//domain
+    });
+//end domain
+//vps
+    Route::prefix('vps')->group(function () {
+    Route::get('/', [App\Http\Controllers\VpsController::class, 'index'])->name('vps.index');
+    Route::get('/vps-type', [App\Http\Controllers\VpsController::class, 'vps_type'])->name('vps.vps-type');
+    });
+//end vps
 
 });

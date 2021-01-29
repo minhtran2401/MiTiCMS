@@ -11,8 +11,7 @@
                                 <div class="container">
                                     <div class="row justify-content-center mb-5">
                                         <div class="col-md-7 text-center heading-section ftco-animate">
-                                            <h2 class="page-title">Dịch Vụ VPS</h2>
-                                            <h4>Dịch vụ cho thuê máy chủ ảo - hỗ trợ trực tiếp hướng dẫn sử dụng!</h4>
+                                            <h2 class="page-title">VPS AWS</h2>
                                         </div>
                                     </div>
                                     <div class="row">
