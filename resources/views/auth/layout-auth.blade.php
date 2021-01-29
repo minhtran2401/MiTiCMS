@@ -24,10 +24,12 @@ body { margin: 0 } /* Removed the default body margin */
 <section class="row main-image">
     @yield('content')
 </section>
+<script src="{{asset('assets')}}/js/sweetalert2@10.js"></script>
 <script src="{{asset('assets')}}/js/jquery-3.2.1.min.js"></script>
 <script src="{{asset('assets')}}/js/popper.min.js"></script>
 <script src="{{asset('assets')}}/js/bootstrap.min.js"></script>
 <script src="{{asset('assets')}}/js/app.js"></script>
+@yield('js')
 </body>
 
 

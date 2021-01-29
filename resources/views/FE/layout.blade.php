@@ -30,7 +30,7 @@
         
       
         @yield('content')
-       
+      
         <div class="notification-box">
             <div class="msg-sidebar notifications msg-noti">
                 <div class="topnav-dropdown-header">
@@ -240,7 +240,9 @@
                 </div>
             </div>
         </div>
+       
     </div>
+   
     <div class="sidebar-overlay" data-reff=""></div>
     <script src="{{asset('assets')}}/js/sweetalert2@10.js"></script>
     <script src="{{asset('assets')}}/js/jquery-3.2.1.min.js"></script>

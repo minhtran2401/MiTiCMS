@@ -60,7 +60,7 @@
                     <ul style="display: none;">
                         <li><a href="{{route('domain.index')}}">Bảng giá</a></li>
                         <li><a href="{{route('checkdomain.view')}}">Kiểm tra tên miền</a></li>
-                        <li><a href="leaves.html">Đăng kí tên miền</a></li>
+                        <li><a href="{{route('view.domain.reg')}}">Đăng kí tên miền</a></li>
                        
                     </ul>
                 </li>

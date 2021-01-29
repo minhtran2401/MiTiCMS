@@ -1,0 +1,6 @@
+form chi tiết + dang kí mua acc
+bao gồm tên, mail, loại acc ( type = hiden)
+loại acc ( read only )
+số lượng , thời gian combo ( nếu có )
+note
+nút submit

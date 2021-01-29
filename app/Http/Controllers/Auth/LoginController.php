@@ -1,9 +1,10 @@
 <?php
 
 namespace App\Http\Controllers\Auth;
-
+use App\Models\User;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
+use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 class LoginController extends Controller
@@ -37,4 +38,49 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+    
+    // public function show_login_form()
+    // {
+    //     return view('login');
+    // }
+    public function process_login(Request $request)
+    {
+        $request->validate([
+            'email' => 'required',
+            'password' => 'required'
+        ]);
+
+        $credentials = $request->except(['_token']);
+
+        $user = User::where('email',$request->email)->first();
+
+        if (auth()->attempt($credentials)) {  
+            return response()->json(1); //đúng tk mk
+        }else{
+            return response()->json(0); //sai tk mk
+        }
+    }
+    public function process_signup(Request $request)
+    {   
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required',
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+        ]);
+            
+        $user = User::create([
+            'name' => trim($request->input('name')),
+            'email' => strtolower($request->input('email')),
+            'password' => bcrypt($request->input('password')),
+        ]);
+        
+        return response()->json("1");
+        
+    }
+    public function logout()
+    {
+        \Auth::logout();
+        return redirect()->route('login');
+    }
+    
 }
