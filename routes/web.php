@@ -23,8 +23,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/', [App\Http\Controllers\DomainController::class, 'index'])->name('domain.index');
     Route::get('/kiem-tra-ten-mien', [App\Http\Controllers\DomainController::class, 'view_check_domain'])->name('checkdomain.view');
     Route::post('/kiem-tra-ten-mien', [App\Http\Controllers\DomainController::class, 'check_domain'])->name('domain.check');
-
-
+    Route::get('/dang-ki-ten-mien', [App\Http\Controllers\DomainController::class, 'view_reg_domain'])->name('view.domain.reg');
 
 });
 

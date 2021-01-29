@@ -33,7 +33,7 @@
                                 <form id="check-domain-form" method="POST" action="{{route('domain.check')}}" class="domain-form d-flex mb-3">
                                     @csrf
                           <div class="form-group domain-name">
-                            <input name="name-domain" type="text" class="form-control name px-4" placeholder="Tìm tên miền...">
+                            <input name="name-domain" type="text" class="form-control name px-4" required placeholder="Tìm tên miền...">
                           </div>
                           <div class="form-group domain-select d-flex">
                             <input type="submit" class="search-domain btn btn-primary text-center" value="Tìm">
@@ -151,7 +151,7 @@
 								<input type="submit" class="dm_khung_nut btn btn-primary" value="Tìm Kiếm">
 								</td>
 								<td class="dm_khung_com">
-									<input type="text" class="dm_domain_text form-control" name="domain" placeholder="Domain cách nhau bằng dấu phẩy(,) nếu bạn nhập domain có domain.(*) thì hệ thống chỉ check domain.(*) đó, nếu domain không .(*) thì hệ thống check theo .(*) bạn chọn phía trên."></textarea>
+									<input type="text" class="dm_domain_text form-control" name="domain" placeholder="Chỉ cần nhập tên và tick chọn đuôi domain, mỗi tên cách nhau bằng dấu phẩy">
 								</td>
 							  </tr>
 							</table>
@@ -241,7 +241,8 @@
 						        <td>$45.00</td>
 						        <td>$5.00</td>
 						        <td>$5.00</td>
-						        <td><a href="#" class="btn btn-primary">Sign Up</a></td>
+								<td><a href="#" class="btn btn-primary">Sign Up</a></td>
+							
 						      </tr>
 						    </tbody>
 						  </table>
@@ -266,7 +267,33 @@
 $("#check-domain-form").submit(function(e) {
 
 e.preventDefault(); // avoid to execute the actual submit of the form.
-
+let timerInterval
+Swal.fire({
+  title: 'Đang kiểm tra',
+  html: 'Vui lòng đợi một lát',
+  timer: 9000,
+  timerProgressBar: true,
+  didOpen: () => {
+    Swal.showLoading()
+    timerInterval = setInterval(() => {
+      const content = Swal.getContent()
+      if (content) {
+        const b = content.querySelector('b')
+        if (b) {
+          b.textContent = Swal.getTimerLeft()
+        }
+      }
+    }, 100)
+  },
+  willClose: () => {
+    clearInterval(timerInterval)
+  }
+}).then((result) => {
+  /* Read more about handling dismissals below */
+  if (result.dismiss === Swal.DismissReason.timer) {
+    console.log('I was closed by the timer')
+  }
+})
 var form = $(this);
 var url = form.attr('action');
 
@@ -299,7 +326,7 @@ $.ajax({
 						'Tên miền bạn vừa nhập có thể mua , thanh toán ngay !',
 						'success'
 						);
-			$("#alert-domain").text("Bạn có thể mua tên miền " + data +  " ✔").css('color', 'green');
+			$("#alert-domain").text("Bạn có thể mua tên miền " + data +  " ✔" ).css('color', 'green').append( "<a class='btn btn-primary ml-2' href='{{route('view.domain.reg')}}'>Mua ngay</a>");
 			}
 		});
        }
@@ -309,11 +336,11 @@ $.ajax({
 });    
 </script>
 <script src="{{asset('assets')}}/js/escovietnam.js"></script>
-
 <script>
 //luu y phai chen thu vien jquey moi su dung dc.
-var link_whois="{{route('index')}}"; 
-var link_dk="{{route('index')}}"; 
+var link_whois="{{route('view.domain.reg')}}"; 
+var link_dk="{{route('view.domain.reg')}}"; 
+
 
 // link toi trang whois của bạn hoặc để trống hệ thống lấy trang whois của chúng tôi.
 // Luu ý trang whois phải là trang chúng tôi cung cấp whois.html
@@ -334,7 +361,8 @@ $(document).ready(function() {
 	function replace_dk(link_dk){
 		$(".esco_doshow").each(function($i){
 			var domain_gets=$("#esco_doshow"+$i).attr("val");//domain get dc
-			var links_dk_domain=link_dk+"?domain="+domain_gets;//links đăng ký domain
+			var links_dk_domain=link_dk;//links đăng ký domain
+			
 			$("#esco_doshow"+$i+" .w_dk").attr("href",links_dk_domain);
 		});	
 	}
@@ -411,4 +439,10 @@ $(document).ready(function() {
 	});
 });
 </script>
+<script>
+$(document).on('click', '.w_dk', function () {
+window.open("{{route('view.domain.reg')}}");
+});
+	
+	</script>
 @endsection
