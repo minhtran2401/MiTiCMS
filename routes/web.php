@@ -13,7 +13,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
  Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('index');
-    Auth::routes();
+    Auth::routes(); 
+        Route::post('/login', [App\Http\Controllers\Auth\LoginController::class, 'process_login'])->name('loginz');
+        Route::post('/logout',[App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
+        Route::post('/register', [App\Http\Controllers\Auth\LoginController::class,'process_signup'])->name('register');
+
+//     Route::get('/login','LoginController@show_login_form')->name('login');
+//   Route::get('/register','LoginController@show_signup_form')->name('register');
+
+ 
+  
     
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'home'])->name('home');
 
