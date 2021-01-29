@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDomainTable extends Migration
+class CreateServicePriceTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,12 @@ class CreateDomainTable extends Migration
      */
     public function up()
     {
-        Schema::create('domain', function (Blueprint $table) {
-            $table->id('domain_id');
-            $table->string('domain_type');
-            $table->string('domain_name');
+        Schema::create('service_price', function (Blueprint $table) {
+            $table->id('service_price_id');
+            $table->integer('service_group_id');
+            $table->integer('service_type_id');
+            $table->string('sku');
+            $table->text('service_price_info');
             $table->timestamps();
         });
     }
@@ -28,6 +30,6 @@ class CreateDomainTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('domain');
+        Schema::dropIfExists('service_price');
     }
 }
