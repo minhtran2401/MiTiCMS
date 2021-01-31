@@ -68,6 +68,8 @@ Route::prefix('admin')->group(function () {
     // Route::get('/register','AdminLoginController@show_signup_form')->name('register');
     // Route::post('/register','AdminLoginController@process_signup');
     Route::resource('/group-service', App\Http\Controllers\BE\GroupServiceController::class);
+    Route::post('/group-service-ajax', [App\Http\Controllers\BE\GroupServiceController::class, 'storeajax'])->name('store.gr.ajax');
+
 
 
     Route::prefix('app')->group(function () {

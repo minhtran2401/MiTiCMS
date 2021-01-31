@@ -82,7 +82,8 @@
             <!-- Modal to add new record -->
             <div class="modal modal-slide-in fade" id="modals-slide-in">
                 <div class="modal-dialog sidebar-sm">
-                    <form class="add-new-record modal-content pt-0">
+                    <form id="create-groups-service" method="POST" action="{{route('store.gr.ajax')}}" class="add-new-record modal-content pt-0">
+                        @csrf
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
                         <div class="modal-header mb-1">
                             <h5 class="modal-title" id="exampleModalLabel">Thêm Nhóm Dịch Vụ Mới</h5>
@@ -90,10 +91,10 @@
                         <div class="modal-body flex-grow-1">
                             <div class="form-group">
                                 <label class="form-label" for="basic-icon-default-fullname">Tên Nhóm</label>
-                                <input type="text" class="form-control dt-full-name" id="basic-icon-default-fullname" placeholder="Tên Nhóm" aria-label="John Doe" />
+                                <input type="text" name="name_group_service" class="form-control dt-full-name" id="basic-icon-default-fullname" placeholder="Tên Nhóm"  />
                             </div>
                            
-                            <button type="button" class="btn btn-primary data-submit mr-1">Lưu</button>
+                            <button type="submit" class="btn btn-primary data-submit mr-1">Lưu</button>
                             <button type="reset" class="btn btn-outline-secondary" data-dismiss="modal">Hủy</button>
                         </div>
                     </form>
@@ -109,6 +110,8 @@
 @endsection
 
 @section('pagevendor')
+<script src="{{asset('BE')}}/app-assets/vendors/js/extensions/toastr.min.js"></script>
+<script src="{{asset('BE')}}/app-assets/js/scripts/extensions/ext-component-toastr.js"></script>
 <script src="{{asset('BE')}}/app-assets/vendors/js/tables/datatable/jquery.dataTables.min.js"></script>
 
 <script src="{{asset('BE')}}/app-assets/vendors/js/tables/datatable/datatables.bootstrap4.min.js"></script>
@@ -135,6 +138,32 @@
         ]
     } );
 } );
+    </script>
+    <script>
+        $("#create-groups-service").submit(function(e) {
+
+e.preventDefault(); // avoid to execute the actual submit of the form.
+
+var form = $(this);
+var url = form.attr('action');
+
+$.ajax({
+       type: "POST",
+       url: url,
+       data: form.serialize(), // serializes the form's elements.
+       success: function(data)
+       {
+        //    alert(data); // show response from the php script.
+        Swal.fire(
+  'Thành công!',
+  'Đã thêm nhóm mới!',
+  'success'
+)
+       }
+     });
+
+
+});
     </script>
     
 

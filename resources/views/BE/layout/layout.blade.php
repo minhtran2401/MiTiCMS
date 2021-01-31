@@ -71,7 +71,8 @@
     <button class="btn btn-primary btn-icon scroll-top" type="button"><i data-feather="arrow-up"></i></button>
     <!-- END: Footer-->
 
-  
+    <script src="{{asset('assets')}}/js/sweetalert2@10.js"></script>
+    <script src="{{asset('assets')}}/js/jquery-3.2.1.min.js"></script>
 
     <!-- BEGIN: Vendor JS-->
     <script src="{{asset('BE')}}/app-assets/vendors/js/vendors.min.js"></script>

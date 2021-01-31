@@ -46,7 +46,20 @@ class GroupServiceController extends Controller
         ]);
         toast('Thêm Tên Nhóm Sản Phẩm Thành Công!','success');
         $ngs->save();
-        return redirect ()->route('nhom-san-pham.index')->with('ok','Đã thêm nhóm mới !');
+        return redirect ()->route('BE.group-service.show');
+      
+    }
+    public function storeajax(Request $request)
+    {
+       
+       
+        $ngs = new GroupService([
+            'slug' =>\Str::slug($request->name_group_service),
+            'service_group_name' => $request->get('name_group_service'),
+            'dislay' => 1,
+        ]);
+        $ngs->save();
+        return response()->json(1);
     }
 
     /**
