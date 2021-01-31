@@ -21,6 +21,7 @@ class CreateAccountServiceTable extends Migration
             $table->string('account_name');             // Tài khoản drive unlimited
             $table->text('account_info');               // Thông tin chi tiết của tài khoản
             $table->integer('display');                 // Ẩn | Hiện
+            $table->string('slug')->nullable();
             $table->timestamps();
         });
     }

@@ -42,5 +42,17 @@ Route::prefix('vps')->group(function () {
     Route::get('/vps-type', [App\Http\Controllers\VpsController::class, 'vps_type'])->name('vps.vps-type');
     });
 //end vps
+//hosting
+Route::prefix('hosting')->group(function () {
+    Route::get('/', [App\Http\Controllers\HostingController::class, 'index'])->name('hosting.index');
+    Route::get('/hosting-type', [App\Http\Controllers\HostingController::class, 'hosting_type'])->name('hosting.hosting-type');
+    });
+//end hosting
+//account
+Route::prefix('account')->group(function () {
+    Route::get('/', [App\Http\Controllers\AccountController::class, 'index'])->name('account.index');
+    Route::get('/account-type', [App\Http\Controllers\AccountController::class, 'account-type'])->name('account.vps-type');
+    });
+//end account
 
 });

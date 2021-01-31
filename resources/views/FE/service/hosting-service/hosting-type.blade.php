@@ -1,5 +1,5 @@
 @extends('FE.layout')
-@section('pagetitle', ' Máy Chủ Ảo ')
+@section('pagetitle', ' Lưu Trữ ')
 @section('content')
 
 <div class="page-wrapper">
@@ -8,7 +8,7 @@
             <div class="col-lg-12">
                 <div class="card" style="overflow: hidden">
                     <div class="shin-title-page">
-                        <h3>MiTiVPS - Virtual Machine - Loại máy chủ</h3>
+                        <h3>MiTiVPS - Hosting - Loại hosting</h3>
                     </div>
                     <div class="card-body">
                         <section class="ftco-section">
@@ -18,23 +18,11 @@
                                             {{-- <h4>Dịch vụ cho thuê máy chủ ảo - hỗ trợ trực tiếp hướng dẫn sử dụng!</h4> --}}
                                             <div class="row justify-content-center mb-3">
                                                 <div class="">
-                                                    <div class="shin-service-menu-type">1 core - 1Gb ram</div>
-                                                    <div class="shin-service-menu-type">1 core - 2Gb ram</div>
-                                                    <div class="shin-service-menu-type">2 core - 2Gb ram</div>
-                                                    <div class="shin-service-menu-type">2 core - 2Gb ram</div>
-                                                    <div class="shin-service-menu-type">2 core - 2Gb ram</div>
-                                                    <div class="shin-service-menu-type">2 core - 2Gb ram</div>
-                                                    <div class="shin-service-menu-type">2 core - 2Gb ram</div>
-                                                    <div class="shin-service-menu-type">2 core - 2Gb ram</div>
-                                                    <div class="shin-service-menu-type">2 core - 2Gb ram</div>
-                                                    <div class="shin-service-menu-type">2 core - 2Gb ram</div>
-                                                    <div class="shin-service-menu-type">2 core - 2Gb ram</div>
-                                                    <div class="shin-service-menu-type">2 core - 2Gb ram</div>
-                                                    <div class="shin-service-menu-type">2 core - 2Gb ram</div>
-                                                    <div class="shin-service-menu-type">2 core - 2Gb ram</div>
-                                                    <div class="shin-service-menu-type">2 core - 2Gb ram</div>
-                                                    <div class="shin-service-menu-type">2 core - 2Gb ram</div>
-                                                    <div class="shin-service-menu-type">2 core - 2Gb ram</div>
+                                                    <a href="" class="shin-service-menu-type">1 core - 1Gb ram</a>
+                                                    <a href="" class="shin-service-menu-type">1 core - 1Gb ram</a>
+                                                    <a href="" class="shin-service-menu-type">1 core - 1Gb ram</a>
+                                                    <a href="" class="shin-service-menu-type">1 core - 1Gb ram</a>
+                                                    <a href="" class="shin-service-menu-type">1 core - 1Gb ram</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -48,12 +36,12 @@
                                                             <div style="box-shadow: 0 0 3px grey;" class="card block-7">
                                                                 <div class="card-body">
                                                                     <div class="text-center">
-                                                                        
-                                                                        <h2 class="heading">Tên VPS</h2>
-                                                                        <div class="shin-service-type mb-2">Loại VPS</div>
+                                                                        {{-- <div class="shin-service-promo mb-2">Giảm 30% đến hết 16/02/2021</div> --}}
+                                                                        <h2 class="heading">Tên Hosting</h2>
+                                                                        <div class="shin-service-type mb-2">Loại Hosting</div>
                                                                         <div class="shin-service-title-info mb-2">Thông tin cấu hình</div>
                                                                         <div class="shin-service-info mb-2">
-                                                                            nội dung thông tin cấu hình vps trong textarea sẽ hiển thị ở đây
+                                                                            nội dung thông tin cấu hình Hosting trong textarea sẽ hiển thị ở đây
                                                                         </div>
                                                                         <a href="#"><div class="shin-service-okmuahang">Xem giá cả</div></a>
                                                                     </div>
@@ -64,12 +52,12 @@
                                                             <div style="box-shadow: 0 0 3px grey;" class="card block-7">
                                                                 <div class="card-body">
                                                                     <div class="text-center">
-                                                                        
-                                                                        <h2 class="heading">Tên VPS</h2>
-                                                                        <div class="shin-service-type mb-2">Loại VPS</div>
+                                                                        {{-- <div class="shin-service-promo mb-2">Giảm 30% đến hết 16/02/2021</div> --}}
+                                                                        <h2 class="heading">Tên Hosting</h2>
+                                                                        <div class="shin-service-type mb-2">Loại Hosting</div>
                                                                         <div class="shin-service-title-info mb-2">Thông tin cấu hình</div>
                                                                         <div class="shin-service-info mb-2">
-                                                                            nội dung thông tin cấu hình vps trong textarea sẽ hiển thị ở đây
+                                                                            nội dung thông tin cấu hình Hosting trong textarea sẽ hiển thị ở đây
                                                                         </div>
                                                                         <a href="#"><div class="shin-service-okmuahang">Xem giá cả</div></a>
                                                                     </div>
@@ -80,12 +68,12 @@
                                                             <div style="box-shadow: 0 0 3px grey;" class="card block-7">
                                                                 <div class="card-body">
                                                                     <div class="text-center">
-                                                                        
-                                                                        <h2 class="heading">Tên VPS</h2>
-                                                                        <div class="shin-service-type mb-2">Loại VPS</div>
+                                                                        {{-- <div class="shin-service-promo mb-2">Giảm 30% đến hết 16/02/2021</div> --}}
+                                                                        <h2 class="heading">Tên Hosting</h2>
+                                                                        <div class="shin-service-type mb-2">Loại Hosting</div>
                                                                         <div class="shin-service-title-info mb-2">Thông tin cấu hình</div>
                                                                         <div class="shin-service-info mb-2">
-                                                                            nội dung thông tin cấu hình vps trong textarea sẽ hiển thị ở đây
+                                                                            nội dung thông tin cấu hình Hosting trong textarea sẽ hiển thị ở đây
                                                                         </div>
                                                                         <a href="#"><div class="shin-service-okmuahang">Xem giá cả</div></a>
                                                                     </div>
@@ -96,12 +84,12 @@
                                                             <div style="box-shadow: 0 0 3px grey;" class="card block-7">
                                                                 <div class="card-body">
                                                                     <div class="text-center">
-                                                                        
-                                                                        <h2 class="heading">Tên VPS</h2>
-                                                                        <div class="shin-service-type mb-2">Loại VPS</div>
+                                                                        {{-- <div class="shin-service-promo mb-2">Giảm 30% đến hết 16/02/2021</div> --}}
+                                                                        <h2 class="heading">Tên Hosting</h2>
+                                                                        <div class="shin-service-type mb-2">Loại Hosting</div>
                                                                         <div class="shin-service-title-info mb-2">Thông tin cấu hình</div>
                                                                         <div class="shin-service-info mb-2">
-                                                                            nội dung thông tin cấu hình vps trong textarea sẽ hiển thị ở đây
+                                                                            nội dung thông tin cấu hình Hosting trong textarea sẽ hiển thị ở đây
                                                                         </div>
                                                                         <a href="#"><div class="shin-service-okmuahang">Xem giá cả</div></a>
                                                                     </div>
@@ -112,12 +100,12 @@
                                                             <div style="box-shadow: 0 0 3px grey;" class="card block-7">
                                                                 <div class="card-body">
                                                                     <div class="text-center">
-                                                                        
-                                                                        <h2 class="heading">Tên VPS</h2>
-                                                                        <div class="shin-service-type mb-2">Loại VPS</div>
+                                                                        {{-- <div class="shin-service-promo mb-2">Giảm 30% đến hết 16/02/2021</div> --}}
+                                                                        <h2 class="heading">Tên Hosting</h2>
+                                                                        <div class="shin-service-type mb-2">Loại Hosting</div>
                                                                         <div class="shin-service-title-info mb-2">Thông tin cấu hình</div>
                                                                         <div class="shin-service-info mb-2">
-                                                                            nội dung thông tin cấu hình vps trong textarea sẽ hiển thị ở đây
+                                                                            nội dung thông tin cấu hình Hosting trong textarea sẽ hiển thị ở đây
                                                                         </div>
                                                                         <a href="#"><div class="shin-service-okmuahang">Xem giá cả</div></a>
                                                                     </div>
@@ -128,12 +116,12 @@
                                                             <div style="box-shadow: 0 0 3px grey;" class="card block-7">
                                                                 <div class="card-body">
                                                                     <div class="text-center">
-                                                                        
-                                                                        <h2 class="heading">Tên VPS</h2>
-                                                                        <div class="shin-service-type mb-2">Loại VPS</div>
+                                                                        {{-- <div class="shin-service-promo mb-2">Giảm 30% đến hết 16/02/2021</div> --}}
+                                                                        <h2 class="heading">Tên Hosting</h2>
+                                                                        <div class="shin-service-type mb-2">Loại Hosting</div>
                                                                         <div class="shin-service-title-info mb-2">Thông tin cấu hình</div>
                                                                         <div class="shin-service-info mb-2">
-                                                                            nội dung thông tin cấu hình vps trong textarea sẽ hiển thị ở đây
+                                                                            nội dung thông tin cấu hình Hosting trong textarea sẽ hiển thị ở đây
                                                                         </div>
                                                                         <a href="#"><div class="shin-service-okmuahang">Xem giá cả</div></a>
                                                                     </div>
@@ -144,12 +132,12 @@
                                                             <div style="box-shadow: 0 0 3px grey;" class="card block-7">
                                                                 <div class="card-body">
                                                                     <div class="text-center">
-                                                                        
-                                                                        <h2 class="heading">Tên VPS</h2>
-                                                                        <div class="shin-service-type mb-2">Loại VPS</div>
+                                                                        {{-- <div class="shin-service-promo mb-2">Giảm 30% đến hết 16/02/2021</div> --}}
+                                                                        <h2 class="heading">Tên Hosting</h2>
+                                                                        <div class="shin-service-type mb-2">Loại Hosting</div>
                                                                         <div class="shin-service-title-info mb-2">Thông tin cấu hình</div>
                                                                         <div class="shin-service-info mb-2">
-                                                                            nội dung thông tin cấu hình vps trong textarea sẽ hiển thị ở đây
+                                                                            nội dung thông tin cấu hình Hosting trong textarea sẽ hiển thị ở đây
                                                                         </div>
                                                                         <a href="#"><div class="shin-service-okmuahang">Xem giá cả</div></a>
                                                                     </div>

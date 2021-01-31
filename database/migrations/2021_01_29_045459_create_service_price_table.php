@@ -19,6 +19,7 @@ class CreateServicePriceTable extends Migration
             $table->integer('service_type_id');
             $table->string('sku');
             $table->text('service_price_info');
+            $table->string('slug')->nullable();
             $table->timestamps();
         });
     }
