@@ -17,6 +17,7 @@ class CreateServiceGroupsTable extends Migration
             $table->id('service_group_id');
             $table->string('service_group_name');
             $table->integer('display')->default(1);
+            $table->string('slug')->nullable();
             $table->timestamps();
         });
     }

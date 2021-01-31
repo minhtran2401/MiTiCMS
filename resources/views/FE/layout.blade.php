@@ -10,7 +10,10 @@
     <link rel="stylesheet" type="text/css" href="{{asset('assets')}}/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="{{asset('assets')}}/css/style.css">
     <link rel="preconnect" href="https://fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css2?family=Red+Rose:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Mitr:wght@300&display=swap" rel="stylesheet">
+    {{-- <link href="https://fonts.googleapis.com/css2?family=Cuprum&display=swap" rel="stylesheet"> --}}
     <!--[if lt IE 9]>
 		<script src="{{asset('assets')}}/js/html5shiv.min.js"></script>
 		<script src="{{asset('assets')}}/js/respond.min.js"></script>
@@ -20,7 +23,9 @@
 @yield('css')
     <style>
         body{
-            font-family: sfu !important;
+            /* font-family: 'KoHo', !important; */
+            /* font-family: 'Patrick Hand', cursive; */
+            font-family: 'Mitr', sans-serif !important;
         }
     </style>
 <body>
