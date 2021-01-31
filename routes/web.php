@@ -51,7 +51,7 @@ Route::prefix('hosting')->group(function () {
 //account
 Route::prefix('account')->group(function () {
     Route::get('/', [App\Http\Controllers\AccountController::class, 'index'])->name('account.index');
-    Route::get('/account-type', [App\Http\Controllers\AccountController::class, 'account-type'])->name('account.vps-type');
+    Route::get('/account-detail', [App\Http\Controllers\AccountController::class, 'account_detail'])->name('account.account-detail');
     });
 //end account
 
