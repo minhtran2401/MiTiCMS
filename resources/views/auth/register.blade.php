@@ -1,51 +1,63 @@
 @extends('auth.layout-auth')
+@section('pagetitle','Đăng Kí')
+
 @section('content')
-    <div class="main-wrapper account-wrapper">
-        <div class="account-page">
-			<div class="account-center">
-				<div class="account-box">
-                   <form id="form-res" method="POST" action="{{ route('register') }}"  class="form-signin">
-                        @csrf
 
-						<div class="account-logo">
-                            <a href="index-2.html"><img src="assets/img/logo-dark.png" alt=""></a>
+                        <!-- Left Text-->
+                        <div class="d-none d-lg-flex col-lg-8 align-items-center p-5">
+                            <div class="w-100 d-lg-flex align-items-center justify-content-center px-5"><img class="img-fluid" src="{{asset('BE')}}/app-assets/images/pages/register-v2.svg" alt="Register V2" /></div>
                         </div>
-                        <div class="form-group ">
-                            <label for="email">{{ __('Họ và Tên') }}</label>
-                            <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
-                              
+                        <!-- /Left Text-->
+                        <!-- Register-->
+                        <div class="d-flex col-lg-4 align-items-center auth-bg px-2 p-lg-5">
+                            <div class="col-12 col-sm-8 col-md-6 col-lg-12 px-xl-2 mx-auto">
+                                <h4 class="card-title mb-1">Adventure starts here 🚀</h4>
+                                <p class="card-text mb-2">Make your app management easy and fun!</p>
+                                <form class="auth-register-form mt-2" id="form-res" method="POST" action="{{ route('register') }}">
+                                    @csrf
+                                    <div class="form-group">
+                                        <label class="form-label" for="name">Họ và Tên</label>
+                                        <input class="form-control" id="name" type="text" name="name" placeholder="johndoe" aria-describedby="register-username" autofocus="" tabindex="1" required />
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label" for="email">Email</label>
+                                        <input class="form-control" id="email" type="text" name="email" placeholder="john@example.com" aria-describedby="register-email" tabindex="2" required />
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label" for="password">Mật khẩu</label>
+                                        <div class="input-group input-group-merge form-password-toggle">
+                                            <input class="form-control form-control-merge" id="password" type="password" name="password" placeholder="············" aria-describedby="register-password" tabindex="3" required />
+                                            <div class="input-group-append"><span class="input-group-text cursor-pointer"><i data-feather="eye"></i></span></div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label" for="password-confirm">Nhập lại mật khẩu</label>
+                                        <div class="input-group input-group-merge form-password-toggle">
+                                            <input class="form-control form-control-merge" id="password-confirm" type="password" name="password_confirmation" placeholder="············" aria-describedby="register-password" tabindex="3" required/>
+                                            <div class="input-group-append"><span class="input-group-text cursor-pointer"><i data-feather="eye"></i></span></div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="custom-control custom-checkbox">
+                                            <input class="custom-control-input" id="register-privacy-policy" type="checkbox" tabindex="4" />
+                                            <label class="custom-control-label" for="register-privacy-policy">I agree to<a href="javascript:void(0);">&nbsp;privacy policy & terms</a></label>
+                                        </div>
+                                    </div>
+                                    <button id="btnSubmitres" class="btn btn-primary btn-block" tabindex="5">Sign up</button>
+                                </form>
+                                <p class="text-center mt-2"><span>Already have an account?</span><a href="{{route('login')}}"><span>&nbsp;Sign in instead</span></a></p>
+                                <div class="divider my-2">
+                                    <div class="divider-text">or</div>
+                                </div>
+                                <div class="auth-footer-btn d-flex justify-content-center"><a class="btn btn-facebook" href="javascript:void(0)"><i data-feather="facebook"></i></a><a class="btn btn-twitter white" href="javascript:void(0)"><i data-feather="twitter"></i></a><a class="btn btn-google" href="javascript:void(0)"><i data-feather="mail"></i></a><a class="btn btn-github" href="javascript:void(0)"><i data-feather="github"></i></a></div>
+                            </div>
                         </div>
-
-                        <div class="form-group ">
-                            <label for="email">{{ __('Địa Chỉ Email') }}</label>
-                             <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
-
-                              
-                        </div>
-
-                        <div class="form-group ">
-                            <label for="email">{{ __('Mật Khẩu') }}</label>
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
-
-                          
-                        </div>
-                        <div class="form-group ">
-                            <label for="password-confirm" >{{ __('Nhập lại mật khẩu') }}</label>
-                             <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
-                        </div>
-                        <div class="form-group text-center">
-                            <button id="btnSubmitres" class="btn btn-primary account-btn" type="submit">Đăng Kí</button>
-                        </div>
-                        <div class="text-center login-link">
-                            Đã có tài khoản? <a href="{{route('login')}}">Đăng Nhập</a>
-                        </div>
-                    </form>
-                </div>
-			</div>
-        </div>
-    </div>
+                        <!-- /Register-->
+       
 @endsection
 @section('js')
+<script src="{{asset('assets')}}/js/sweetalert2@10.js"></script>
+<script src="{{asset('assets')}}/js/jquery-3.2.1.min.js"></script>
 <script>
     $('#password').on('blur', function(){
     if(this.value.length < 8){ // checks the password value length

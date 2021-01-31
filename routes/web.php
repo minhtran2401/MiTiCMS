@@ -1,5 +1,5 @@
 <?php
-
+// namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -38,4 +38,24 @@ Route::group(['middleware' => ['auth']], function () {
 
 //domain
 
+});
+
+
+///////////////ADmin///////////////////////////////////
+Route::group(['middleware' => ['checkadmin']], function () {
+Route::prefix('admin')->group(function () {
+    Route::get('/login', [App\Http\Controllers\BE\AdminLoginController::class, 'show_login_form'])->name('admin.login')->withoutMiddleware('checkadmin');
+    Route::post('/login', [App\Http\Controllers\BE\AdminLoginController::class, 'process_login'])->name('admin.login.process')->withoutMiddleware('checkadmin');
+    Route::post('/logout', [App\Http\Controllers\BE\AdminLoginController::class, 'logout'])->name('logout.admin');
+    Route::get('/', [App\Http\Controllers\BE\AdminController::class, 'dashboard'])->name('admin.dashboard');
+    // Route::get('/register','AdminLoginController@show_signup_form')->name('register');
+    // Route::post('/register','AdminLoginController@process_signup');
+    Route::resource('/group-service', App\Http\Controllers\BE\GroupServiceController::class);
+
+
+    Route::prefix('app')->group(function () {
+        
+    }); // app
+
+  }); // admin
 });

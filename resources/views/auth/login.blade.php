@@ -1,59 +1,53 @@
 @extends('auth.layout-auth')
+@section('pagetitle','Đăng Nhập')
 @section('content')
-<div class="main-wrapper account-wrapper">
-    <div class="account-page">
-        <div class="account-center">
-            <div class="account-box">
-                <form id="formz-login" method="POST" action="{{ route('loginz') }}" class="form-signin">
-                    @csrf
-                    <div class="account-logo">
-                        <a href="{{route('home')}}"><img src="assets/img/logo-dark.png" alt=""></a>
-                    </div>
-                  
-                    <div class="form-group">
-                        <label> Email</label>
-                        <input id="email" type="email" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus class="form-control @error('email') is-invalid @enderror">
-                      
-                    </div>
-                    <div class="form-group">
-                        <label>Mật khẩu</label>
-                        <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
-                      
-                    </div>
 
-                    <div class="form-group ">
-                        <div class="col-md-6">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-
-                                <label class="form-check-label" for="remember">
-                                    {{ __('Lưu tài khoản') }}
-                                </label>
+                    <!-- Left Text-->
+                    <div class="d-none d-lg-flex col-lg-8 align-items-center p-5">
+                        <div class="w-100 d-lg-flex align-items-center justify-content-center px-5"><img class="img-fluid" src="{{asset('BE')}}/app-assets/images/pages/login-v2.svg" alt="Login V2" /></div>
+                    </div>
+                    <!-- /Left Text-->
+                    <!-- Login-->
+                    <div class="d-flex col-lg-4 align-items-center auth-bg px-2 p-lg-5">
+                        <div class="col-12 col-sm-8 col-md-6 col-lg-12 px-xl-2 mx-auto">
+                            <h4 class="card-title mb-1">Chào mừng bạn đến với MiTi! 👋</h4>
+                            <p class="card-text mb-2">Đăng nhập để sử dụng những dịch vụ của MiTi</p>
+                            <form  id="formz-login" method="POST" action="{{ route('loginz') }}" class="auth-login-form mt-2">
+                                @csrf
+                                <div class="form-group">
+                                    <label class="form-label" for="email">Email</label>
+                                    <input class="form-control" type="text" name="email" placeholder="gmail@example.com" aria-describedby="login-email" autofocus="" tabindex="1" />
+                                </div>
+                                <div class="form-group">
+                                    <div class="d-flex justify-content-between">
+                                        <label for="password">Mật khẩu</label><a href="{{ route('password.request') }}"><small>Quên mật khẩu</small></a>
+                                    </div>
+                                    <div class="input-group input-group-merge form-password-toggle">
+                                        <input class="form-control form-control-merge" type="password" name="password" placeholder="············" aria-describedby="login-password" tabindex="2" />
+                                        <div class="input-group-append"><span class="input-group-text cursor-pointer"><i data-feather="eye"></i></span></div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="custom-control custom-checkbox">
+                                        <input class="custom-control-input" type="checkbox" id="rememberz" >
+                                        <label class="custom-control-label" for="rememberz"> Nhớ tài khoản</label>
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-primary btn-block" tabindex="4">Đăng nhập</button>
+                            </form>
+                            <p class="text-center mt-2"><span>Thành viên mới ?</span><a href="{{route('register')}}"><span>&nbsp;Đăng Kí Ngay</span></a></p>
+                            <div class="divider my-2">
+                                <div class="divider-text">Hoặc</div>
                             </div>
+                            <div class="auth-footer-btn d-flex justify-content-center"><a class="btn btn-facebook" href="javascript:void(0)"><i data-feather="facebook"></i></a><a class="btn btn-twitter white" href="javascript:void(0)"><i data-feather="twitter"></i></a><a class="btn btn-google" href="javascript:void(0)"><i data-feather="mail"></i></a><a class="btn btn-github" href="javascript:void(0)"><i data-feather="github"></i></a></div>
                         </div>
                     </div>
-
-                    <div class="form-group text-right">
-                        @if (Route::has('password.request'))
-                        <a class="btn btn-link" href="{{ route('password.request') }}">
-                            {{ __('Quên mật khẩu ?') }}
-                        </a>
-                    @endif
-                    </div>
-                    <div class="form-group text-center">
-                        <button type="submit" class="btn btn-primary account-btn">Đăng Nhập</button>
-                    </div>
-                    <div class="text-center register-link">
-                        Không có tài khoản ? <a href="{{route('register')}}">Đăng Kí Ngay</a>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-
+                    <!-- /Login-->
+   
 @endsection
 @section('js')
+<script src="{{asset('assets')}}/js/sweetalert2@10.js"></script>
+<script src="{{asset('assets')}}/js/jquery-3.2.1.min.js"></script>
     <script>
         $("#formz-login").submit(function(e) {
 
@@ -82,7 +76,7 @@ $.ajax({
           }
           else{
             Swal.fire(
-                'Sai',
+                'Thất bại',
                 'Kiểm tra lại thông tin đăng nhập và thử lại',
                 'error'
                 )

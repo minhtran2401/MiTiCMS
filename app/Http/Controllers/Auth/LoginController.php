@@ -47,7 +47,8 @@ class LoginController extends Controller
     {
         $request->validate([
             'email' => 'required',
-            'password' => 'required'
+            'password' => 'required',
+            // 'remember_token' => 'required'
         ]);
 
         $credentials = $request->except(['_token']);
