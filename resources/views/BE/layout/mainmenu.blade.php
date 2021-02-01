@@ -174,6 +174,17 @@
        
                 </ul>
             </li>
+            @php
+            $link2 = ['admin/log/admin','admin/type-service','blog/create','loai-blog','loai-blog/*/edit','loai-blog/create',];
+            @endphp
+            <li class=" nav-item  {{ request()->is($link2) ? 'has-sub open' : '' }}"><a class="d-flex align-items-center" href="#"><i data-feather='book-open'></i><span class="menu-title text-truncate">Hoạt động</span></a>
+                <ul class="menu-content">
+                    <li><a class="d-flex align-items-center  {{ request()->is('admin/log/admin') ? 'active' : '' }}" href="{{route('admin.log')}}"><i data-feather='user-check'></i><span class="menu-item " >Quản trị viên</span></a>
+                    </li>
+                    <li><a class="d-flex align-items-center" href="#"><i data-feather='users'></i><span class="menu-item" >Khách hàng</span></a>
+                    </li>
+                </ul>
+            </li>
   
 
            

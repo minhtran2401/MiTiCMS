@@ -1,5 +1,5 @@
 @extends('BE.layout.layout')
-@section('pagetitle','Loại dịch vụ')
+@section('pagetitle','Dịch Vụ VPS')
 @section('csspage')
     <link rel="stylesheet" type="text/css" href="{{asset('BE')}}/app-assets/vendors/css/tables/datatable/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" type="text/css" href="{{asset('BE')}}/app-assets/vendors/css/tables/datatable/responsive.bootstrap4.min.css">
@@ -10,9 +10,9 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.6.5/css/buttons.dataTables.min.css">
 @endsection
 @section('content')
-@section('br-namepage1','Loại dịch vụ')
+@section('br-namepage1','VPS')
 @section('br-namepage2','Dịch vụ')
-@section('br-namepage3','Loại dịch vụ')
+@section('br-namepage3','Dịch vụ VPS')
 
 
 
@@ -21,7 +21,7 @@
                 <div class="col-12">
                     <div class="alert alert-primary" role="alert">
                         <div class="alert-body">
-                            <strong>Ghi chú:</strong> Loại dịch vụ của website.
+                            <strong>Ghi chú:</strong> Dịch vụ VPS của website.
                            
                         </div>
                     </div>
@@ -39,39 +39,55 @@
                         <div class="card-header border-bottom p-1"><div class="head-label"><h6 class="mb-0">MitiVPS</h6></div>
                         <div class="dt-action-buttons text-right"><div class="dt-buttons d-inline-flex">
                             <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#modals-slide-in">
-                               + Thêm loại dịch vụ
+                               + Thêm VPS
                             </button>
                      </div></div></div>
                         <table class="datatables-basic table" id="table-1">
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Nhóm dịch vụ</th>
-                                    <th>Loại dịch vụ</th>
+                                    <th>Tên</th>
+                                    <th>Cấu Hình</th>
+                                    <th class="text-center">Giá</th>
                                     <th>Trạng thái</th>
                                     <th>Quản Lí</th>
                                 </tr>
                             </thead>
                             <tbody>
+                                <tr>
+                                  <th scope="row">1</th>
+                                  <td>Mark</td>
+                                  <td>Otto</td>
+                                  <td width="15%"><select class="form-control" aria-label="Default select example">
+                                    <option value="1">20.000 đ/ 1 tháng</option>
+                                    <option value="2">Two</option>
+                                    <option value="3">Three</option>
+                                  </select></td>
+                                  <td>Mark</td>
+                                  <td>Otto</td>
+                                </tr>
+                              
+                              </tbody>
+                            <tbody>
                                 @foreach ($ds as $row)
                                 <tr>
                                   <th scope="row">{{$row->service_type_id}}</th>
-                                  <td>  @php
+                                  {{-- <td>  @php
                                     $service_group_id =$row->service_group_id;
                                     $tl = App\Models\GroupService::find($service_group_id);
                                     echo $tl->service_group_name;
                                     @endphp</td>
-                                  <td>{{$row->service_type_name}}</td>
+                                  <td>{{$row->service_type_name}}</td> --}}
                                  
-
+{{-- 
                                   <td data-id="{{ $row->service_group_id }}">
                                     <div class="custom-control custom-switch custom-control-inline">
                                         <input type="checkbox" id="gr-{{$row->service_group_id}}"  class="custom-control-input change-status"  {{ $row->display==1?'checked':'' }}>
                                         <label for="gr-{{$row->service_group_id}}" class="custom-control-label content-status" >{{ $row->display==1?'Hiện':'Ẩn'}}</label>
                                     </div>
-                                  </td>
+                                  </td> --}}
 
-                                  <td >
+                                  {{-- <td >
                                     <div class="modal fade text-left" id="editgr-{{$row->service_type_id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel33" aria-hidden="true">
                                         <div class="modal-dialog modal-dialog-centered" role="document">
                                             <div class="modal-content">
@@ -135,7 +151,7 @@
                                        <button  class="btn btn-icon btn-danger xoaha" style="border: 0" onclick="xoaha(event)" ><i class="fa fa-trash" aria-hidden="true"></i> Xóa</button>
                                   </form>
           
-                                </td>
+                                </td> --}}
                                 </tr>
                                 @endforeach
                               </tbody>
@@ -144,34 +160,7 @@
                 </div>
             </div>
             <!-- Modal to add new record -->
-            <div class="modal modal-slide-in fade" id="modals-slide-in">
-                <div class="modal-dialog sidebar-sm">
-                    <form id="create-groups-service" method="POST" action="{{route('store.tp.ajax')}}" class="add-new-record modal-content pt-0">
-                        @csrf
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
-                        <div class="modal-header mb-1">
-                            <h5 class="modal-title" id="exampleModalLabel">Thêm Loại Dịch Vụ Mới</h5>
-                        </div>
-                        <div class="modal-body flex-grow-1">
-                            <div class="form-group">
-                                <label  for="">Nhóm dịch vụ</label>
-                                <select name="service_group_id" class="form-control" >
-                                    @foreach($gr as $g)
-                                    <option value="{{$g->service_group_id}}">{{$g->service_group_name}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label" for="basic-icon-default-fullname">Tên Loại</label>
-                                <input type="text" name="name_type_service" class="form-control dt-full-name" id="basic-icon-default-fullname" placeholder="Tên Nhóm" required  />
-                            </div>
-                           
-                            <button type="submit" class="btn btn-primary data-submit mr-1">Lưu</button>
-                            <button type="reset" class="btn btn-outline-secondary" data-dismiss="modal">Hủy</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
+          
         </section>
         <!--/ Basic table -->
         

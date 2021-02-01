@@ -12,6 +12,8 @@ class GroupService extends Model {
         'display',
         'slug'
     ];
-   
+    public function checktype() {
+        return $this->hasMany('App\Models\TypeService','service_group_id','service_group_id');
+    }
 }
 

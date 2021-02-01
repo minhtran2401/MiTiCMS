@@ -76,9 +76,16 @@ Route::prefix('admin')->group(function () {
     Route::post('/change-status-group-service','App\Http\Controllers\BE\GroupServiceController@changeStatus')->name('changeStatus.group-service');
     Route::resource('/type-service', App\Http\Controllers\BE\TypeServiceController::class);
     Route::post('/type-service-ajax', [App\Http\Controllers\BE\TypeServiceController::class, 'storeajax'])->name('store.tp.ajax');
+    Route::post('/change-status-type-service','App\Http\Controllers\BE\TypeServiceController@changeStatus')->name('changeStatus.type-service');
 
+    Route::prefix('log')->group(function () {
+        Route::get('/admin', [App\Http\Controllers\BE\LogController::class, 'admin'])->name('admin.log');
+        Route::get('/user', [App\Http\Controllers\BE\LogController::class, 'user'])->name('user.log');
+    }); // log
 
-
+    Route::prefix('service')->group(function () {
+        Route::resource('/vps', App\Http\Controllers\BE\VPSController::class);
+    }); // app
 
 
     Route::prefix('app')->group(function () {
