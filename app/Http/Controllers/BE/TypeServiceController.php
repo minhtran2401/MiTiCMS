@@ -42,8 +42,9 @@ class TypeServiceController extends Controller
        
        
         $ngs = new TypeService([
-            'slug' =>\Str::slug($request->name_group_service),
-            'service_group_name' => $request->get('name_group_service'),
+            'slug' =>\Str::slug($request->name_type_service),
+            'service_group_id' =>$request->get('service_group_id'),
+            'service_type_name' => $request->get('name_type_service'),
             'dislay' => 1,
         ]);
         toast('Thêm Tên Nhóm Sản Phẩm Thành Công!','success');
@@ -62,8 +63,8 @@ class TypeServiceController extends Controller
             'dislay' => 1,
         ]);
          $ngs->save();
-         $data['1'] = $ngs->service_group_id;
-         $data['2'] =$ngs->service_group_name;
+         $data['1'] = $ngs->service_type_id;
+         $data['2'] =$ngs->service_type_name;
          $data['3'] = '1';
              return response()->json($data);
        

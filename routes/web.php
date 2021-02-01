@@ -71,6 +71,8 @@ Route::prefix('admin')->group(function () {
     Route::post('/group-service-ajax', [App\Http\Controllers\BE\GroupServiceController::class, 'storeajax'])->name('store.gr.ajax');
     Route::post('/change-status-group-service','App\Http\Controllers\BE\GroupServiceController@changeStatus')->name('changeStatus.group-service');
     Route::resource('/type-service', App\Http\Controllers\BE\TypeServiceController::class);
+    Route::post('/type-service-ajax', [App\Http\Controllers\BE\TypeServiceController::class, 'storeajax'])->name('store.tp.ajax');
+
 
 
 
