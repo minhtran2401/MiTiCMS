@@ -20,29 +20,45 @@ col ben tráis sẽ là form đăng kí acc --}}
 <div class="page-wrapper">
     <div class="content">
         <div class="row">
-            <div class="col-sm-4 col-3">
-                <h4 class="page-title">Tài khoản</h4>
-            </div>
-            <div class="col-sm-8 col-9 text-right m-b-20">
-                {{-- <a href="add-doctor.html" class="btn btn-primary btn-rounded float-right"><i class="fa fa-plus"></i> Add Doctor</a> --}}
-            </div>
-        </div>
-        <div class="row doctor-grid">
-            <div class="col-md-4 col-sm-4  col-lg-3">
+            <div class="col-md-12 col-sm-12 col-lg-3">
                 <div class="profile-widget">
-                    <h5 class="shin-service-title" class="mb-2"><a href="profile.html">Tài khoản mail edu US</a></h5>
-                    <p>
-                        <span class="shin-service-type">Mail Edu</span>
+                    <h3 class="text-left">Thông tin chi tiết</h3>
+                    <hr>
+                    <h5 class="shin-service-title" class="mb-2"><a href="profile.html">Tài khoản email EDU US</a></h5>
+                    <p class="text-left">
+                        - Drive Unlimited <br>
+                        - Free Git Student
                     </p>
-                    <p style="text-align: left;">- Drive Unlimited <br> - Free gitstudent</p>
-                    <div class="shin-service-okmuahang">Mua ngay 300.000 đ</div>
+                    Mua thôi bạn! Chờ éo gì nữa?
                 </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-12">
-                <div class="see-all">
-                    <a class="see-all-btn" href="javascript:void(0);">Xem thêm</a>
+
+            <div class="col-md-12 col-sm-12 col-lg-9">
+                <div class="card">
+                    <div class="card-body">
+                        <h3 class="text-left">Mua ngay</h3>
+                        <hr>
+                        <form action="" class="">
+                            <div class="row col-lg-12">
+                                <input type="text" class="form-control" name="user_name" hidden>
+                                <input type="text" class="form-control" name="user_email" hidden>
+
+                                <div class="col-sm-12 col-md-8 col-lg-6 form-group">
+                                    <label for="account_type">Tên tài khoản</label>
+                                    <input type="text" readonly class="form-control" value="Email EDU US" name="account_type">
+                                </div>
+                                <div class="col-sm-12 col-md-8 col-lg-6 form-group">
+                                    <label for="account_type">Loại tài khoản</label>
+                                    <input type="text" readonly class="form-control" value="Mail EDU" name="account_type">
+                                </div>
+                                <div class="col-sm-12 col-md-8 col-lg-6 form-group">
+                                    <label for="account_type">Số lượng</label>
+                                    <input type="number" class="form-control" name="user_name">
+                                </div>
+                            </div>
+                        </form>                     
+                    <div class="shin-service-okmuahang text-center" >Mua ngay 300.000 đ</div>
+                    </div>
                 </div>
             </div>
         </div>

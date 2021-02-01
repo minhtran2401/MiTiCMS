@@ -11,15 +11,15 @@
     <div class="content">
         <div class="row">
             <div class="col-sm-12">
-				<div class="card" style="overflow: hidden">
-                    <div class="shin-title-page">
+				<div class="shin-title-page mb-4">
                         <h3>MiTiVPS - Domain - Kiểm tra tên miền</h3>
                     </div>
+				<div class="card" style="overflow: hidden">
                     <div class="card-body">
                         <section class="ftco-section">
                             <div class="container">
                                 <div class="row d-flex justify-content-center pt-5">
-                                    <div class="col-lg-12 text-center heading-white mb-4 mb-sm-4 mb-lg-0 ftco-animate">
+                                    <div class="col-lg-6 col-md-12 text-center heading-white mb-4 mb-sm-4 mb-lg-0 ftco-animate">
                                         <h2 >TÌM KIẾM TÊN MIỀN</h2>
                                         <p>Chọn một tên miền thật đẹp theo ý của bạn</p>
                                     </div>
@@ -83,7 +83,7 @@
 								</div>
 
 								<!-- start phần chơi--> 
-									<div class="col-lg-7 col-md-12 mb-3">
+									<div class="col-lg-9 col-md-12 mb-3">
 										<div style="border: solid 1px #7673F0; border-radius: 3px 3px 0 0; background: #7673F0; color: white" class="col-lg-12 col-md-12">
 											<div class="shin-domain-type">
 												<input title="Click chọn hoặc bỏ tất cả domain phổ biến..!" id="phobien" class="phobien" name="phobien" type="checkbox" value="-1" />
@@ -119,7 +119,7 @@
 											</div>
 										</div>
 									</div>
-									<div class="col-lg-7 col-md-12 mb-3">
+									<div class="col-lg-9 col-md-12 mb-3">
 										<div style="border: solid 1px #7673F0; border-radius: 3px 3px 0 0; background: #7673F0; color: white" class="col-lg-12 col-md-12">
 											<div class="shin-domain-type">
 												<input id="vietnam" title="Click chọn hoặc bỏ tất cả domain Việt Nam..!" class="vietnam" name="vietnam" type="checkbox" value="-2" />
@@ -140,7 +140,7 @@
 											</div>
 										</div>
 									</div>
-									<div class="col-lg-7 col-md-12 mb-3">
+									<div class="col-lg-9 col-md-12 mb-3">
 										<div style="border: solid 1px #7673F0; border-radius: 3px 3px 0 0; background: #7673F0; color: white" class="col-lg-12 col-md-12">
 											<div class="shin-domain-type">
 												<input id="quocte" title="Click chọn hoặc bỏ tất cả domain quốc tế..!" class="quocte" name="quocte" type="checkbox" value="-3" />
@@ -185,7 +185,7 @@
 						</div>
 					
 					</div>
-				</section>
+					</section>
 					</div>
 				</div>
 				

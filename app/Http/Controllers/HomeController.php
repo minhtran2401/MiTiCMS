@@ -25,6 +25,23 @@ class HomeController extends Controller
     {
         return view('FE.home');
     }
+    public function contact()
+    {
+        return view('FE.contact');
+    }
+    public function profile()
+    {
+        return view('FE.user-profile.profile');
+    }
+    public function edit_profile()
+    {
+        return view('FE.user-profile.edit-profile');
+    }
+    public function changepassword()
+    {
+        return view('FE.user-profile.changepassword');
+    }
+    
     public function index()
     {
         return view('FE.home');

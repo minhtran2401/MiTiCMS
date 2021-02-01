@@ -25,6 +25,10 @@ use Illuminate\Support\Facades\Route;
   
     
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'home'])->name('home');
+    Route::get('/contact', [App\Http\Controllers\HomeController::class, 'contact'])->name('contact');
+    Route::get('/profile', [App\Http\Controllers\HomeController::class, 'profile'])->name('profile');
+    Route::get('/edit-profile', [App\Http\Controllers\HomeController::class, 'edit_profile'])->name('edit-profile');
+    Route::get('/changepassword', [App\Http\Controllers\HomeController::class, 'changepassword'])->name('changepassword');
 
 Route::group(['middleware' => ['auth']], function () {
 //domain
@@ -58,7 +62,7 @@ Route::prefix('account')->group(function () {
 });
 
 
-///////////////ADmin///////////////////////////////////
+///////////////Admin///////////////////////////////////
 Route::group(['middleware' => ['checkadmin']], function () {
 Route::prefix('admin')->group(function () {
     Route::get('/login', [App\Http\Controllers\BE\AdminLoginController::class, 'show_login_form'])->name('admin.login')->withoutMiddleware('checkadmin');
