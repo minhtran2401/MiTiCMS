@@ -1,14 +1,14 @@
 <?php
 
 namespace App\Http\Controllers\BE;
-use App\Models\GroupService;
+use App\Models\TypeService;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 
 use App\Http\Controllers\Controller;
 
 
-class GroupServiceController extends Controller
+class TypeServiceController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,8 +17,8 @@ class GroupServiceController extends Controller
      */
     public function index()
     {
-        $ds = GroupService::orderby('service_group_id','desc')->get();
-        return view('BE.group-service.show', compact('ds'));
+        $ds = TypeService::orderby('service_type_id','desc')->get();
+        return view('BE.type-service.show', compact('ds'));
     }
 
     /**
@@ -41,7 +41,7 @@ class GroupServiceController extends Controller
     {
        
        
-        $ngs = new GroupService([
+        $ngs = new TypeService([
             'slug' =>\Str::slug($request->name_group_service),
             'service_group_name' => $request->get('name_group_service'),
             'dislay' => 1,
@@ -55,9 +55,10 @@ class GroupServiceController extends Controller
     {
        
        
-        $ngs = new GroupService([
-            'slug' =>\Str::slug($request->name_group_service),
-            'service_group_name' => $request->get('name_group_service'),
+        $ngs = new TypeService([
+            'slug' =>\Str::slug($request->name_type_service),
+            'service_group_id' =>$request->get('service_group_id'),
+            'service_type_name' => $request->get('name_type_service'),
             'dislay' => 1,
         ]);
          $ngs->save();
