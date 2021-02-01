@@ -42,6 +42,11 @@
                     
                 </ul>
             </li>
+
+            @php
+            $link = ['admin/group-service','admin/type-service','blog/create','loai-blog','loai-blog/*/edit','loai-blog/create',];
+            @endphp
+
             <li class=" navigation-header"><span data-i18n="Apps &amp; Pages">Ứng Dụng &amp; Tiện Ích</span><i data-feather="more-horizontal"></i>
             </li>
             <li class=" nav-item"><a class="d-flex align-items-center" href="#"><i data-feather='grid'></i><span class="menu-title text-truncate" >Tiện Ích</span></a>
@@ -60,25 +65,15 @@
             <li class=" navigation-header"><span data-i18n="Apps &amp; Pages">Dịch Vụ</span><i data-feather="more-horizontal"></i>
             </li>
 
-            <li class=" nav-item"><a class="d-flex align-items-center" href="#"><i data-feather="menu"></i><span class="menu-title text-truncate" data-i18n="Menu Levels">Danh sách</span></a>
+            <li class=" nav-item {{ request()->is($link) ? 'has-sub open' : '' }}"><a class="d-flex align-items-center" href="#"><i data-feather="menu"></i><span class="menu-title text-truncate" data-i18n="Menu Levels">Danh sách</span></a>
                 <ul class="menu-content">
-                    <li><a class="d-flex align-items-center" href="#"><i data-feather='archive'></i><span class="menu-item" > Nhóm & Loại</span></a>
+                    <li class=" {{ request()->is($link) ? 'has-sub open' : '' }}"><a class="d-flex align-items-center" href="#"><i data-feather='archive'></i><span class="menu-item" > Nhóm & Loại</span></a>
                         <ul class="menu-content">
-                            <li><a class="d-flex align-items-center" href="#"><i data-feather='package'></i><span class="menu-item" data-i18n="Third Level">Nhóm</span></a>
-                                <ul class="menu-content">
-                                    <li><a class="d-flex align-items-center" href="#"><i data-feather='plus'></i><span class="menu-item" >Thêm</span></a>
-                                    </li>
-                                    <li><a class="d-flex align-items-center" href="#"><i data-feather='settings'></i><span class="menu-item" >Quản Lí</span></a>
-                                    </li>
-                                </ul>
+                            <li><a class="d-flex align-items-center  {{ request()->is('admin/group-service') ? 'active' : '' }}" href="{{route('group-service.index')}}"><i data-feather='package'></i><span class="menu-item" >Nhóm dịch vụ</span></a>
+                                
                             </li>
-                            <li><a class="d-flex align-items-center" href="#"><i data-feather='package'></i><span class="menu-item" data-i18n="Third Level">Loại</span></a>
-                                <ul class="menu-content">
-                                    <li><a class="d-flex align-items-center" href="#"><i data-feather='plus'></i><span class="menu-item" >Thêm</span></a>
-                                    </li>
-                                    <li><a class="d-flex align-items-center" href="#"><i data-feather='settings'></i><span class="menu-item" >Quản Lí</span></a>
-                                    </li>
-                                </ul>
+                            <li><a class="d-flex align-items-center  {{ request()->is('admin/type-service') ? 'active' : '' }}" href="{{route('type-service.index')}}"><i data-feather='package'></i><span class="menu-item" >Loại dịch vụ</span></a>
+                               
                             </li>
                         </ul>
                     </li>

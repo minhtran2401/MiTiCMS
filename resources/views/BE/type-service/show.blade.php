@@ -1,6 +1,5 @@
 @extends('BE.layout.layout')
-@section('pagetitle','Nhóm dịch vụ')
-@section('content')
+@section('pagetitle','Loại dịch vụ')
 @section('csspage')
     <link rel="stylesheet" type="text/css" href="{{asset('BE')}}/app-assets/vendors/css/tables/datatable/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" type="text/css" href="{{asset('BE')}}/app-assets/vendors/css/tables/datatable/responsive.bootstrap4.min.css">
@@ -10,9 +9,11 @@
     {{-- <link rel="stylesheet" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css"> --}}
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.6.5/css/buttons.dataTables.min.css">
 @endsection
+@section('content')
 @section('br-namepage1','Loại dịch vụ')
 @section('br-namepage2','Dịch vụ')
-@section('br-namepage3','Nhóm dịch vụ')
+@section('br-namepage3','Loại dịch vụ')
+
 
 
         <div class="content-body">
@@ -20,7 +21,7 @@
                 <div class="col-12">
                     <div class="alert alert-primary" role="alert">
                         <div class="alert-body">
-                            <strong>Ghi chú:</strong> Nhóm dịch vụ của website.
+                            <strong>Ghi chú:</strong> Loại dịch vụ của website.
                            
                         </div>
                     </div>
@@ -38,14 +39,15 @@
                         <div class="card-header border-bottom p-1"><div class="head-label"><h6 class="mb-0">MitiVPS</h6></div>
                         <div class="dt-action-buttons text-right"><div class="dt-buttons d-inline-flex">
                             <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#modals-slide-in">
-                               + Thêm dịch vụ
+                               + Thêm loại dịch vụ
                             </button>
                      </div></div></div>
                         <table class="datatables-basic table" id="table-1">
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Tên dịch vụ</th>
+                                    <th>Nhóm dịch vụ</th>
+                                    <th>Loại dịch vụ</th>
                                     <th>Trạng thái</th>
                                     <th>Quản Lí</th>
                                 </tr>
@@ -53,7 +55,7 @@
                             <tbody>
                                 @foreach ($ds as $row)
                                 <tr>
-                                  <th scope="row">{{$row->service_group_id}}</th>
+                                  <th scope="row">{{$row->service_type_id}}</th>
                                   <td>{{$row->service_group_name}}</td>
 
                                   <td data-id="{{ $row->service_group_id }}">
@@ -126,11 +128,18 @@
                         @csrf
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
                         <div class="modal-header mb-1">
-                            <h5 class="modal-title" id="exampleModalLabel">Thêm Nhóm Dịch Vụ Mới</h5>
+                            <h5 class="modal-title" id="exampleModalLabel">Thêm Loại Dịch Vụ Mới</h5>
                         </div>
                         <div class="modal-body flex-grow-1">
                             <div class="form-group">
-                                <label class="form-label" for="basic-icon-default-fullname">Tên Nhóm</label>
+                                <label  for="">Nhóm dịch vụ</label>
+                                <select name="display" class="form-control" >
+                                    <option value="0">Loai1</option>
+                                    <option value="0">Loai2</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="basic-icon-default-fullname">Tên Loại</label>
                                 <input type="text" name="name_group_service" class="form-control dt-full-name" id="basic-icon-default-fullname" placeholder="Tên Nhóm" required  />
                             </div>
                            
@@ -142,6 +151,7 @@
             </div>
         </section>
         <!--/ Basic table -->
+        
 
 
 @endsection
