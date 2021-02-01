@@ -10,8 +10,8 @@ class AccountController extends Controller
     {
         return view('FE.service.account-service.index');
     }
-    public function account_type()
+    public function account_detail()
     {
-        return view('FE.service.account-service.account-type');
+        return view('FE.service.account-service.account-detail');
     }
 }
