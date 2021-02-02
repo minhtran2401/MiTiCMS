@@ -13,9 +13,7 @@
     <link rel="apple-touch-icon" href="{{asset('BE')}}/app-assets/images/ico/apple-icon-120.png">
     <link rel="shortcut icon" type="image/x-icon" href="{{asset('BE')}}/app-assets/images/ico/favicon.ico">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500;1,600" rel="stylesheet">
-
-   
-
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
     <!-- BEGIN: Vendor CSS-->
     <link rel="stylesheet" type="text/css" href="{{asset('BE')}}/app-assets/vendors/css/vendors.min.css">
     <link rel="stylesheet" type="text/css" href="{{asset('BE')}}/app-assets/vendors/css/extensions/sweetalert2.min.css">
@@ -37,7 +35,7 @@
     <!-- BEGIN: Custom CSS-->
     <link rel="stylesheet" type="text/css" href="{{asset('BE')}}/assets/css/style.css">
     <!-- END: Custom CSS-->
-    
+
 
 </head>
 <!-- END: Head-->
@@ -105,9 +103,11 @@
     </footer>
     <button class="btn btn-primary btn-icon scroll-top" type="button"><i data-feather="arrow-up"></i></button>
     <!-- END: Footer-->
+   
 
     <script src="{{asset('assets')}}/js/sweetalert2@10.js"></script>
     <script src="{{asset('assets')}}/js/jquery-3.2.1.min.js"></script>
+
 
     <!-- BEGIN: Vendor JS-->
     <script src="{{asset('BE')}}/app-assets/vendors/js/vendors.min.js"></script>
@@ -125,7 +125,6 @@
     <!-- BEGIN: Page JS-->
     @yield('pagejs')
     <!-- END: Page JS-->
-
     <script>
         $(window).on('load', function() {
             if (feather) {
@@ -133,8 +132,33 @@
                     width: 14,
                     height: 14
                 });
-            }
+            }   
         })
+    </script>
+    <script>
+        $(document).ready(function () {
+          $("#addPrice").click(function(){
+              $("#insert").append('<div class="form-control"><input type="file" name="price[]" ></div>');
+              });
+      });
+      </script>
+
+<script>
+    $(document).ready(function(){
+        $("[name='getgroup']").change(function(){ 
+             var id_nhomsp= $(this).val();
+             var diachi= "{{route('get_type_pro',"")}}/"+id_nhomsp;
+                        $("[name='gettype']").load(diachi);
+  
+        });
+    });
+  </script>
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+  $('#summernote').summernote();
+});
     </script>
     
 </body>

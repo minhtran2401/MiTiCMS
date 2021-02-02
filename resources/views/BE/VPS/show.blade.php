@@ -38,120 +38,60 @@
                     <div class="card p-2">
                         <div class="card-header border-bottom p-1"><div class="head-label"><h6 class="mb-0">MitiVPS</h6></div>
                         <div class="dt-action-buttons text-right"><div class="dt-buttons d-inline-flex">
-                            <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#modals-slide-in">
-                               + Thêm VPS
-                            </button>
+                           
+                              <a  class="btn btn-outline-primary" href="{{route('vps.create')}}"> + Thêm VPS</a>
+                            
                      </div></div></div>
                         <table class="datatables-basic table" id="table-1">
                             <thead>
                                 <tr>
                                     <th>#</th>
                                     <th>Tên</th>
-                                    <th>Cấu Hình</th>
                                     <th class="text-center">Giá</th>
                                     <th>Trạng thái</th>
                                     <th>Quản Lí</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr>
-                                  <th scope="row">1</th>
-                                  <td>Mark</td>
-                                  <td>Otto</td>
-                                  <td width="15%"><select class="form-control" aria-label="Default select example">
-                                    <option value="1">20.000 đ/ 1 tháng</option>
-                                    <option value="2">Two</option>
-                                    <option value="3">Three</option>
-                                  </select></td>
-                                  <td>Mark</td>
-                                  <td>Otto</td>
-                                </tr>
-                              
-                              </tbody>
+              
                             <tbody>
                                 @foreach ($ds as $row)
                                 <tr>
-                                  <th scope="row">{{$row->service_type_id}}</th>
-                                  {{-- <td>  @php
-                                    $service_group_id =$row->service_group_id;
-                                    $tl = App\Models\GroupService::find($service_group_id);
-                                    echo $tl->service_group_name;
-                                    @endphp</td>
-                                  <td>{{$row->service_type_name}}</td> --}}
-                                 
-{{-- 
-                                  <td data-id="{{ $row->service_group_id }}">
-                                    <div class="custom-control custom-switch custom-control-inline">
-                                        <input type="checkbox" id="gr-{{$row->service_group_id}}"  class="custom-control-input change-status"  {{ $row->display==1?'checked':'' }}>
-                                        <label for="gr-{{$row->service_group_id}}" class="custom-control-label content-status" >{{ $row->display==1?'Hiện':'Ẩn'}}</label>
-                                    </div>
-                                  </td> --}}
-
-                                  {{-- <td >
-                                    <div class="modal fade text-left" id="editgr-{{$row->service_type_id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel33" aria-hidden="true">
-                                        <div class="modal-dialog modal-dialog-centered" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h4 class="modal-title" id="myModalLabel33">Sửa loại dịch vụ</h4>
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>
-                                                <form class="form-change-group" action="{{route('type-service.update', $row->service_type_id)}}" method="POST">
-                                                    @csrf
-                                                    @method('patch')
-                                                    <div class="modal-body">
-                                                        <label>Nhóm </label>
-                                                        <div class="form-group">
-                                                            <select name="id_group" class="form-control" >
-                                                                @php
-                                                                $kq = App\Models\GroupService::select("service_group_id", "service_group_name")->get();
-                                                            @endphp
-                                                                @foreach ($kq as $nsp)
-                                                                @if ($row->service_group_id == $nsp->service_group_id)
-                                                                    <option value='{{$row->service_group_id}}'
-                                                                            selected>{{$nsp->service_group_name}}</option>
-                                                                @else
-                                                                    <option value='{{$nsp->service_group_id}}'>{{$nsp->service_group_name}}</option>
-                                                                @endif
-                                                            @endforeach
-                                                            </select>
-                                                        </div>
-                                                        <label>Tên Mới </label>
-                                                        <div class="form-group">
-                                                            <input name="name_type" type="text" value="{{$row->service_type_name}}" class="form-control" />
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label  for="">Trạng thái</label>
-                                                            <select name="display" class="form-control" >
-                                                                @if ($row->display == 1)  
-                                                                <option value="0">Ẩn</option>
-                                                                <option value="1" selected>Đang Hiện</option>
-                                                                @else
-                                                                <option value="0" selected>Đang Ẩn</option>
-                                                                <option value="1" >Hiện</option>
-                                                                @endif
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="submit" class="btn btn-primary" >Sửa</button>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    
-                                    <button  class="btn btn-icon btn-primary" data-toggle="modal" data-target="#editgr-{{$row->service_type_id}}" > <i class="fa fa-eye" aria-hidden="true"></i> Sửa</button>
+                                  <th scope="row">{{$row->vps_id}}</th>
+                                  <td>
+                                    <img src="{{asset('vps')}}/{{$row->vps_image}}" class="mr-75" height="20" width="20" alt="Angular">
+                                    <span class="font-weight-bold">{{$row->vps_name}}</span>
+                                </td>
+                                <td>
+                                  @php
+                                  $prices = \DB::table('service_price')->where('sku',$row->sku)->get();
+                                  @endphp
+                                  <select class="form-control" >
+                                    @foreach ($prices as $price)
+                                    <option>{{number_format($price->service_price)}} đ/ {{$price->service_time}}</option>
+                                    @endforeach
                                   
-                                  <form class="form-check-inline" action="{{route('type-service.destroy', $row->service_type_id)}}" method="POST">
+                                </select>
+                                </td>
+                                <td data-id="{{ $row->vps_id }}">
+                                  <div class="custom-control custom-switch custom-control-inline">
+                                      <input type="checkbox" id="vps-{{$row->vps_id}}"  class="custom-control-input change-status"  {{ $row->display==1?'checked':'' }}>
+                                      <label for="vps-{{$row->vps_id}}" class="custom-control-label content-status" >{{ $row->display==1?'Hiện':'Ẩn'}}</label>
+                                  </div>
+                                </td>
+                                 
+                                    <td>
+                                      <form class="form-check-inline"  method="GET">
+                                        {{ method_field('UPDATE')}}
+                                        @csrf
+                                        <a href="{{route('vps.edit', $row->vps_id)}}"  title="Sửa" class="btn btn-icon btn-primary"><i class="fa fa-eye" aria-hidden="true"></i> Sửa</a>
+                                      </form>
+                                  <form class="form-check-inline" action="{{route('vps.destroy', $row->vps_id)}}" method="POST">
                                         @csrf
                                         @method('delete')
                                        <button  class="btn btn-icon btn-danger xoaha" style="border: 0" onclick="xoaha(event)" ><i class="fa fa-trash" aria-hidden="true"></i> Xóa</button>
                                   </form>
           
-                                </td> --}}
+                                </td>
                                 </tr>
                                 @endforeach
                               </tbody>
@@ -209,7 +149,7 @@ $("#table-1").on("click", ".change-status", function(e){
           if(id){
               $.ajax({
                   //tên route có url là ....
-                  url:"{{ route('changeStatus.type-service') }}",
+                  url:"{{ route('changeStatus.vps-service') }}",
                   // kiểu method nên là post
                   type:"post",
 
@@ -228,23 +168,26 @@ $("#table-1").on("click", ".change-status", function(e){
                       alert("Không nhận được id.");
                   let old= change.prop('checked')?false:true;
                     change.prop('checked',old)
-                      //k cho chạy lệnh bên dưới nhờ return
                       return;
                   }
-
-
-                  //nếu status là 1 ( hiện )
+                 
                   if(result==1){
-                    
                       change.prop('checked','checked')
                       content.text('Hiện')
-                      //k cho chạy lệnh bên dưới nhờ return
+                      Swal.fire(
+  'Thành công',
+  'VPS đang được hiển thị',
+  'success'
+)
                       return;
-                  }
-                  //nếu status là 0 ( ẩn )
-                     
+                  }  
                       change.prop('checked','')
                       content.text('Ẩn')
+                      Swal.fire(
+  'Thành công!',
+  'VPS đang được ẩn đi',
+  'success'
+)
                     //nếu gửi thất bại
               }).fail(function(){
                   let old= change.prop('checked')?false:true;
@@ -269,89 +212,7 @@ $("#table-1").on("click", ".change-status", function(e){
 } );
 
     </script>
-    <script>
-        $("#create-groups-service").submit(function(e) {
-
-e.preventDefault(); // avoid to execute the actual submit of the form.
-
-var form = $(this);
-var url = form.attr('action');
-$.ajax({
-       type: "POST",
-       url: url,
-       data: form.serialize(), // serializes the form's elements.
-       success: function(data){
-        //    alert(data);
-            if(data['3']==1){
-                $('#table-1').append($('<tr>')
-    .append($('<td>').html('<b>' + data['1'] + '</b>'))
-    .append($('<td>').html(data['4']))
-    .append($('<td>').append(data['2']))
-    .append($('<td>').append(" <div class='custom-control custom-switch custom-control-inline'><input type='checkbox' checked  class='custom-control-input change-status'  ><label  class='custom-control-label content-status' >Hiện</label> </div>"))
-                                        
-                                        
-                                   
-    .append($('<td>').html(" <button  class='btn btn-icon btn-primary' >  Sửa</button> <form class='form-check-inline'>  <button  class='btn btn-icon btn-danger xoaha' style='border: 0' onclick='xoaha(event)' ><i class='fa fa-tras' aria-hidden='true'></i> Xóa</button></form>"))
-                                  
-                                  
-                                 
-                                    
-                                     
-  )
-
-
-        Swal.fire(
-        'Thành công!',
-        'Đã thêm nhóm mới!',
-        'success'
-        )}
-        else{
-            Swal.fire(
-        'Thất Bại!',
-        'Đã có lỗi xảy ra',
-        'error'
-        )}}
-     });
-});
-    </script>
-     
-     <script>
-         $(".form-change-group").submit(function(e) {
-
-e.preventDefault(); // avoid to execute the actual submit of the form.
-
-var form = $(this);
-var url = form.attr('action');
-// basic-datatable
-
-$.ajax({
-       type: "POST",
-       url: url,
-       data: form.serialize(), // serializes the form's elements.
-       success: function(data)
-       {
-            if(data==1){
-               
-                Swal.fire(
-  'Thành công',
-  'Đã cập nhật lại nhóm sản phẩm',
-  'success'
-)
-
-            }
-            else{
-                Swal.fire(
-  'Lỗi',
-  'Đã có lỗi xảy ra',
-  'error'
-)
-            }
-    }
-     });
-
-
-});
-     </script>
+   
 
 <script>
     function xoaha(event) {

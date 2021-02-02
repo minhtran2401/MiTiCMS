@@ -44,7 +44,9 @@
             </li>
 
             @php
-            $link = ['admin/group-service','admin/type-service','blog/create','loai-blog','loai-blog/*/edit','loai-blog/create',];
+            $link = ['admin/group-service','admin/type-service','admin/service/*','loai-blog/*/edit','loai-blog/create',];
+            $linkvps = ['admin/service/vps','admin/service/vps/create','loai-blog/create',];
+            $linkgr_ty = ['admin/group-service','admin/type-service','loai-blog/*/edit','loai-blog/create',];
             @endphp
 
             <li class=" navigation-header"><span data-i18n="Apps &amp; Pages">Ứng Dụng &amp; Tiện Ích</span><i data-feather="more-horizontal"></i>
@@ -67,12 +69,12 @@
 
             <li class=" nav-item {{ request()->is($link) ? 'has-sub open' : '' }}"><a class="d-flex align-items-center" href="#"><i data-feather="menu"></i><span class="menu-title text-truncate" data-i18n="Menu Levels">Danh sách</span></a>
                 <ul class="menu-content">
-                    <li class=" {{ request()->is($link) ? 'has-sub open' : '' }}"><a class="d-flex align-items-center" href="#"><i data-feather='archive'></i><span class="menu-item" > Nhóm & Loại</span></a>
+                    <li class=" {{ request()->is($linkgr_ty) ? 'has-sub open' : '' }}"><a class="d-flex align-items-center" href="#"><i data-feather='archive'></i><span class="menu-item" > Nhóm & Loại</span></a>
                         <ul class="menu-content">
-                            <li><a class="d-flex align-items-center  {{ request()->is('admin/group-service') ? 'active' : '' }}" href="{{route('group-service.index')}}"><i data-feather='package'></i><span class="menu-item" >Nhóm dịch vụ</span></a>
+                            <li class="{{ request()->is('admin/group-service') ? 'active' : '' }}"><a class="d-flex align-items-center  " href="{{route('group-service.index')}}"><i data-feather='package'></i><span class="menu-item" >Nhóm dịch vụ</span></a>
                                 
                             </li>
-                            <li><a class="d-flex align-items-center  {{ request()->is('admin/type-service') ? 'active' : '' }}" href="{{route('type-service.index')}}"><i data-feather='package'></i><span class="menu-item" >Loại dịch vụ</span></a>
+                            <li class="{{ request()->is('admin/type-service') ? 'active' : '' }}"><a class="d-flex align-items-center  " href="{{route('type-service.index')}}"><i data-feather='package'></i><span class="menu-item" >Loại dịch vụ</span></a>
                                
                             </li>
                         </ul>
@@ -85,12 +87,13 @@
                             </li>
                         </ul>
                     </li>
-                    <li><a class="d-flex align-items-center" href="#"><i data-feather='cpu'></i><span class="menu-item" > VPS</span></a>
+                    <li class=" nav-item {{ request()->is($linkvps) ? 'has-sub open' : '' }}"><a class="d-flex align-items-center" href="#"><i data-feather='cpu'></i><span class="menu-item" > VPS</span></a>
                         <ul class="menu-content">
-                            <li><a class="d-flex align-items-center" href="#"><i data-feather='plus'></i><span class="menu-item" data-i18n="Third Level">Thêm</span></a>
+                            <li class=" {{ request()->is('admin/service/vps') ? 'active' : '' }}"><a class="d-flex align-items-center " href="{{route('vps.index')}}"><i data-feather='settings'></i><span class="menu-item">Quản Lí</span></a>
                             </li>
-                            <li><a class="d-flex align-items-center" href="#"><i data-feather='settings'></i><span class="menu-item" data-i18n="Third Level">Quản Lí</span></a>
+                            <li class=" {{ request()->is('admin/service/vps/create') ? 'active' : '' }}"><a class="d-flex align-items-center" href="{{route('vps.create')}}"><i data-feather='plus'></i><span class="menu-item" >Thêm</span></a>
                             </li>
+      
                         </ul>
                     </li>
 
@@ -179,7 +182,7 @@
             @endphp
             <li class=" nav-item  {{ request()->is($link2) ? 'has-sub open' : '' }}"><a class="d-flex align-items-center" href="#"><i data-feather='book-open'></i><span class="menu-title text-truncate">Hoạt động</span></a>
                 <ul class="menu-content">
-                    <li><a class="d-flex align-items-center  {{ request()->is('admin/log/admin') ? 'active' : '' }}" href="{{route('admin.log')}}"><i data-feather='user-check'></i><span class="menu-item " >Quản trị viên</span></a>
+                    <li class="{{ request()->is('admin/log/admin') ? 'active' : '' }}" ><a class="d-flex align-items-center  " href="{{route('admin.log')}}"><i data-feather='user-check'></i><span class="menu-item " >Quản trị viên</span></a>
                     </li>
                     <li><a class="d-flex align-items-center" href="#"><i data-feather='users'></i><span class="menu-item" >Khách hàng</span></a>
                     </li>

@@ -13,6 +13,8 @@ class TypeService extends Model {
         'display',
         'slug'
     ];
-   
+    public function checkvps() {
+        return $this->hasMany('App\Models\VPSService','service_type_id','service_type_id');
+    }
 }
 

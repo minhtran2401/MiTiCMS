@@ -167,18 +167,26 @@ class TypeServiceController extends Controller
      */
     public function destroy($id)
     {
+      
         $nsp = TypeService::find($id);
-        $name = Auth::user()->name;
-        $namedv1 = TypeService ::find($id)->service_type_name;
+        if ($nsp->checkvps()->get()->toArray()==null) {
+            $name = Auth::user()->name;
+        $namedv1 = Typeservice ::find($id)->service_type_name;
         $log = new LogAdmin([
            
            'id_user' => Auth::user()->id, 
             'task' => " $name đã xóa loại dịch vụ $namedv1 ",
         ]);
         $log->save();
-        $nsp->delete();
-        toast('Đã Xóa Loại Dịch Vụ Thành Công!','success');
-        return redirect()->back();
+            $nsp->delete();
+            toast('Đã Xóa Loại Dịch Vụ Thành Công!','success');
+            return redirect()->back();
+        }else{
+            alert()->error('Lỗi','Không thể xóa do đang liên kết với dịch vụ');
+
+            // toast('Không Thể Xóa Do Đang Chứa Loại Dịch Vụ!','error');
+            return redirect()->back();
+        }
     }
 
     function changeStatus(Request $request){

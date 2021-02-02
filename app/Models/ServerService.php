@@ -17,4 +17,6 @@ class ServerService extends Model
         'display',
         'slug'
     ];
+
+  
 }
