@@ -12,15 +12,9 @@
                 <li class="submenu">
                     <a href="#"><i class="fa fa-user"></i> <span>Thông Tin Tài Khoản </span> <span class="menu-arrow"></span></a>
                     <ul style="display: none;">
-                        <li><a href="employees.html">Cập Nhật Thông Tin</a></li>
-                        <li><a href="leaves.html">Đổi Mật Khẩu</a></li>
-                        <li>
-                            <a href="doctors.html"><i class="fa fa-user-md"></i> <span>Dịch Vụ Đang Dùng</span></a>
-                        </li>
-                       
-                        <li>
-                            <a href="doctors.html"><i class="fa fa-user-md"></i> <span>Lịch Sử Mua</span></a>
-                        </li>
+                        <li><a href="{{route('user-profile.profile')}}">Thông tin</a></li>
+                        <li><a href="{{route('user-profile.edit-profile')}}">Cập nhật thông tin</a></li>
+                        <li><a href="{{route('user-profile.changepassword')}}">Đổi mật khẩu</a></li>
                     </ul>
                 </li>
 
@@ -40,19 +34,15 @@
                 <li class="submenu">
                     <a href="#"><i class="fa fa-user"></i> <span> VPS </span> <span class="menu-arrow"></span></a>
                     <ul style="display: none;">
-                        <li><a href="employees.html">Employees List</a></li>
-                        <li><a href="leaves.html">Leaves</a></li>
-                        <li><a href="holidays.html">Holidays</a></li>
-                        <li><a href="attendance.html">Attendance</a></li>
+                        <li><a href="{{route('vps.index')}}">Trang chính</a></li>
+                        <li><a href="{{route('vps.vps-type')}}">Loại hosting</a></li>
                     </ul>
                 </li>
                 <li class="submenu">
-                    <a href="#"><i class="fa fa-user"></i> <span>Hosting </span> <span class="menu-arrow"></span></a>
+                    <a href="{{route('hosting.index')}}"><i class="fa fa-user"></i> <span>Hosting </span> <span class="menu-arrow"></span></a>
                     <ul style="display: none;">
-                        <li><a href="employees.html">Employees List</a></li>
-                        <li><a href="leaves.html">Leaves</a></li>
-                        <li><a href="holidays.html">Holidays</a></li>
-                        <li><a href="attendance.html">Attendance</a></li>
+                        <li><a href="{{route('hosting.index')}}">Trang chính</a></li>
+                        <li><a href="{{route('hosting.hosting-type')}}">Loại hosting</a></li>
                     </ul>
                 </li>
                 <li class="submenu">
@@ -99,7 +89,7 @@
                     <a href="doctors.html"><i class="fa fa-user-md"></i> <span>Hỗ Trợ</span></a>
                 </li>
                 <li>
-                    <a href="doctors.html"><i class="fa fa-user-md"></i> <span>Liên Hệ</span></a>
+                    <a href="{{route('contact')}}"><i class="fa fa-user-md"></i> <span>Liên Hệ</span></a>
                 </li>
                
             </ul>

@@ -21,14 +21,24 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
+
+    //trang chủ ↓
+    public function index()
+    {
+        return view('FE.home');
+    }
     public function home()
     {
         return view('FE.home');
     }
+
+    // trang liên hệ ↓
     public function contact()
     {
         return view('FE.contact');
     }
+
+    // trang cá nhân ↓
     public function profile()
     {
         return view('FE.user-profile.profile');
@@ -41,9 +51,51 @@ class HomeController extends Controller
     {
         return view('FE.user-profile.changepassword');
     }
-    
-    public function index()
+
+    // dịch vụ hosting ↓
+    public function hosting()
     {
-        return view('FE.home');
+        return view('FE.service.hosting-service.index');
+    }
+    public function hosting_type()
+    {
+        return view('FE.service.hosting-service.hosting-type');
+    }
+
+    //dịch vụ vps ↓
+    public function vps()
+    {
+        return view('FE.service.vps-service.index');
+    }
+    public function vps_type()
+    {
+        return view('FE.service.vps-service.vps-type');
+    }
+
+    // dịch vụ account ↓
+    public function account()
+    {
+        return view('FE.service.account-service.index');
+    }
+    public function account_detail()
+    {
+        return view('FE.service.account-service.account-detail');
+    }
+
+    // dịch vụ domain ↓
+    public function domain()
+    {
+        return view('FE.service.domain-service.index');
+    }
+    public function view_check_domain()
+    {
+        return view('FE.service.domain-service.check-domain');
+    }
+    public function check_domain(Request $request){
+        $domain = $request->get('name-domain');
+        return response()->json($domain); //không có domain
+    }
+    public function view_reg_domain(){
+        return view('FE.service.domain-service.reg-domain');
     }
 }

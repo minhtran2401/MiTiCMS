@@ -15,10 +15,11 @@ class CreateDomainServiceTable extends Migration
     {
         Schema::create('domain_service', function (Blueprint $table) {
             $table->id('domain_id');
-            $table->string('sku');              // ( dabcxyz | dngheyd | ...)
-            $table->string('domain_type');      // ( [1] Phổ Biến | [2] VN | [3] Quốc tế )
-            $table->string('domain_name');      // ( .com | .net | ... )
-            $table->integer('status');          // ( [1] Nổi bật | [2] Khuyến mãi | [3] Ẩn )
+            $table->string('sku');                      // ( dabcxyz | dngheyd | ...)
+            $table->string('domain_type');              // ( [1] Phổ Biến | [2] VN | [3] Quốc tế )
+            $table->string('domain_image')->nullable(); // ( Hình ảnh )
+            $table->string('domain_name');              // ( .com | .net | ... )
+            $table->integer('status');                  // ( [1] Nổi bật | [2] Khuyến mãi | [3] Ẩn )
             $table->string('slug')->nullable();
             $table->timestamps();
         });

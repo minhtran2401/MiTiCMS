@@ -18,6 +18,7 @@ class CreateVpsServiceTable extends Migration
             $table->integer('service_group_id');
             $table->integer('service_type_id');
             $table->string('sku');
+            $table->string('vps_image')->nullable();
             $table->string('vps_name');
             $table->text('vps_profile');
             $table->integer('display');

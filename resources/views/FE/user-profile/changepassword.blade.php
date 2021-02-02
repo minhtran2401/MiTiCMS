@@ -40,7 +40,7 @@
                                                 
                                                 <div class="col-sm-12 col-md-8 col-lg-12 form-group">
                                                     <label for="password">Mật khẩu cũ</label>
-                                                    <input type="password" readonly class="form-control" value="matkhaucu" name="password">
+                                                    <input type="password" class="form-control" placeholder="Mật khẩu cũ" name="password">
                                                 </div>
                                                 
                                                 <div class="col-sm-12 col-md-8 col-lg-12 form-group">

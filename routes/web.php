@@ -26,36 +26,40 @@ use Illuminate\Support\Facades\Route;
     
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'home'])->name('home');
     Route::get('/contact', [App\Http\Controllers\HomeController::class, 'contact'])->name('contact');
-    Route::get('/profile', [App\Http\Controllers\HomeController::class, 'profile'])->name('profile');
-    Route::get('/edit-profile', [App\Http\Controllers\HomeController::class, 'edit_profile'])->name('edit-profile');
-    Route::get('/changepassword', [App\Http\Controllers\HomeController::class, 'changepassword'])->name('changepassword');
+    
 
 Route::group(['middleware' => ['auth']], function () {
+// trang cá nhân
+    Route::prefix('trang-ca-nhan')->group(function(){
+        Route::get('/', [App\Http\Controllers\HomeController::class, 'profile'])->name('user-profile.profile');
+        Route::get('/chinh-sua-thong-tin', [App\Http\Controllers\HomeController::class, 'edit_profile'])->name('user-profile.edit-profile');
+        Route::get('/doi-mat-khau', [App\Http\Controllers\HomeController::class, 'changepassword'])->name('user-profile.changepassword');
+    });
 //domain
     Route::prefix('ten-mien')->group(function () {
-    Route::get('/', [App\Http\Controllers\DomainController::class, 'index'])->name('domain.index');
-    Route::get('/kiem-tra-ten-mien', [App\Http\Controllers\DomainController::class, 'view_check_domain'])->name('checkdomain.view');
-    Route::post('/kiem-tra-ten-mien', [App\Http\Controllers\DomainController::class, 'check_domain'])->name('domain.check');
-    Route::get('/dang-ki-ten-mien', [App\Http\Controllers\DomainController::class, 'view_reg_domain'])->name('view.domain.reg');
+        Route::get('/', [App\Http\Controllers\HomeController::class, 'domain'])->name('domain.index');
+        Route::get('/kiem-tra-ten-mien', [App\Http\Controllers\HomeController::class, 'view_check_domain'])->name('checkdomain.view');
+        Route::post('/kiem-tra-ten-mien', [App\Http\Controllers\HomeController::class, 'check_domain'])->name('domain.check');
+        Route::get('/dang-ki-ten-mien', [App\Http\Controllers\HomeController::class, 'view_reg_domain'])->name('view.domain.reg');
 });
 //domain
 
 //vps
-Route::prefix('vps')->group(function () {
-    Route::get('/', [App\Http\Controllers\VpsController::class, 'index'])->name('vps.index');
-    Route::get('/vps-type', [App\Http\Controllers\VpsController::class, 'vps_type'])->name('vps.vps-type');
+    Route::prefix('may-ao')->group(function () {
+        Route::get('/', [App\Http\Controllers\HomeController::class, 'vps'])->name('vps.index');
+        Route::get('/loai-may-ao', [App\Http\Controllers\HomeController::class, 'vps_type'])->name('vps.vps-type');
     });
 //end vps
 //hosting
-Route::prefix('hosting')->group(function () {
-    Route::get('/', [App\Http\Controllers\HostingController::class, 'index'])->name('hosting.index');
-    Route::get('/hosting-type', [App\Http\Controllers\HostingController::class, 'hosting_type'])->name('hosting.hosting-type');
+    Route::prefix('hosting')->group(function () {
+        Route::get('/', [App\Http\Controllers\HomeController::class, 'hosting'])->name('hosting.index');
+        Route::get('/loai-hosting', [App\Http\Controllers\HomeController::class, 'hosting_type'])->name('hosting.hosting-type');
     });
 //end hosting
 //account
-Route::prefix('account')->group(function () {
-    Route::get('/', [App\Http\Controllers\AccountController::class, 'index'])->name('account.index');
-    Route::get('/account-detail', [App\Http\Controllers\AccountController::class, 'account_detail'])->name('account.account-detail');
+    Route::prefix('tai-khoan')->group(function () {
+        Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('account.index');
+        Route::get('/thong-tin-tai-khoan', [App\Http\Controllers\HomeController::class, 'account_detail'])->name('account.account-detail');
     });
 //end account
 

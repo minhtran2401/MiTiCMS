@@ -18,6 +18,7 @@ class CreateServerServiceTable extends Migration
             $table->integer('service_group_id');
             $table->integer('service_type_id');
             $table->string('sku');
+            $table->string('server_image')->nullable();
             $table->string('server_name');
             $table->text('server_profile');
             $table->integer('display');
