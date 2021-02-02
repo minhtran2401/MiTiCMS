@@ -3,20 +3,18 @@
 namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
-class VPSService extends Model {
-
-    protected $table='vps_service';
-    protected $primaryKey='vps_id';
+class AccountService extends Model
+{
+    protected $table='account_service';
+    protected $primaryKey='account_id';
     protected $fillable = [
         'service_group_id',
         'service_type_id',
         'sku',
-        'vps_image',
-        'vps_name',
-        'vps_profile',
+        'account_image',
+        'account_name',
+        'account_info',
         'display',
         'slug'
     ];
-   
 }
-
