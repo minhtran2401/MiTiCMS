@@ -45,7 +45,7 @@
 
             @php
             $link = ['admin/group-service','admin/type-service','admin/service/*','loai-blog/*/edit','loai-blog/create',];
-            $linkvps = ['admin/service/vps','admin/service/vps/create','loai-blog/create',];
+            $linkvps = ['admin/service/vps','admin/service/vps/create','admin/service/vps/*/edit',];
             $linkgr_ty = ['admin/group-service','admin/type-service','loai-blog/*/edit','loai-blog/create',];
             @endphp
 

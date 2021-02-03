@@ -175,19 +175,19 @@ $("#table-1").on("click", ".change-status", function(e){
                       change.prop('checked','checked')
                       content.text('Hiện')
                       Swal.fire(
-  'Thành công',
-  'VPS đang được hiển thị',
-  'success'
-)
+                        'Thành công',
+                        'VPS đang được hiển thị',
+                        'success'
+                      )
                       return;
                   }  
                       change.prop('checked','')
                       content.text('Ẩn')
                       Swal.fire(
-  'Thành công!',
-  'VPS đang được ẩn đi',
-  'success'
-)
+                      'Thành công!',
+                      'VPS đang được ẩn đi',
+                      'success'
+                    )
                     //nếu gửi thất bại
               }).fail(function(){
                   let old= change.prop('checked')?false:true;

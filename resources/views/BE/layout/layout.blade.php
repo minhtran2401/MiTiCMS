@@ -69,7 +69,7 @@
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">Trang chủ</a>
                                     </li>
-                                    <li class="breadcrumb-item"><a href="#">@yield('br-namepage2')</a>
+                                    <li class="breadcrumb-item"><a href="@yield('br-link2')">@yield('br-namepage2')</a>
                                     </li>
                                     <li class="breadcrumb-item active">@yield('br-namepage3')
                                     </li>
@@ -138,7 +138,14 @@
     <script>
         $(document).ready(function () {
           $("#addPrice").click(function(){
-              $("#insert").append('<div class="form-control"><input type="file" name="price[]" ></div>');
+              $("#insert").append('<div class="row"><small class="font-weight-semibold w-100 ml-1 my-1">Giá thuê VPS - Gói mới</small>' +
+                ' <a href="javascript:void(0)" class="del_img btn btn-danger btn-circle icon_del mb-3"><i class="glyphicon glyphicon-remove">Xóa</i></a>'+
+                '<div class="col-md"><div class="form-group">'+
+                   '<input type="text" class="form-control " name="price[]" placeholder = "giá tiền" ></div></div>'+   
+                   '<div class="col-md"><div class="form-group"><div class="input-group">'+
+                   '<input type="text" class="form-control" name="time[]" placeholder="thời hạn"></div></div></div>'+                             
+                '</div>');
+
               });
       });
       </script>
@@ -153,6 +160,46 @@
         });
     });
   </script>
+
+<script>
+    $(document).ready(function() {
+  
+      $(".del_price").on('click',function() {
+        
+          var url = "{{route('delPrice')}}";
+          var id = $(this).parent().data('id');
+          $.ajax({
+              url: url ,
+              type: 'POST',
+            cache: false,
+              data: {
+                "_token": "{{ csrf_token() }}",
+                      id:id,
+                  },
+              success: function (data) {
+                 
+                  if (data) {
+                      $('#row-price-'+id).remove()
+                      Swal.fire(
+                        'Thành công',
+                        'Đã xóa giá vừa chọn',
+                        'success'
+                        )
+                                
+                  } else {
+                    Swal.fire(
+                        'Thất bại',
+                        'Đã có lỗi xảy ra',
+                        'error'
+                        )
+                  }	
+                  
+              }
+          });
+      });
+  });
+  </script>
+
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 
     <script>

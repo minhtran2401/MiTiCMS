@@ -91,8 +91,9 @@ Route::prefix('admin')->group(function () {
         Route::resource('/vps', App\Http\Controllers\BE\VPSController::class);
         Route::get('/vps/get-type-pro/{service_group_id}', [App\Http\Controllers\BE\VPSController::class, 'get_type_pro'])->name('get_type_pro');
         Route::post('/change-status-vps-service','App\Http\Controllers\BE\VPSController@changeStatus')->name('changeStatus.vps-service');
+        Route::post('/delprice','App\Http\Controllers\BE\VPSController@delPrice')->name('delPrice');
 
-    }); // app
+    }); // service
 
 
     Route::prefix('app')->group(function () {

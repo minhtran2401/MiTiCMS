@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\BE;
 use App\Models\VPSService;
 use App\Models\LogAdmin;
+use App\Models\TypeService;
 use App\Models\Price;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -135,8 +136,13 @@ class VPSController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {
-        //
+    {  
+        $data['type_service'] = DB::table("service_types")->select("service_type_id", "service_type_name")->get();
+        $data['group_service'] = DB::table("service_groups")->select("service_group_id", "service_group_name")->get();
+       
+        $row = VPSService::find($id);
+        $data['price'] =DB::table('service_price')->where('sku',$row->sku)->get();
+        return view('BE.VPS.edit',compact('row'),$data);
     }
 
     /**
@@ -148,8 +154,70 @@ class VPSController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
-    }
+        $sp = VPSService::find($id);
+        $fileimg = $request->file('image'); // tạo biến lấy dữ liệu từ input
+        if ($fileimg){
+            $fileimg = $request->file('image'); // tạo biến lấy dữ liệu từ input
+            $filename = $fileimg->getClientOriginalName(); // lấy tên theo tên gốc của file
+            $pathimg = $fileimg->move(public_path().'/VPS/', $filename); //chỗ chứa file
+            $sp->vps_image = $filename;
+          
+            $sp->vps_name = $request->get('name_service');
+            $sp->slug =\Str::slug($request->get('name_service'));
+            $sp->service_group_id = $request->get('getgroup');
+            $sp->service_type_id = $request->get('gettype');
+            $sp->sku = VPSService::find($id)->sku;
+            $sp->display = $request->get('display');
+            $sp->vps_profile = $request->get('vps_profile');
+
+        }
+        else{
+
+            $sp->slug =\Str::slug($request->get('name_service'));
+            $sp->vps_name = $request->get('name_service');
+            $sp->service_group_id = $request->get('getgroup');
+            $sp->service_type_id = $request->get('gettype');
+            $sp->sku = VPSService::find($id)->sku;
+            $sp->display = $request->get('display');
+            $sp->vps_profile = $request->get('vps_profile');
+          
+
+        }
+      
+        if ($request->get('price','time')) {
+            
+        $prices = $request->get('price');
+        $times = $request->get('time');
+        $value = array_combine($times,$prices);
+            // dd($value);
+  
+                foreach($value as $key => $packs){
+                $combo = new Price; 
+
+                                    $combo->service_group_id = $sp->service_group_id;
+                                    $combo->service_type_id = $sp->service_type_id;
+                                    $combo->sku = $sp->sku;
+                                    $combo->service_price = $packs;
+                                    $combo->service_time = $key;
+                                    $combo->save();
+
+                }
+        }
+          
+        $name = Auth::user()->name;
+        $namedv = $sp->vps_name;
+        $log = new LogAdmin([
+           
+           'id_user' => Auth::user()->id, 
+            'task' => " $name sửa thông tin VPS $namedv ",
+        ]);
+        $log->save();
+       
+          $sp->save();
+          toast('Cập Nhật VPS Thành Công!','success');
+
+        return redirect()->route('vps.index');
+        }
 
     /**
      * Remove the specified resource from storage.
@@ -203,5 +271,14 @@ class VPSController extends Controller
             // trả về status hiện tại để xử lý front end
             return $request->status;
         }}
+
+        public function delPrice(Request $request){
+            if ($request->ajax()) {
+                $price_service = Price::find($request->id);
+                    $price_service->delete();
+                return $request->id;
+            }
+        }
+    
 
 }
