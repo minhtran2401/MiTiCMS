@@ -88,10 +88,21 @@ Route::prefix('admin')->group(function () {
     }); // log
 
     Route::prefix('service')->group(function () {
+        // vps ↓
         Route::resource('/vps', App\Http\Controllers\BE\VPSController::class);
         Route::get('/vps/get-type-pro/{service_group_id}', [App\Http\Controllers\BE\VPSController::class, 'get_type_pro'])->name('get_type_pro');
         Route::post('/change-status-vps-service','App\Http\Controllers\BE\VPSController@changeStatus')->name('changeStatus.vps-service');
         Route::post('/delprice','App\Http\Controllers\BE\VPSController@delPrice')->name('delPrice');
+        // hosting ↓
+        Route::resource('/hosting', App\Http\Controllers\BE\HostingController::class);
+        Route::get('/hosting/get-type-pro/{service_group_id}', [App\Http\Controllers\BE\HostingController::class, 'get_type_pro'])->name('get_type_pro');
+        Route::post('/change-status-hosting-service','App\Http\Controllers\BE\HostingController@changeStatus')->name('changeStatus.hosting-service');
+        Route::post('/delprice','App\Http\Controllers\BE\HostingController@delPrice')->name('delPrice');
+        // server ↓
+        Route::resource('/server', App\Http\Controllers\BE\ServerController::class);
+        Route::get('/server/get-type-pro/{service_group_id}', [App\Http\Controllers\BE\ServerController::class, 'get_type_pro'])->name('get_type_pro');
+        Route::post('/change-status-server-service','App\Http\Controllers\BE\ServerController@changeStatus')->name('changeStatus.server-service');
+        Route::post('/delprice','App\Http\Controllers\BE\ServerController@delPrice')->name('delPrice');
 
     }); // service
 
