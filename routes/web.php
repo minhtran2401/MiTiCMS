@@ -103,9 +103,21 @@ Route::prefix('admin')->group(function () {
         Route::get('/server/get-type-pro/{service_group_id}', [App\Http\Controllers\BE\ServerController::class, 'get_type_pro'])->name('get_type_pro');
         Route::post('/change-status-server-service','App\Http\Controllers\BE\ServerController@changeStatus')->name('changeStatus.server-service');
         Route::post('/delprice','App\Http\Controllers\BE\ServerController@delPrice')->name('delPrice');
-
+         // domain ↓
+         Route::resource('/domain', App\Http\Controllers\BE\DomainController::class);
+         Route::get('/domain/get-type-pro/{service_group_id}', [App\Http\Controllers\BE\DomainController::class, 'get_type_pro'])->name('get_type_pro');
+         Route::post('/change-status-domain-service','App\Http\Controllers\BE\DomainController@changeStatus')->name('changeStatus.domain-service');
+         Route::post('/delprice','App\Http\Controllers\BE\DomainController@delPrice')->name('delPrice');
+         Route::post('/domain-ajax', [App\Http\Controllers\BE\DomainController::class, 'storeajax'])->name('store.dm.ajax');
+         // account ↓
+         Route::resource('/account', App\Http\Controllers\BE\AccountController::class);
+         Route::get('/account/get-type-pro/{service_group_id}', [App\Http\Controllers\BE\AccountController::class, 'get_type_pro'])->name('get_type_pro');
+         Route::post('/change-status-account-service','App\Http\Controllers\BE\AccountController@changeStatus')->name('changeStatus.account-service');
+         Route::post('/delprice','App\Http\Controllers\BE\AccountController@delPrice')->name('delPrice');
+         Route::post('/account-ajax', [App\Http\Controllers\BE\AccountController::class, 'storeajax'])->name('store.ac.ajax');
     }); // service
 
+    Route::post('/change-themes', [App\Http\Controllers\BE\AdminController::class, 'change_theme'])->name('change_theme');
 
     Route::prefix('app')->group(function () {
         

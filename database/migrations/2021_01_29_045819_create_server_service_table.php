@@ -22,7 +22,7 @@ class CreateServerServiceTable extends Migration
             $table->string('server_name');
             $table->text('server_profile');
             $table->integer('display');
-            $table->string('slug')->nullable();
+            $table->string('slug')->nullable()->unique();
             $table->timestamps();
         });
     }

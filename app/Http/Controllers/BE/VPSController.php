@@ -161,7 +161,6 @@ class VPSController extends Controller
             $filename = $fileimg->getClientOriginalName(); // lấy tên theo tên gốc của file
             $pathimg = $fileimg->move(public_path().'/VPS/', $filename); //chỗ chứa file
             $sp->vps_image = $filename;
-          
             $sp->vps_name = $request->get('name_service');
             $sp->slug =\Str::slug($request->get('name_service'));
             $sp->service_group_id = $request->get('getgroup');
@@ -172,7 +171,6 @@ class VPSController extends Controller
 
         }
         else{
-
             $sp->slug =\Str::slug($request->get('name_service'));
             $sp->vps_name = $request->get('name_service');
             $sp->service_group_id = $request->get('getgroup');
@@ -180,42 +178,31 @@ class VPSController extends Controller
             $sp->sku = VPSService::find($id)->sku;
             $sp->display = $request->get('display');
             $sp->vps_profile = $request->get('vps_profile');
-          
-
         }
       
-        if ($request->get('price','time')) {
-            
+        
         $prices = $request->get('price');
         $times = $request->get('time');
+        if(isset($prices) && isset($times)){
         $value = array_combine($times,$prices);
-            // dd($value);
-  
-                foreach($value as $key => $packs){
-                $combo = new Price; 
-
-                                    $combo->service_group_id = $sp->service_group_id;
-                                    $combo->service_type_id = $sp->service_type_id;
-                                    $combo->sku = $sp->sku;
-                                    $combo->service_price = $packs;
-                                    $combo->service_time = $key;
-                                    $combo->save();
-
-                }
-        }
-          
+            foreach($value as $key => $packs){
+            $combo = new Price; 
+            $combo->service_group_id = $sp->service_group_id;
+            $combo->service_type_id = $sp->service_type_id;
+            $combo->sku = $sp->sku;
+            $combo->service_price = $packs;
+            $combo->service_time = $key;
+            $combo->save();
+                }}  
         $name = Auth::user()->name;
         $namedv = $sp->vps_name;
         $log = new LogAdmin([
-           
            'id_user' => Auth::user()->id, 
             'task' => " $name sửa thông tin VPS $namedv ",
         ]);
         $log->save();
-       
-          $sp->save();
-          toast('Cập Nhật VPS Thành Công!','success');
-
+        $sp->save();
+        toast('Cập Nhật VPS Thành Công!','success');
         return redirect()->route('vps.index');
         }
 

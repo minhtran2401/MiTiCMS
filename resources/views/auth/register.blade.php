@@ -11,17 +11,17 @@
                         <!-- Register-->
                         <div class="d-flex col-lg-4 align-items-center auth-bg px-2 p-lg-5">
                             <div class="col-12 col-sm-8 col-md-6 col-lg-12 px-xl-2 mx-auto">
-                                <h4 class="card-title mb-1">Adventure starts here 🚀</h4>
-                                <p class="card-text mb-2">Make your app management easy and fun!</p>
+                                <h4 class="card-title mb-1">Đăng Kí Ngay 🚀</h4>
+                                <p class="card-text mb-2">Nhiều dịch vụ với giá cực kì ưu đãi</p>
                                 <form class="auth-register-form mt-2" id="form-res" method="POST" action="{{ route('register') }}">
                                     @csrf
                                     <div class="form-group">
                                         <label class="form-label" for="name">Họ và Tên</label>
-                                        <input class="form-control" id="name" type="text" name="name" placeholder="johndoe" aria-describedby="register-username" autofocus="" tabindex="1" required />
+                                        <input class="form-control" id="name" type="text" name="name" placeholder="Họ Tên" aria-describedby="register-username" autofocus="" tabindex="1" required />
                                     </div>
                                     <div class="form-group">
                                         <label class="form-label" for="email">Email</label>
-                                        <input class="form-control" id="email" type="text" name="email" placeholder="john@example.com" aria-describedby="register-email" tabindex="2" required />
+                                        <input class="form-control" id="email" type="text" name="email" placeholder="user@gmail.com" aria-describedby="register-email" tabindex="2" required />
                                     </div>
                                     <div class="form-group">
                                         <label class="form-label" for="password">Mật khẩu</label>
@@ -39,15 +39,16 @@
                                     </div>
                                     <div class="form-group">
                                         <div class="custom-control custom-checkbox">
-                                            <input class="custom-control-input" id="register-privacy-policy" type="checkbox" tabindex="4" />
-                                            <label class="custom-control-label" for="register-privacy-policy">I agree to<a href="javascript:void(0);">&nbsp;privacy policy & terms</a></label>
+                                            <input class="custom-control-input" id="checkme" type="checkbox" tabindex="4" />
+                                            <label class="custom-control-label" for="checkme">Tôi đồng ý với<a href="javascript:void(0);">&nbsp;Chính sách và Điều khoản bảo mật</a> của website</label>
                                         </div>
                                     </div>
-                                    <button id="btnSubmitres" class="btn btn-primary btn-block" tabindex="5">Sign up</button>
+
+                                    <button id="btnSubmitres" name="btnSubmitres" disabled="disabled" class="btn btn-primary btn-block" tabindex="5">Sign up</button>
                                 </form>
-                                <p class="text-center mt-2"><span>Already have an account?</span><a href="{{route('login')}}"><span>&nbsp;Sign in instead</span></a></p>
+                                <p class="text-center mt-2"><span>Đã có tài khoản?</span><a href="{{route('login')}}"><span>&nbsp;Đăng nhập ngay</span></a></p>
                                 <div class="divider my-2">
-                                    <div class="divider-text">or</div>
+                                    <div class="divider-text">hoặc</div>
                                 </div>
                                 <div class="auth-footer-btn d-flex justify-content-center"><a class="btn btn-facebook" href="javascript:void(0)"><i data-feather="facebook"></i></a><a class="btn btn-twitter white" href="javascript:void(0)"><i data-feather="twitter"></i></a><a class="btn btn-google" href="javascript:void(0)"><i data-feather="mail"></i></a><a class="btn btn-github" href="javascript:void(0)"><i data-feather="github"></i></a></div>
                             </div>
@@ -58,6 +59,21 @@
 @section('js')
 <script src="{{asset('assets')}}/js/sweetalert2@10.js"></script>
 <script src="{{asset('assets')}}/js/jquery-3.2.1.min.js"></script>
+
+<script>
+     var checker = document.getElementById('checkme');
+ var sendbtn = document.getElementById('btnSubmitres');
+ // when unchecked or checked, run the function
+ checker.onchange = function(){
+if(this.checked){
+    sendbtn.disabled = false;
+} else {
+    sendbtn.disabled = true;
+}
+
+}
+</script>
+
 <script>
     $('#password').on('blur', function(){
     if(this.value.length < 8){ // checks the password value length

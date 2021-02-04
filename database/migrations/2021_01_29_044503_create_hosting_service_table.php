@@ -22,7 +22,7 @@ class CreateHostingServiceTable extends Migration
             $table->string('hosting_name');
             $table->text('hosting_profile');
             $table->integer('display');
-            $table->string('slug')->nullable();
+            $table->string('slug')->nullable()->unique();
             $table->timestamps();
         });
     }

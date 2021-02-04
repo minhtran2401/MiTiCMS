@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\BE;
 use App\Models\HostingService;
+use App\Models\DomainService;
 use App\Models\LogAdmin;
 use App\Models\TypeService;
 use App\Models\Price;
@@ -11,7 +12,7 @@ use RealRashid\SweetAlert\Facades\Alert;
 use Auth;
 use DB;
 
-class HostingController extends Controller
+class DomainController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,8 +21,9 @@ class HostingController extends Controller
      */
     public function index()
     {
-        $ds = HostingService::all();
-        return view('BE.hosting.show', compact('ds'));
+        $ds = DomainService::all();
+        $gr = DB::table('service_groups')->get();
+        return view('BE.domain.show', compact('ds','gr'));
     }
 
     /**
@@ -44,75 +46,42 @@ class HostingController extends Controller
      */
     public function store(Request $request)
     {
-            $request->validate([
-                'image' => 'mimes:jpeg,bmp,png' // Only allow .jpg, .bmp and .png file types.
-            ]);
+          // store ajax rồi
+    }
 
-            // Save the file locally in the storage/public/ folder under a new folder named /product
-            $fileimg = $request->file('image'); // tạo biến lấy dữ liệu từ input
-            $filename = $fileimg->getClientOriginalName(); // lấy tên theo tên gốc của file
-            $pathimg = $fileimg->move(public_path().'/Hosting/', $filename); //chỗ chứa file
-            $sku = mt_rand(1000000000, 9999999999);
-
-            // Store the record, using the new file hashname which will be it's new filename identity.
-            $product = new HostingService([
-                "service_group_id" => $request->get('getgroup'),
-                "service_type_id" => $request->get('gettype'),
-                "sku" => $sku,
-                "hosting_name" => $request->get('name_service'),
-                "slug" =>\Str::slug($request->name_service),
-                "hosting_image" => $filename,
-                "display" =>$request->get('display'),
-                "hosting_profile"=>$request->get('hosting_profile')
-
-            ]);
-            $product->save();
-
-            $prices =[];
-            $times =[]; 
-          
-            if ($request->get('price1','time1')) {
-                $prices[] = $request->get('price1');
-                $times[] = $request->get('time1');
-            }
-            if ($request->get('price2','time2')) {
-                $prices[] = $request->get('price2');
-                $times[] = $request->get('time2');
-            }
-            if ($request->get('price3','time3')) {
-                $prices[] = $request->get('price3');
-                $times[] = $request->get('time3');
-            }
-            if ($request->get('price4','time4')) {
-                $prices[] = $request->get('price4');
-                $times[] = $request->get('time4');
-            }
-            if ($request->get('price5','time5')) {
-                $prices[] = $request->get('price5');
-                $times[] = $request->get('time5');
-            }
-            $value = array_combine(  $times,$prices);
-  
-                foreach($value as $key => $packs){
-                $combo = new Price; 
-                    $combo->service_group_id = $product->service_group_id;
-                    $combo->service_type_id = $product->service_type_id;
-                    $combo->sku = $product->sku;
-                    $combo->service_price = $packs;
-                    $combo->service_time = $key;
-                    $combo->save();
-
-                }
-                $name = Auth::user()->name;
-                $namedv = $product->hosting_name;
-                $log = new LogAdmin([
-                   
-                   'id_user' => Auth::user()->id, 
-                    'task' => " $name đã tạo hosting $namedv ",
-                ]);
-                $log->save();
-        toast('Thêm hosting Thành Công!','success');
-        return redirect()->route('hosting.index');
+    public function storeajax(Request $request)
+    {
+       
+        $sku = mt_rand(1000000000, 9999999999);
+        $ngs = new DomainService([
+            'slug' =>\Str::slug($request->domain_name),
+            'price_show' => $request->get('price_show'),
+            'service_type_id' => $request->get('gettype'),
+            'sku' => $sku,
+            'price_show' => $request->get('price_show'),
+            'domain_name' => $request->get('domain_name'),
+            'domain_type' => $request->get('domain_type'),
+            'status' => 1,
+        ]);
+        $name = Auth::user()->name;
+        $namedv = $ngs->domain_name;
+        $log = new LogAdmin([
+           'id_user' => Auth::user()->id, 
+            'task' => " $name đã tạo loại tên miền $namedv ",
+        ]);
+        $log->save();
+        $ngs->save();
+      
+        $name = DomainService::find($ngs->domain_id);
+            // $name = $tl->service_group_name;
+         $data['4'] = $name->domain_type;
+         $data['1'] = $ngs->domain_name;
+         $data['2'] =number_format($ngs->price_show);
+         $data['5'] =$ngs->domain_id;
+         $data['3'] = '1';
+        return response()->json($data);
+       
+       
     }
 
     /**
@@ -137,9 +106,9 @@ class HostingController extends Controller
         $data['type_service'] = DB::table("service_types")->select("service_type_id", "service_type_name")->get();
         $data['group_service'] = DB::table("service_groups")->select("service_group_id", "service_group_name")->get();
        
-        $row = HostingService::find($id);
+        $row = DomainService::find($id);
         $data['price'] =DB::table('service_price')->where('sku',$row->sku)->get();
-        return view('BE.hosting.edit',compact('row'),$data);
+        return view('BE.domain.edit',compact('row'),$data);
     }
 
     /**
@@ -151,32 +120,31 @@ class HostingController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $sp = HostingService::find($id);
+        $sp = DomainService::find($id);
         $fileimg = $request->file('image'); // tạo biến lấy dữ liệu từ input
         if ($fileimg){
             $fileimg = $request->file('image'); // tạo biến lấy dữ liệu từ input
             $filename = $fileimg->getClientOriginalName(); // lấy tên theo tên gốc của file
-            $pathimg = $fileimg->move(public_path().'/Hosting/', $filename); //chỗ chứa file
-            $sp->hosting_image = $filename;
+            $pathimg = $fileimg->move(public_path().'/Domain/', $filename); //chỗ chứa file
+            $sp->domain_image = $filename;
           
-            $sp->hosting_name = $request->get('name_service');
+            $sp->domain_name = $request->get('name_service');
             $sp->slug =\Str::slug($request->get('name_service'));
-            $sp->service_group_id = $request->get('getgroup');
-            $sp->service_type_id = $request->get('gettype');
-            $sp->sku = HostingService::find($id)->sku;
-            $sp->display = $request->get('display');
-            $sp->hosting_profile = $request->get('hosting_profile');
+            // $sp->service_group_id = $request->get('getgroup');
+            // $sp->service_type_id = $request->get('gettype');
+            $sp->sku = DomainService::find($id)->sku;
+            $sp->status = $request->get('display');
+        
 
         }
         else{
 
+            $sp->domain_name = $request->get('name_service');
             $sp->slug =\Str::slug($request->get('name_service'));
-            $sp->hosting_name = $request->get('name_service');
-            $sp->service_group_id = $request->get('getgroup');
-            $sp->service_type_id = $request->get('gettype');
-            $sp->sku = HostingService::find($id)->sku;
-            $sp->display = $request->get('display');
-            $sp->hosting_profile = $request->get('hosting_profile');
+            // $sp->service_group_id = $request->get('getgroup');
+            // $sp->service_type_id = $request->get('gettype');
+            $sp->sku = DomainService::find($id)->sku;
+            $sp->status = $request->get('display');
           
 
         }
@@ -189,26 +157,26 @@ class HostingController extends Controller
         $value = array_combine($times,$prices);
                 foreach($value as $key => $packs){
                 $combo = new Price; 
-                    $combo->service_group_id = $sp->service_group_id;
-                    $combo->service_type_id = $sp->service_type_id;
+                    $combo->service_group_id = "0";
+                    $combo->service_type_id = "0";
                     $combo->sku = $sp->sku;
                     $combo->service_price = $packs;
                     $combo->service_time = $key;
                     $combo->save();
                 }}
         $name = Auth::user()->name;
-        $namedv = $sp->hosting_name;
+        $namedv = $sp->domain_name;
         $log = new LogAdmin([
            
            'id_user' => Auth::user()->id, 
-            'task' => " $name sửa thông tin hosting $namedv ",
+            'task' => " $name sửa cập nhật lại tên miền $namedv ",
         ]);
         $log->save();
        
           $sp->save();
-          toast('Cập Nhật Hosting Thành Công!','success');
+          toast('Cập Nhật Tên Miền Thành Công!','success');
 
-        return redirect()->route('hosting.index');
+        return redirect()->route('domain.index');
         }
 
     /**
@@ -219,19 +187,19 @@ class HostingController extends Controller
      */
     public function destroy($id)
     {
-        $sp = HostingService::find($id);
+        $sp = DomainService::find($id);
         $sp->delete();
         $delprice = DB::table('service_price')->where('sku',$sp->sku)->delete();
-        alert()->success('Thành công','Đã xóa Hosting');
+        alert()->success('Thành công','Đã xóa Domain');
         $name = Auth::user()->name;
-        $namedv = $sp->hosting_name;
+        $namedv = $sp->domain_name;
         $log = new LogAdmin([
            
            'id_user' => Auth::user()->id, 
             'task' => " $name đã xóa hosting $namedv ",
         ]);
         $log->save();
-        return redirect()->route('hosting.index');
+        return redirect()->route('domain.index');
     }
 
     
@@ -259,7 +227,7 @@ class HostingController extends Controller
     
             // hien 1 _____ an 0
             //lấy nhóm sản phảm dựa theo id và update lai trạng thái
-            HostingService::where('hosting_id',$request->id)->update(['display'=>$request->status]);
+            DomainService::where('domain_id',$request->id)->update(['status'=>$request->status]);
             // trả về status hiện tại để xử lý front end
             return $request->status;
         }}

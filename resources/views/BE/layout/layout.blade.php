@@ -42,7 +42,16 @@
 
 <!-- BEGIN: Body-->
 
-<body class="vertical-layout vertical-menu-modern  navbar-floating footer-static  " data-open="click" data-menu="vertical-menu-modern" data-col="">
+@php
+if(Auth::user()->theme == 1){
+    $theme = "";
+}
+else{
+    $theme = "dark-layout";
+}
+@endphp
+
+<body class="vertical-layout vertical-menu-modern {{$theme}} navbar-floating footer-static  " data-open="click" data-menu="vertical-menu-modern" data-col="">
     @include('sweetalert::alert')
 
     <!-- BEGIN: Header-->
@@ -138,7 +147,7 @@
     <script>
         $(document).ready(function () {
           $("#addPrice").click(function(){
-              $("#insert").append('<div class="row"><small class="font-weight-semibold w-100 ml-1 my-1">Giá thuê VPS - Gói mới</small>' +
+              $("#insert").append('<div class="row"><small class="font-weight-semibold w-100 ml-1 my-1">Giá thuê - Gói mới</small>' +
                 ' <a href="javascript:void(0)" class="del_img btn btn-danger btn-circle icon_del mb-3"><i class="glyphicon glyphicon-remove">Xóa</i></a>'+
                 '<div class="col-md"><div class="form-group">'+
                    '<input type="text" class="form-control " name="price[]" placeholder = "giá tiền" ></div></div>'+   
@@ -207,6 +216,78 @@
   $('#summernote').summernote();
 });
     </script>
+
+<script>
+    
+  
+    
+    $('#changetheme').change(function(e){
+        // ngăn sự kiện change-status này khi click sẽ lan ra các sự kiện khác
+        //thường áp dụng cho các button form hoặc thẻ link ( tag a )
+          e.preventDefault();
+
+          //lấy id nhóm sản phẩm từ thẻ td ( data-id )
+          var id=$(this).parent().parent().data('id');
+
+        
+        var status=$(this).prop('checked')?1:0;
+   
+          //tạo biến global cho element đang click
+          var change=$(this)
+          var content=$(this).parent().find('.content-status')
+          //nếu có id thì mới gửi ajax
+          if(id){
+              $.ajax({
+                  //tên route có url là ....
+                  url:"{{ route('change_theme') }}",
+                  // kiểu method nên là post
+                  type:"post",
+
+                  //truyền biến id bà status
+                  data:{
+                      id:id,
+                      status:status,
+                      "_token": "{{ csrf_token() }}",
+                    
+                    }
+
+                  //nếu gửi thành công
+              }).done(function(result){
+                //nếu k nhận dc id
+                  if(result=='error'){
+                      alert("Không nhận được id.");
+                  let old= change.prop('checked')?false:true;
+                    change.prop('checked',old)
+                      return;
+                  }
+                 
+                  if(result==1){
+                      change.prop('checked','checked')
+                      Swal.fire(
+                        'Thành công',
+                        'Đã kích hoạt giao diện sáng',
+                        'success'
+                      )
+                      return;
+                  }  
+                      change.prop('checked','')
+                   
+                      Swal.fire(
+                      'Thành công!',
+                      'Đã kích hoạt giao diện tối',
+                      'success'
+                    )
+                    //nếu gửi thất bại
+              }).fail(function(){
+                  let old= change.prop('checked')?false:true;
+                    change.prop('checked',old)
+                  alert("Xảy ra lỗi từ phía server.");
+              })
+          }
+      })
+   
+</script>
+
     
 </body>
 <!-- END: Body-->

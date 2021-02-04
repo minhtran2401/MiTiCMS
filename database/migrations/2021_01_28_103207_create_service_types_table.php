@@ -18,7 +18,7 @@ class CreateServiceTypesTable extends Migration
             $table->integer('service_group_id');
             $table->string('service_type_name');
             $table->integer('display')->default(1);
-            $table->string('slug')->nullable();
+            $table->string('slug')->nullable()->unique();
             $table->timestamps();
         });
     }

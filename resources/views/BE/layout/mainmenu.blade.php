@@ -44,12 +44,16 @@
             </li>
 
             @php
-            $link = ['admin/group-service','admin/type-service','admin/service/*','loai-blog/*/edit','loai-blog/create',];
+            $link = ['admin/group-service','admin/type-service','admin/service/*',];
             $linkvps = ['admin/service/vps','admin/service/vps/create','admin/service/vps/*/edit',];
+            $linkaccount = ['admin/service/account','admin/service/account/create','admin/service/account/*/edit',];
+            $linkdomain = ['admin/service/domain','admin/service/domain/create','admin/service/domain/*/edit',];
+            $linkserver = ['admin/service/server','admin/service/server/create','admin/service/server/*/edit',];
+            $linkhost = ['admin/service/hosting','admin/service/hosting/create','admin/service/hosting/*/edit',];
             $linkgr_ty = ['admin/group-service','admin/type-service','loai-blog/*/edit','loai-blog/create',];
             @endphp
 
-            <li class=" navigation-header"><span data-i18n="Apps &amp; Pages">Ứng Dụng &amp; Tiện Ích</span><i data-feather="more-horizontal"></i>
+            <li class=" navigation-header"><span >Ứng Dụng &amp; Tiện Ích</span><i data-feather="more-horizontal"></i>
             </li>
             <li class=" nav-item"><a class="d-flex align-items-center" href="#"><i data-feather='grid'></i><span class="menu-title text-truncate" >Tiện Ích</span></a>
                 <ul class="menu-content">
@@ -64,7 +68,7 @@
                 </ul>
             </li>
 
-            <li class=" navigation-header"><span data-i18n="Apps &amp; Pages">Dịch Vụ</span><i data-feather="more-horizontal"></i>
+            <li class=" navigation-header"><span >Dịch Vụ</span><i data-feather="more-horizontal"></i>
             </li>
 
             <li class=" nav-item {{ request()->is($link) ? 'has-sub open' : '' }}"><a class="d-flex align-items-center" href="#"><i data-feather="menu"></i><span class="menu-title text-truncate" data-i18n="Menu Levels">Danh sách</span></a>
@@ -79,11 +83,11 @@
                             </li>
                         </ul>
                     </li>
-                    <li><a class="d-flex align-items-center" href="#"><i data-feather='server'></i><span class="menu-item" > Máy chủ</span></a>
+                    <li class=" nav-item {{ request()->is($linkserver) ? 'has-sub open' : '' }}"><a class="d-flex align-items-center" href="#"><i data-feather='server'></i><span class="menu-item" > Máy chủ</span></a>
                         <ul class="menu-content">
-                            <li><a class="d-flex align-items-center" href="#"><i data-feather='plus'></i><span class="menu-item" data-i18n="Third Level">Thêm</span></a>
+                            <li class="{{ request()->is('admin/service/server') ? 'active' : '' }}" ><a class="d-flex align-items-center" href="{{route('server.index')}}"><i data-feather='settings'></i><span class="menu-item">Quản Lí</span></a>
                             </li>
-                            <li><a class="d-flex align-items-center" href="#"><i data-feather='settings'></i><span class="menu-item" data-i18n="Third Level">Quản Lí</span></a>
+                            <li class="{{ request()->is('admin/service/server/create') ? 'active' : '' }}"><a class="d-flex align-items-center" href="{{route('server.create')}}"><i data-feather='plus'></i><span class="menu-item" >Thêm</span></a>
                             </li>
                         </ul>
                     </li>
@@ -97,28 +101,27 @@
                         </ul>
                     </li>
 
-                    <li><a class="d-flex align-items-center" href="#"><i data-feather='database'></i><span class="menu-item" > Hosting</span></a>
+                    <li class=" nav-item {{ request()->is($linkhost) ? 'has-sub open' : '' }}"><a class="d-flex align-items-center" href="#"><i data-feather='database'></i><span class="menu-item" > Hosting</span></a>
                         <ul class="menu-content">
-                            <li><a class="d-flex align-items-center" href="#"><i data-feather='plus'></i><span class="menu-item" data-i18n="Third Level">Thêm</span></a>
+                            <li class="{{ request()->is('admin/service/hosting') ? 'active' : '' }}"><a class="d-flex align-items-center" href="{{route('hosting.index')}}"><i data-feather='settings'></i><span class="menu-item" >Quản Lí</span></a>
                             </li>
-                            <li><a class="d-flex align-items-center" href="#"><i data-feather='settings'></i><span class="menu-item" data-i18n="Third Level">Quản Lí</span></a>
+                            <li class="{{ request()->is('admin/service/hosting/create') ? 'active' : '' }}"><a class="d-flex align-items-center" href="{{route('hosting.create')}}"><i data-feather='plus'></i><span class="menu-item" >Thêm</span></a>
                             </li>
                         </ul>
                     </li>
-                    <li><a class="d-flex align-items-center" href="#"><i data-feather='globe'></i><span class="menu-item" > Tên miền</span></a>
+                    <li class=" nav-item {{ request()->is($linkdomain) ? 'has-sub open' : '' }}" ><a class="d-flex align-items-center" href="#"><i data-feather='globe'></i><span class="menu-item" > Tên miền</span></a>
                         <ul class="menu-content">
-                            <li><a class="d-flex align-items-center" href="#"><i data-feather='plus'></i><span class="menu-item" data-i18n="Third Level">Thêm</span></a>
+                            <li class="{{ request()->is('admin/service/domain') ? 'active' : '' }}"><a class="d-flex align-items-center" href="{{route('domain.index')}}"><i data-feather='settings'></i><span class="menu-item" >Quản Lí</span></a>
                             </li>
-                            <li><a class="d-flex align-items-center" href="#"><i data-feather='settings'></i><span class="menu-item" data-i18n="Third Level">Quản Lí</span></a>
-                            </li>
+                            {{-- <li  class="{{ request()->is('admin/service/domain/create') ? 'active' : '' }}"><a class="d-flex align-items-center" href="#"><i data-feather='plus'></i><span class="menu-item" >Thêm</span></a>
+                            </li> --}}
+                            
                         </ul>
                     </li>
 
-                    <li><a class="d-flex align-items-center" href="#"><i data-feather='clipboard'></i><span class="menu-item" > Tài khoản</span></a>
+                    <li class=" nav-item {{ request()->is($linkaccount) ? 'has-sub open' : '' }}" ><a class="d-flex align-items-center" href="#"><i data-feather='clipboard'></i><span class="menu-item" > Tài khoản</span></a>
                         <ul class="menu-content">
-                            <li><a class="d-flex align-items-center" href="#"><i data-feather='plus'></i><span class="menu-item" data-i18n="Third Level">Thêm</span></a>
-                            </li>
-                            <li><a class="d-flex align-items-center" href="#"><i data-feather='settings'></i><span class="menu-item" data-i18n="Third Level">Quản Lí</span></a>
+                            <li class="{{ request()->is('admin/service/account') ? 'active' : '' }}"><a class="d-flex align-items-center" href="{{route('account.index')}}"><i data-feather='settings'></i><span class="menu-item" >Quản Lí</span></a>
                             </li>
                         </ul>
                     </li>
@@ -132,11 +135,11 @@
 
             <li class=" nav-item"><a class="d-flex align-items-center" href="#"><i data-feather="user"></i><span class="menu-title text-truncate" >Khách Hàng</span></a>
                 <ul class="menu-content">
-                    <li><a class="d-flex align-items-center" href="app-user-list.html"><i data-feather="circle"></i><span class="menu-item" data-i18n="List">List</span></a>
+                    <li><a class="d-flex align-items-center" href="app-user-list.html"><i data-feather="circle"></i><span class="menu-item" >List</span></a>
                     </li>
-                    <li><a class="d-flex align-items-center" href="app-user-view.html"><i data-feather="circle"></i><span class="menu-item" data-i18n="View">View</span></a>
+                    <li><a class="d-flex align-items-center" href="app-user-view.html"><i data-feather="circle"></i><span class="menu-item" >View</span></a>
                     </li>
-                    <li><a class="d-flex align-items-center" href="app-user-edit.html"><i data-feather="circle"></i><span class="menu-item" data-i18n="Edit">Edit</span></a>
+                    <li><a class="d-flex align-items-center" href="app-user-edit.html"><i data-feather="circle"></i><span class="menu-item" >Edit</span></a>
                     </li>
                 </ul>
             </li>

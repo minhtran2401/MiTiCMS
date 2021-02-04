@@ -25,14 +25,25 @@
                         <input type="checkbox" class="custom-control-input" id="customSwitch2" />
                         <label class="custom-control-label" for="customSwitch2">Bảo vệ trang web</label>
                     </div>    
-                </a></li>
-                
-                
+                </a></li>  
+            </ul>
+            <ul class="nav navbar-nav ">
+                <a href="#" class="nav-link  ">
+                    <form action="#" method="get">
+                      <button style="submit" class="btn btn-danger ">Xuất Database <i  data-feather='download'></i></button>
+                  </form>
+                  </a>
             </ul>
       
         </div>
-        <ul class="nav navbar-nav align-items-center ml-auto">
-            <li class="nav-item d-none d-lg-block"><a class="nav-link nav-link-style"><i class="ficon" data-feather="moon"></i></a></li>
+        <ul class="nav navbar-nav  align-items-center ml-auto">
+            <li data-id="{{ Auth::user()->id}}" class="nav-item d-none d-lg-block">
+                <div class="custom-control custom-switch custom-control-inline">
+                    <input type="checkbox" id="changetheme"  class="custom-control-input change-status nav-link-style"  {{ Auth::user()->theme == 1?'checked':'' }}>
+                    <label for="changetheme" class="custom-control-label content-status" ><i  data-feather='{{ Auth::user()->theme == 1?'sun':'moon' }}'></i></label>
+                </div>
+            </li>
+
             <li class="nav-item nav-search"><a class="nav-link nav-link-search"><i class="ficon" data-feather="search"></i></a>
                 <div class="search-input">
                     <div class="search-input-icon"><i data-feather="search"></i></div>
@@ -300,3 +311,7 @@
             <div class="d-flex justify-content-start"><span class="mr-75" data-feather="alert-circle"></span><span>No results found.</span></div>
         </a></li>
 </ul>
+
+@section('pagevendor')
+
+@endsection

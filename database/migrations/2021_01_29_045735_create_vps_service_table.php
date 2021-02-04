@@ -22,7 +22,7 @@ class CreateVpsServiceTable extends Migration
             $table->string('vps_name');
             $table->text('vps_profile');
             $table->integer('display');
-            $table->string('slug')->nullable();
+            $table->string('slug')->nullable()->unique();
             $table->timestamps();
         });
     }
