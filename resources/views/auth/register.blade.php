@@ -21,7 +21,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label class="form-label" for="email">Email</label>
-                                        <input class="form-control" id="email" type="text" name="email" placeholder="user@gmail.com" aria-describedby="register-email" tabindex="2" required />
+                                        <input class="form-control" id="email" type="email" name="email" placeholder="user@gmail.com" aria-describedby="register-email" tabindex="2" required />
                                     </div>
                                     <div class="form-group">
                                         <label class="form-label" for="password">Mật khẩu</label>

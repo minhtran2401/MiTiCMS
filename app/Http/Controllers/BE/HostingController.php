@@ -156,7 +156,7 @@ class HostingController extends Controller
         if ($fileimg){
             $fileimg = $request->file('image'); // tạo biến lấy dữ liệu từ input
             $filename = $fileimg->getClientOriginalName(); // lấy tên theo tên gốc của file
-            $pathimg = $fileimg->move(public_path().'/Hosting/', $filename); //chỗ chứa file
+            $pathimg = $fileimg->move(public_path().'/image/', $filename); //chỗ chứa file
             $sp->hosting_image = $filename;
           
             $sp->hosting_name = $request->get('name_service');

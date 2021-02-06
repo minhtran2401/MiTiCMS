@@ -27,6 +27,7 @@
     <link rel="stylesheet" type="text/css" href="{{asset('BE')}}/app-assets/css/themes/bordered-layout.css">
 
     <!-- BEGIN: Page CSS-->
+    <link rel="stylesheet" type="text/css" href="{{asset('BE')}}/app-assets/css/plugins/forms/form-validation.css">
     <link rel="stylesheet" type="text/css" href="{{asset('BE')}}/app-assets/css/core/menu/menu-types/vertical-menu.css">
     <link rel="stylesheet" type="text/css" href="{{asset('BE')}}/app-assets/css/plugins/forms/form-validation.css">
     <link rel="stylesheet" type="text/css" href="{{asset('BE')}}/app-assets/css/pages/page-auth.css">
@@ -99,6 +100,7 @@
     <!-- BEGIN Vendor JS-->
 
     <!-- BEGIN: Page Vendor JS-->
+
     <script src="{{asset('BE')}}/app-assets/vendors/js/forms/validation/jquery.validate.min.js"></script>
     <!-- END: Page Vendor JS-->
 
@@ -109,6 +111,8 @@
 
     <!-- BEGIN: Page JS-->
     <script src="{{asset('BE')}}/app-assets/js/scripts/pages/page-auth-login.js"></script>
+    <script src="{{asset('BE')}}/app-assets/js/scripts/forms/form-validation.js"></script>
+
     <!-- END: Page JS-->
 
     <script>

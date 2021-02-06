@@ -156,7 +156,7 @@ class ServerController extends Controller
         if ($fileimg){
             $fileimg = $request->file('image'); // tạo biến lấy dữ liệu từ input
             $filename = $fileimg->getClientOriginalName(); // lấy tên theo tên gốc của file
-            $pathimg = $fileimg->move(public_path().'/server/', $filename); //chỗ chứa file
+            $pathimg = $fileimg->move(public_path().'/image/', $filename); //chỗ chứa file
             $sp->server_image = $filename;
           
             $sp->server_name = $request->get('name_service');

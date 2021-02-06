@@ -51,6 +51,8 @@
             $linkserver = ['admin/service/server','admin/service/server/create','admin/service/server/*/edit',];
             $linkhost = ['admin/service/hosting','admin/service/hosting/create','admin/service/hosting/*/edit',];
             $linkgr_ty = ['admin/group-service','admin/type-service','loai-blog/*/edit','loai-blog/create',];
+            $linkuser = ['admin/user','admin/user/*/edit',];
+
             @endphp
 
             <li class=" navigation-header"><span >Ứng Dụng &amp; Tiện Ích</span><i data-feather="more-horizontal"></i>
@@ -133,25 +135,18 @@
             <li class=" navigation-header"><span > Người Dùng</span><i data-feather="more-horizontal"></i>
             </li>
 
-            <li class=" nav-item"><a class="d-flex align-items-center" href="#"><i data-feather="user"></i><span class="menu-title text-truncate" >Khách Hàng</span></a>
+            <li class=" nav-item  {{ request()->is($linkuser) ? 'has-sub open' : '' }}"><a class="d-flex align-items-center" href="#"><i data-feather="user"></i><span class="menu-title text-truncate" >Khách Hàng</span></a>
                 <ul class="menu-content">
-                    <li><a class="d-flex align-items-center" href="app-user-list.html"><i data-feather="circle"></i><span class="menu-item" >List</span></a>
-                    </li>
-                    <li><a class="d-flex align-items-center" href="app-user-view.html"><i data-feather="circle"></i><span class="menu-item" >View</span></a>
-                    </li>
-                    <li><a class="d-flex align-items-center" href="app-user-edit.html"><i data-feather="circle"></i><span class="menu-item" >Edit</span></a>
+                    <li class="{{ request()->is('admin/user') ? 'active' : '' }}"><a class="d-flex align-items-center" href="{{route('user.index')}}"><i data-feather="list"></i><span class="menu-item" >Danh sách</span></a>
                     </li>
                 </ul>
             </li>
 
             <li class=" nav-item"><a class="d-flex align-items-center" href="app-file-manager.html"><i data-feather='file-text'></i><span class="menu-title text-truncate" >Hóa Đơn</span></a>
                 <ul class="menu-content">
-                    <li><a class="d-flex align-items-center" href="app-user-list.html"><i data-feather="circle"></i><span class="menu-item" data-i18n="List">List</span></a>
+                    <li><a class="d-flex align-items-center" href="app-user-list.html"><i data-feather="circle"></i><span class="menu-item" >Danh sách</span></a>
                     </li>
-                    <li><a class="d-flex align-items-center" href="app-user-view.html"><i data-feather="circle"></i><span class="menu-item" data-i18n="View">View</span></a>
-                    </li>
-                    <li><a class="d-flex align-items-center" href="app-user-edit.html"><i data-feather="circle"></i><span class="menu-item" data-i18n="Edit">Edit</span></a>
-                    </li>
+                   
                 </ul>
             </li>
 

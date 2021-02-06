@@ -117,8 +117,12 @@ Route::prefix('admin')->group(function () {
          Route::post('/account-ajax', [App\Http\Controllers\BE\AccountController::class, 'storeajax'])->name('store.ac.ajax');
     }); // service
 
+    // user ↓
     Route::post('/change-themes', [App\Http\Controllers\BE\AdminController::class, 'change_theme'])->name('change_theme');
+    Route::resource('/user', App\Http\Controllers\BE\UserController::class);
+    Route::post('/change-status-user-service','App\Http\Controllers\BE\UserController@changeStatus')->name('changeStatus.user-service');
 
+    //end user
     Route::prefix('app')->group(function () {
         
     }); // app

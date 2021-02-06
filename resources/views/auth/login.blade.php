@@ -26,6 +26,7 @@
                                         <input class="form-control form-control-merge" type="password" name="password" placeholder="············" aria-describedby="login-password" tabindex="2" />
                                         <div class="input-group-append"><span class="input-group-text cursor-pointer"><i data-feather="eye"></i></span></div>
                                     </div>
+                                    <input type="text" hidden name="active" value="1" id="">
                                 </div>
                                 <div class="form-group">
                                     <div class="custom-control custom-checkbox">
@@ -74,10 +75,17 @@ $.ajax({
   window.location = reurl;
 },1500);
           }
-          else{
+          else if(data==0){
             Swal.fire(
                 'Thất bại',
-                'Kiểm tra lại thông tin đăng nhập và thử lại',
+                'Kiểm tra lại thông tin đăng nhập và thử lại.',
+                'error'
+                )
+          }
+          else {
+            Swal.fire(
+                'Thất bại',
+                'Tài khoản của bạn đã bị khóa , liên hệ admin để mở khóa.',
                 'error'
                 )
           }
