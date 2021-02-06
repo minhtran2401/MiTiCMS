@@ -144,8 +144,13 @@ Route::prefix('admin')->group(function () {
 
     Route::prefix('quickadd')->group(function () {
         Route::get('/os-location', [App\Http\Controllers\BE\QuickAddController::class, 'os_system'])->name('os_system');
-        Route::post('/os-location-destroy', [App\Http\Controllers\BE\QuickAddController::class, 'os_system_destroy'])->name('os_system.destroy');
+        Route::post('/os-location-destroy/{id}', [App\Http\Controllers\BE\QuickAddController::class, 'os_system_destroy'])->name('os_system.destroy');
         Route::post('/os-location-create', [App\Http\Controllers\BE\QuickAddController::class, 'os_system_create'])->name('store.os.ajax');
+        /////
+        Route::get('/status-invoice', [App\Http\Controllers\BE\QuickAddController::class, 'status_invoice'])->name('status_invoice');
+        Route::post('/statis-invioce-destroy/{id}', [App\Http\Controllers\BE\QuickAddController::class, 'status_invoice_destroy'])->name('status_invoice.destroy');
+        Route::post('/statis-invioce-reset', [App\Http\Controllers\BE\QuickAddController::class, 'reset_status_invoice'])->name('status_invoice.reset');
+        Route::post('/status-invoice-create', [App\Http\Controllers\BE\QuickAddController::class, 'status_invoice_create'])->name('store.iv.ajax');
     }); // app
 
   }); // admin

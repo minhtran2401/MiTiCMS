@@ -1,5 +1,5 @@
 @extends('BE.layout.layout')
-@section('pagetitle','Trang Khu Vực Dịch Vụ')
+@section('pagetitle','Trạng Thái Hóa Đơn')
 @section('csspage')
     <link rel="stylesheet" type="text/css" href="{{asset('BE')}}/app-assets/vendors/css/tables/datatable/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" type="text/css" href="{{asset('BE')}}/app-assets/vendors/css/tables/datatable/responsive.bootstrap4.min.css">
@@ -10,9 +10,9 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.6.5/css/buttons.dataTables.min.css">
 @endsection
 @section('content')
-@section('br-namepage1','Khu Vực')
-@section('br-namepage2','Khu Vực')
-@section('br-namepage3','Khu Vực Dịch Vụ')
+@section('br-namepage1','Trạng Thái Hóa Đơn')
+@section('br-namepage2','Hóa Đơn')
+@section('br-namepage3','Trạng Thái Hóa Đơn ')
 
 
 
@@ -21,7 +21,7 @@
                 <div class="col-12">
                     <div class="alert alert-primary" role="alert">
                         <div class="alert-body">
-                            <strong>Ghi chú:</strong> Khu Vực Dịch Vụ
+                            <strong>Ghi chú:</strong> Trạng thái hóa đơn
                            
                         </div>
                     </div>
@@ -38,11 +38,15 @@
                     <div class="card p-2">
                         <div class="card-header border-bottom p-1"><div class="head-label"><h6 class="mb-0">MitiVPS</h6></div>
                         <div class="dt-action-buttons text-right"><div class="dt-buttons d-inline-flex">
+                          <form class="form-check-inline" action="{{route('status_invoice.reset')}}" method="POST">
+                            @csrf
                            
+                         <button class="btn btn-outline-danger mr-3" style="border: 0" onclick="xoaha(event)" ><i data-feather='alert-triangle'></i> Reset bảng</button>
                           <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#modals-slide-in">
-                            + Thêm khu vực
+                            <i data-feather='plus-circle'></i> Thêm trạng thái
                          </button>
-                            
+                         
+                  </form>
                      </div></div></div>
                      <table class="table table-striped" id="table-1">
                       <thead>
@@ -50,7 +54,7 @@
                           <th class="text-center">
                             #
                           </th>
-                          <th>Khu Vực</th>
+                          <th>Trạng Thái</th>
                           <th class="text-center" >Quản Lí</th>
                         </tr>
                       </thead>
@@ -59,10 +63,10 @@
                         <tr>
                           <td>{{$row->id}}</td>
                         
-                         <td><div>{{$row->name_os}}</div></td>
+                         <td><div>{{$row->name_status_invoice}}</div></td>
                           
                        <td  class="text-center">
-                      <form class="form-check-inline" action="{{route('os_system.destroy', $row->id)}}" method="POST">
+                      <form class="form-check-inline" action="{{route('status_invoice.destroy', $row->id)}}" method="POST">
                               @csrf
                              
                            <button class="btn btn-icon btn-danger" style="border: 0" onclick="xoaha(event)" ><i class="fa fa-trash" aria-hidden="true"></i> Xóa</button>
@@ -78,16 +82,16 @@
             </div>
             <div class="modal modal-slide-in fade" id="modals-slide-in">
               <div class="modal-dialog sidebar-sm">
-                  <form id="create-groups-service" method="POST" action="{{route('store.os.ajax')}}" class="add-new-record modal-content pt-0">
+                  <form id="create-groups-service" method="POST" action="{{route('store.iv.ajax')}}" class="add-new-record modal-content pt-0">
                       @csrf
                       <button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
                       <div class="modal-header mb-1">
-                          <h5 class="modal-title" id="exampleModalLabel">Thêm Khu Vực Mới</h5>
+                          <h5 class="modal-title" id="exampleModalLabel">Thêm Tình Trạng Hóa Đon</h5>
                       </div>
                       <div class="modal-body flex-grow-1">
                           <div class="form-group">
-                              <label class="form-label" for="basic-icon-default-fullname">Tên Khu Vực</label>
-                              <input type="text" name="name_os" class="form-control dt-full-name" id="basic-icon-default-fullname" placeholder="Tên Khu Vực" required  />
+                              <label class="form-label" for="basic-icon-default-fullname">Tên Gọi</label>
+                              <input type="text" name="name_status_invoice" class="form-control dt-full-name" id="basic-icon-default-fullname" placeholder="Tên Gọi" required  />
                           </div>
                          
                           <button type="submit" class="btn btn-primary data-submit mr-1">Lưu</button>
@@ -165,7 +169,7 @@ $.ajax({
 
    Swal.fire(
    'Thành công!',
-   'Đã thêm nhóm mới!',
+   'Đã thêm trạng thái mới!',
    'success'
    )}
    else{
