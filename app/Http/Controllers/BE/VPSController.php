@@ -159,7 +159,7 @@ class VPSController extends Controller
         if ($fileimg){
             $fileimg = $request->file('image'); // tạo biến lấy dữ liệu từ input
             $filename = $fileimg->getClientOriginalName(); // lấy tên theo tên gốc của file
-            $pathimg = $fileimg->move(public_path().'/VPS/', $filename); //chỗ chứa file
+            $pathimg = $fileimg->move(public_path().'/image/', $filename); //chỗ chứa file
             $sp->vps_image = $filename;
             $sp->vps_name = $request->get('name_service');
             $sp->slug =\Str::slug($request->get('name_service'));

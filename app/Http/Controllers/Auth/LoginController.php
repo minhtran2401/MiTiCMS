@@ -48,16 +48,21 @@ class LoginController extends Controller
         $request->validate([
             'email' => 'required',
             'password' => 'required',
-            // 'remember_token' => 'required'
+            
         ]);
 
         $credentials = $request->except(['_token']);
 
-        $user = User::where('email',$request->email)->first();
-
-        if (auth()->attempt($credentials)) {  
-            return response()->json(1); //đúng tk mk
-        }else{
+        $user = User::where('email',$request->email)->where('active',1)->first();
+       
+        
+        
+         if (auth()->attempt($credentials)) {  
+         
+                 return response()->json(1); //đúng tk mk   
+           
+        }
+        else {
             return response()->json(0); //sai tk mk
         }
     }
@@ -70,9 +75,9 @@ class LoginController extends Controller
         ]);
             
         $user = User::create([
-            'name' => trim($request->input('name')),
-            'email' => strtolower($request->input('email')),
-            'password' => bcrypt($request->input('password')),
+            'name' => trim($request->input('basic-default-name')),
+            'email' => strtolower($request->input('basic-default-email')),
+            'password' => bcrypt($request->input('basic-default-password')),
         ]);
         
         return response()->json("1");
