@@ -79,7 +79,7 @@
                                                     <div class="modal-body">
                                                         <label>Tên Mới </label>
                                                         <div class="form-group">
-                                                            <input name="name_group" type="text" value="{{$row->blog_type_name}}" class="form-control" />
+                                                            <input name="blog_type_name" type="text" value="{{$row->blog_type_name}}" class="form-control" />
                                                         </div>
                                                         <div class="form-group">
                                                             <label  for="">Trạng thái</label>
@@ -279,7 +279,7 @@ $.ajax({
 
         Swal.fire(
         'Thành công!',
-        'Đã thêm nhóm mới!',
+        'Đã thêm loại mới!',
         'success'
         )}
         else{
@@ -311,7 +311,7 @@ $.ajax({
                
                 Swal.fire(
   'Thành công',
-  'Đã cập nhật lại nhóm sản phẩm',
+  'Đã cập nhật lại loại blog',
   'success'
 )
 

@@ -84,7 +84,13 @@ Route::prefix('admin')->group(function () {
     Route::resource('/blog-type', App\Http\Controllers\BE\BlogTypeController::class);
     Route::post('/blog-type-ajax', [App\Http\Controllers\BE\BlogTypeController::class, 'storeajax'])->name('store.blt.ajax');
     Route::post('/change-status-blog-type','App\Http\Controllers\BE\BlogTypeController@changeStatus')->name('changeStatus.blog-type');
+        //blog
+    Route::resource('/blog', App\Http\Controllers\BE\BlogController::class);
+    Route::post('/blog-ajax', [App\Http\Controllers\BE\BlogController::class, 'storeajax'])->name('store.bl.ajax');
+    Route::post('/change-status-blog','App\Http\Controllers\BE\BlogController@changeStatus')->name('changeStatus.blog');
+    Route::post('/change-status-blog2','App\Http\Controllers\BE\BlogController@changeStatus2')->name('changeStatus.blogspecial');
 
+        //endblog
     Route::prefix('log')->group(function () {
         Route::get('/admin', [App\Http\Controllers\BE\LogController::class, 'admin'])->name('admin.log');
         Route::get('/user', [App\Http\Controllers\BE\LogController::class, 'user'])->name('user.log');

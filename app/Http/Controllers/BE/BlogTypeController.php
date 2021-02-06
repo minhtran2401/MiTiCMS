@@ -146,7 +146,7 @@ class BlogTypeController extends Controller
     public function destroy($id)
     {
         $nsp = BlogType::find($id);
-        if ($nsp->checkblogtype()->get()->toArray()==null) {
+        if ($nsp->checkblog()->get()->toArray()==null) {
             $name = Auth::user()->name;
             $namedv1 = BlogType::find($id)->blog_type_name;
             $log = new LogAdmin([

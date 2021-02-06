@@ -50,7 +50,7 @@ class BlogController extends Controller
             // Save the file locally in the storage/public/ folder under a new folder named /product
             $fileimg = $request->file('image'); // tạo biến lấy dữ liệu từ input
             $filename = $fileimg->getClientOriginalName(); // lấy tên theo tên gốc của file
-            $pathimg = $fileimg->move(public_path().'/Blog/', $filename); //chỗ chứa file
+            $pathimg = $fileimg->move(public_path().'/image/', $filename); //chỗ chứa file
 
             // Store the record, using the new file hashname which will be it's new filename identity.
             $product = new Blog([
@@ -222,6 +222,19 @@ class BlogController extends Controller
             return $request->status;
         }}
 
-    
+        function changeStatus2(Request $request){
+            //kiểm tra xem có phải ajax gửi request k
+            if($request->ajax()){
+                // không nhận được id thì báo lỗi
+                if(!$request->id){
+                    return "error";
+                }
+        
+                // hien 1 _____ an 0
+                //lấy nhóm sản phảm dựa theo id và update lai trạng thái
+                Blog::where('blog_id',$request->id)->update(['special'=>$request->status]);
+                // trả về status hiện tại để xử lý front end
+                return $request->status;
+            }}
 
 }
