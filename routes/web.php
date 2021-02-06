@@ -142,5 +142,11 @@ Route::prefix('admin')->group(function () {
         
     }); // app
 
+    Route::prefix('quickadd')->group(function () {
+        Route::get('/os-location', [App\Http\Controllers\BE\QuickAddController::class, 'os_system'])->name('os_system');
+        Route::post('/os-location-destroy', [App\Http\Controllers\BE\QuickAddController::class, 'os_system_destroy'])->name('os_system.destroy');
+        Route::post('/os-location-create', [App\Http\Controllers\BE\QuickAddController::class, 'os_system_create'])->name('store.os.ajax');
+    }); // app
+
   }); // admin
 });

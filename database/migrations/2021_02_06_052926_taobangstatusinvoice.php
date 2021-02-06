@@ -15,7 +15,7 @@ class Taobangstatusinvoice extends Migration
     {
         Schema::create('status_invoice', function (Blueprint $table) {
             $table->id();
-            $table->string('name-status-invoice');
+            $table->string('name_status_invoice');
             $table->timestamps();
         });
     }

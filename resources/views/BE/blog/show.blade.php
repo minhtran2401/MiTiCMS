@@ -263,7 +263,7 @@ $("#table-1").on("click", ".change-status", function(e){
                         content.text('Hiện')
                         Swal.fire(
                           'Thành công',
-                          'Blog đang được hiển thị',
+                          'Blog đang là nổi bật',
                           'success'
                         )
                         return;
@@ -272,7 +272,7 @@ $("#table-1").on("click", ".change-status", function(e){
                         content.text('Ẩn')
                         Swal.fire(
                         'Thành công!',
-                        'Blog đang được ẩn đi',
+                        'Blog đang là tin thường',
                         'success'
                       )
                       //nếu gửi thất bại

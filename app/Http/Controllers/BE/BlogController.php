@@ -101,7 +101,8 @@ class BlogController extends Controller
     public function edit($id)
     {  
         $data['blog_type_id'] = DB::table("blog_type")->select("blog_type_id", "blog_type_name")->get();
-       
+        $row = Blog::find($id);
+
         return view('BE.blog.edit',compact('row'),$data);
     }
 
@@ -133,7 +134,7 @@ class BlogController extends Controller
             $sp->blog_view = $request->get('blog_view');
             $sp->blog_post_time = $request->get('blog_post_time');
             $sp->blog_special = $request->get('blog_special');
-            $sp->user_id = $request->get('user_id');
+            $sp->user_id = Auth::user()->id;
 
         }
         else{
@@ -148,7 +149,7 @@ class BlogController extends Controller
             $sp->blog_view = $request->get('blog_view');
             $sp->blog_post_time = $request->get('blog_post_time');
             $sp->blog_special = $request->get('blog_special');
-            $sp->user_id = $request->get('user_id');
+            $sp->user_id = Auth::user()->id;
           
 
         }
@@ -192,19 +193,6 @@ class BlogController extends Controller
         return redirect()->route('blog.index');
     }
 
-    
-    function get_type_pro($id){
-        $kq = DB::select("SELECT blog_type_id, blog_type_name FROM blog_type WHERE service_group_id=$id");
-        foreach($kq as $row)  
-        if($row != null){
-        echo "<option value={$row->blog_type_id}> {$row->blog_type_name} </option>";
-        }
-        else
-        {
-        echo "<option value='0'> --None-- </option>";
-        
-        };
-    }
 
     
     function changeStatus(Request $request){
@@ -232,7 +220,7 @@ class BlogController extends Controller
         
                 // hien 1 _____ an 0
                 //lấy nhóm sản phảm dựa theo id và update lai trạng thái
-                Blog::where('blog_id',$request->id)->update(['special'=>$request->status]);
+                Blog::where('blog_id',$request->id)->update(['blog_special'=>$request->status]);
                 // trả về status hiện tại để xử lý front end
                 return $request->status;
             }}

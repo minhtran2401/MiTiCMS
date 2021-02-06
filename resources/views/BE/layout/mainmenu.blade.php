@@ -50,6 +50,7 @@
             $linkdomain = ['admin/service/domain','admin/service/domain/create','admin/service/domain/*/edit',];
             $linkserver = ['admin/service/server','admin/service/server/create','admin/service/server/*/edit',];
             $linkhost = ['admin/service/hosting','admin/service/hosting/create','admin/service/hosting/*/edit',];
+            $linkpost = ['admin/blog','admin/blog-type','admin/blog/*/edit','admin/blog-type/*/edit','admin/blog/create','admin/blog-type/create'];
             $linkgr_ty = ['admin/group-service','admin/type-service','loai-blog/*/edit','loai-blog/create',];
             $linkuser = ['admin/user','admin/user/*/edit',];
 
@@ -70,6 +71,7 @@
                 </ul>
             </li>
 
+
             <li class=" navigation-header"><span >Dịch Vụ</span><i data-feather="more-horizontal"></i>
             </li>
 
@@ -81,6 +83,19 @@
                                 
                             </li>
                             <li class="{{ request()->is('admin/type-service') ? 'active' : '' }}"><a class="d-flex align-items-center  " href="{{route('type-service.index')}}"><i data-feather='package'></i><span class="menu-item" >Loại dịch vụ</span></a>
+                               
+                            </li>
+                        </ul>
+                    </li>
+                    <li class=" {{ request()->is($linkgr_ty) ? 'has-sub open' : '' }}"><a class="d-flex align-items-center" href="#"><i data-feather='fast-forward'></i><span class="menu-item" > Thêm Nhanh</span></a>
+                        <ul class="menu-content">
+                            <li class="{{ request()->is('admin/group-service') ? 'active' : '' }}"><a class="d-flex align-items-center  " href="{{route('group-service.index')}}"><i data-feather='loader'></i><span class="menu-item" >Tình trạng </span></a>
+                                
+                            </li>
+                            <li class="{{ request()->is('admin/group-service') ? 'active' : '' }}"><a class="d-flex align-items-center  " href="{{route('group-service.index')}}"><i data-feather='slack'></i><span class="menu-item" >Khu Vực </span></a>
+                                
+                            </li>
+                            <li class="{{ request()->is('admin/type-service') ? 'active' : '' }}"><a class="d-flex align-items-center  " href="{{route('type-service.index')}}"><i data-feather='terminal'></i><span class="menu-item" >HĐH</span></a>
                                
                             </li>
                         </ul>
@@ -154,7 +169,17 @@
             </li>
 
          
-            <li class=" nav-item"><a class="d-flex align-items-center" href="#"><i data-feather='sliders'></i><span class="menu-title text-truncate">Thông Tin</span></a>
+            <li  class=" nav-item {{ request()->is($linkpost) ? 'has-sub open' : '' }}"><a class="d-flex align-items-center" href="#"><i data-feather='bold'></i><span class="menu-title text-truncate">Bài Viết</span></a>
+                <ul class="menu-content">
+                    <li  class="{{ request()->is('admin/blog-type') ? 'active' : '' }}"><a class="d-flex align-items-center" href="{{route('blog-type.index')}}"><i data-feather="circle"></i><span class="menu-item" >Thể Loại</span></a>
+                    </li>
+                    <li  class="{{ request()->is('admin/blog') ? 'active' : '' }}"><a class="d-flex align-items-center" href="{{route('blog.index')}}"><i data-feather="circle"></i><span class="menu-item" >Blog</span></a>
+                    </li>
+                   
+                </ul>
+            </li>
+
+            <li class=" nav-item"><a class="d-flex align-items-center" href="#"><i data-feather='info'></i><span class="menu-title text-truncate">Thông Tin</span></a>
                 <ul class="menu-content">
                     <li><a class="d-flex align-items-center" href="app-user-list.html"><i data-feather="circle"></i><span class="menu-item" >Website</span></a>
                     </li>

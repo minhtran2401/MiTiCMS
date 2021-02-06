@@ -37,10 +37,8 @@
                         <div class="card">
                             <div class="card-body">
                                 
-                                    <form name="formedit" action="{{ route('vps.update',$row->vps_id) }}" method="post" enctype="multipart/form-data">
-                                        <input type="hidden" name="_token" value="{!! csrf_token() !!}" />
+                                    <form action="{{ route('vps.store') }}" method="post" enctype="multipart/form-data">
                                         @csrf
-                                        @method('patch')
                                 <div class="row">
                                    
                                     <div class="col-md-5 row col-12">
@@ -54,11 +52,7 @@
                                             <select name="getgroup" class="select2 form-control form-control-lg">
                                                 <option value="0">---NHÓM DỊCH VỤ---</option>
                                                   @foreach ($group_service as $group)
-                                                  @if($row->service_group_id == $group->service_group_id )
-                                                  <option value='{{$group->service_group_id}}' selected>{{$group->service_group_name}}</option>  
-                                                  @else
-                                                  <option value='{{$group->service_group_id}}' >{{$group->service_group_name}}</option> 
-                                                  @endif 
+                                                  <option value='{{$group->service_group_id}}'>{{$group->service_group_name}}</option>  
                                                   @endforeach
                                           </select>
                                         </div>
@@ -68,19 +62,12 @@
                                             <label >Loại Dịch Vụ</label>
                                             <select name="gettype" class="select2 form-control form-control-lg">
                                               <option value="0">---LOẠI DỊCH VỤ---</option>
-                                              @foreach ($type_service as $type)
-                                              @if($row->service_type_id == $type->service_type_id )
-                                              <option value='{{$type->service_type_id}}' selected>{{$type->service_type_name}}</option>  
-                                              @else
-                                              <option value='{{$type->service_type_id}}' >{{$type->service_type_name}}</option>  
-                                              @endif
-                                              @endforeach 
                                           </select>
                                         </div>
                                         
                                         <div class="col-md-12 mb-1">
                                             <label>Tên VPS</label>
-                                            <input name="name_service" type="text" class="form-control"  placeholder="Tên VPS" value="{{$row->vps_name}}" />
+                                            <input name="name_service" type="text" class="form-control"  placeholder="Tên VPS"  />
                                         </div>
                                         <div class="col-md-12 mb-1">
                                         
@@ -91,11 +78,11 @@
                                                 <label>Trạng thái</label>
                                                 <div class="demo-inline-spacing">
                                                     <div class="custom-control custom-control-primary custom-checkbox">
-                                                        <input type="radio" name="display" class="custom-control-input" value="1" id="hien"    @if ($row->display == 1) checked @endif >
+                                                        <input type="radio" name="display" class="custom-control-input" value="1" id="hien" checked="">
                                                         <label class="custom-control-label" for="hien">Hiện</label>
                                                     </div>
                                                     <div class="custom-control custom-control-secondary custom-checkbox">
-                                                        <input type="radio" name="display" class="custom-control-input" value="0" id="an"    @if ($row->display == 0) checked @endif >
+                                                        <input type="radio" name="display" class="custom-control-input" value="0" id="an">
                                                         <label class="custom-control-label" for="an">Ẩn</label>
                                                     </div>
                                                 </div>
@@ -110,30 +97,86 @@
                                             </p>
                                         </div>   
                                         <div class="card-body">
-                                          
-                               
-                                            @foreach ($price as $key => $pri)
-                                            <div data-id="{{$pri->service_price_id}}" class="row" id="row-price-{{$pri->service_price_id}}">
-                                              
-
-                                                <small class="font-weight-semibold w-100 ml-1 my-1">Giá thuê VPS - Gói {{$key + 1}}</small>
-                                                <a href="javascript:void(0)" onclick="xoaha(event);" class="del_price btn btn-danger btn-circle icon_del mb-3"><i class="glyphicon glyphicon-remove">Xóa</i></a>
+                                            <div class="row">
+                                                <small class="font-weight-semibold w-100 ml-1 my-1">Giá thuê VPS - Gói 1</small>
                                                 <div class="col-md">
                                                     <div class="form-group">
-                                                            <input type="text" class="form-control" readonly value="{{$pri->service_price}}"> 
+                                                            <input type="text" class="form-control " name="price1" placeholder="Giá thuê ( 100000, 200000,...)"> 
                                                     </div>
                                                 </div>
                                                 <div class="col-md">
                                                     <div class="form-group">
                                                         <div class="input-group">
-                                                            <input type="text" class="form-control" readonly  value="{{$pri->service_time}}">
+                                                            <input type="text" class="form-control" name="time1" placeholder="Thời gian ( 1 tháng , 2 tháng ,... )">
                                                         </div>
                                                     </div>
                                                 </div> 
                                             </div>
-                                            @endforeach
-                                            <div id="insert"></div>
-                                            <button type="button" class="btn btn-primary mb-3" id="addPrice">Thêm giá</button>
+
+                                            <div class="row">
+                                                <small class="font-weight-semibold w-100 ml-1 my-1">Giá thuê VPS - Gói 2</small>
+                                                <div class="col-md">
+                                                    <div class="form-group">
+                                                            <input type="text" class="form-control " name="price2" placeholder="Giá thuê ( 100000, 200000,...)"> 
+                                                    </div>
+                                                </div>
+                                                <div class="col-md">
+                                                    <div class="form-group">
+                                                        <div class="input-group">
+                                                            <input type="text" class="form-control" name="time2" placeholder="Thời gian ( 1 tháng , 2 tháng ,... )">
+                                                        </div>
+                                                    </div>
+                                                </div> 
+                                            </div>
+
+                                            <div class="row">
+                                                <small class="font-weight-semibold w-100 ml-1 my-1">Giá thuê VPS - Gói 3</small>
+                                                <div class="col-md">
+                                                    <div class="form-group">
+                                                            <input type="text" class="form-control " name="price3" placeholder="Giá thuê ( 100000, 200000,...)"> 
+                                                    </div>
+                                                </div>
+                                                <div class="col-md">
+                                                    <div class="form-group">
+                                                        <div class="input-group">
+                                                            <input type="text" class="form-control" name="time3" placeholder="Thời gian ( 1 tháng , 2 tháng ,... )">
+                                                        </div>
+                                                    </div>
+                                                </div> 
+                                            </div>
+                                            
+                                            <div class="row">
+                                                <small class="font-weight-semibold w-100 ml-1 my-1">Giá thuê VPS - Gói 4</small>
+                                                <div class="col-md">
+                                                    <div class="form-group">
+                                                            <input type="text" class="form-control " name="price4" placeholder="Giá thuê ( 100000, 200000,...)"> 
+                                                    </div>
+                                                </div>
+                                                <div class="col-md">
+                                                    <div class="form-group">
+                                                        <div class="input-group">
+                                                            <input type="text" class="form-control" name="time4" placeholder="Thời gian ( 1 tháng , 2 tháng ,... )">
+                                                        </div>
+                                                    </div>
+                                                </div> 
+                                            </div>
+
+                                            
+                                            <div class="row">
+                                                <small class="font-weight-semibold w-100 ml-1 my-1">Giá thuê VPS - Gói 5</small>
+                                                <div class="col-md">
+                                                    <div class="form-group">
+                                                            <input type="text" class="form-control " name="price5" placeholder="Giá thuê ( 100000, 200000,...)"> 
+                                                    </div>
+                                                </div>
+                                                <div class="col-md">
+                                                    <div class="form-group">
+                                                        <div class="input-group">
+                                                            <input type="text" class="form-control" name="time5" placeholder="Thời gian ( 1 tháng , 2 tháng ,... )">
+                                                        </div>
+                                                    </div>
+                                                </div> 
+                                            </div>
                                             
                                             
                                         </div>
@@ -153,9 +196,9 @@
                                                                 <div class="card-body">
                                                                     <div class="row">
                                                                         <div class="col-sm-12">
-                                                                            <textarea  cols="30" rows="10" class="form-control" id="summernote" name="vps_profile">
-                                                                                    {!! $row->vps_profile !!}
-                                                                            </textarea> 
+                                                                            <textarea  cols="30" rows="10" class="form-control" id="summernote" name="vps_profile"></textarea>
+                                                                                   
+                                                                                
                                                                         </div>
                                                                     </div>
                                                                 </div>

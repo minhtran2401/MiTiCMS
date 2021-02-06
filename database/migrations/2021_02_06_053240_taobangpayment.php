@@ -15,6 +15,7 @@ class Taobangpayment extends Migration
     {
         Schema::create('payment_method', function (Blueprint $table) {
             $table->id();
+            $table->string('image');
             $table->string('name_payment');
             $table->text('info_payment');
             $table->timestamps();
