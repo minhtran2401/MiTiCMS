@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Models\VPSService;
+use App\Models\TypeService;
+use DB;
 class HomeController extends Controller
 {
     /**
@@ -67,9 +69,14 @@ class HomeController extends Controller
     {
         return view('FE.service.vps-service.index');
     }
-    public function vps_type()
+    public function vps_type($id)
     {
-        return view('FE.service.vps-service.vps-type');
+        $vps_type = TypeService::where('slug',$id)->firstOrFail(); // lấy slug của url
+        $vps_detail = VPSService::where('service_group_id',$vps_type->service_group_id)
+        ->where('service_type_id',$vps_type->service_type_id)
+        ->where('display','1')->orderby('vps_id','desc')->get();
+        // $data['vps_price'] = DB::table('users')
+        return view('FE.service.vps-service.vps-type',compact('vps_type','vps_detail'));
     }
 
     // dịch vụ account ↓
