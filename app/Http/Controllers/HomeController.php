@@ -75,7 +75,7 @@ class HomeController extends Controller
         $vps_detail = VPSService::where('service_group_id',$vps_type->service_group_id)
         ->where('service_type_id',$vps_type->service_type_id)
         ->where('display','1')->orderby('vps_id','desc')->get();
-        // $data['vps_price'] = DB::table('users')
+       
         return view('FE.service.vps-service.vps-type',compact('vps_type','vps_detail'));
     }
 

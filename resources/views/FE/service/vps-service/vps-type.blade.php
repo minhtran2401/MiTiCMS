@@ -18,23 +18,14 @@
                                             {{-- <h4>Dịch vụ cho thuê máy chủ ảo - hỗ trợ trực tiếp hướng dẫn sử dụng!</h4> --}}
                                             <div class="row justify-content-center mb-3">
                                                 <div class="">
-                                                    <div class="shin-service-menu-type">1 core - 1Gb ram</div>
-                                                    <div class="shin-service-menu-type">1 core - 2Gb ram</div>
-                                                    <div class="shin-service-menu-type">2 core - 2Gb ram</div>
-                                                    <div class="shin-service-menu-type">2 core - 2Gb ram</div>
-                                                    <div class="shin-service-menu-type">2 core - 2Gb ram</div>
-                                                    <div class="shin-service-menu-type">2 core - 2Gb ram</div>
-                                                    <div class="shin-service-menu-type">2 core - 2Gb ram</div>
-                                                    <div class="shin-service-menu-type">2 core - 2Gb ram</div>
-                                                    <div class="shin-service-menu-type">2 core - 2Gb ram</div>
-                                                    <div class="shin-service-menu-type">2 core - 2Gb ram</div>
-                                                    <div class="shin-service-menu-type">2 core - 2Gb ram</div>
-                                                    <div class="shin-service-menu-type">2 core - 2Gb ram</div>
-                                                    <div class="shin-service-menu-type">2 core - 2Gb ram</div>
-                                                    <div class="shin-service-menu-type">2 core - 2Gb ram</div>
-                                                    <div class="shin-service-menu-type">2 core - 2Gb ram</div>
-                                                    <div class="shin-service-menu-type">2 core - 2Gb ram</div>
-                                                    <div class="shin-service-menu-type">2 core - 2Gb ram</div>
+                                                    @php 
+                            $vpss = DB::table('service_types')->where('service_group_id','2')->where('display','1')->orderby('service_type_id','desc')->get();
+                        @endphp
+                        @foreach ($vpss as $vps)
+                         <div class="shin-service-menu-type"><a style="color: white" href="{{route('vps.vps-type',$vps->slug)}}">{{$vps->service_type_name}}</a></div>
+                             
+                        @endforeach
+                                                   
                                                 </div>
                                             </div>
                                         </div>
@@ -58,27 +49,14 @@
                                                                         <div class="shin-service-info mb-2">
                                                                            {!!$detail->vps_profile!!}
                                                                         </div>
-                                                                        <a data-toggle="modal" data-target="#exampleModalCenter" href="#"><div class="shin-service-okmuahang">Xem giá cả</div></a>
+                                                                        <a data-toggle="modal" data-target="#price-{{$detail->sku}}" href="#"><div class="shin-service-okmuahang">Xem giá cả</div></a>
                                                                         <!-- Button trigger modal -->
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        @endforeach
-                                                  </div>
-                                                </div>
-                                            </section>
-                                        </div>
-                                    </div>
-                                </div>
-                        </section>
-                </div>
-           </div>
-        </div>
-    </div>
-</div>
-  <!-- Modal -->
-  <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                                         <!-- Modal -->
+  <div class="modal fade" id="price-{{$detail->sku}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -98,20 +76,40 @@
                   </tr>
                 </thead>
                 <tbody>
+                    @php
+                    $vps_price = DB::table('service_price')->where('sku',$detail->sku)->get();
+                   @endphp
+                    @foreach ($vps_price as $key => $price)
                   <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
+                     
+                    <th scope="row">{{$key +1}}</th>
+                    <td>{{$price->service_time}}</td>
+                    <td>{{number_format($price->service_price)}} đ</td>
+                    <td><button class="btn btn-primary">Mua</button></td>
                   </tr>
+                  @endforeach
                 </tbody>
               </table>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Đóng</button>
+     
         </div>
       </div>
     </div>
   </div>
+                                                        @endforeach
+                                                  </div>
+                                                </div>
+                                            </section>
+                                        </div>
+                                    </div>
+                                </div>
+                        </section>
+                </div>
+           </div>
+        </div>
+    </div>
+</div>
+ 
 @endsection
