@@ -21,21 +21,37 @@
          
 
                 <li class="menu-title">Các Gói Dịch Vụ</li>
-
+                <li class="submenu">
+                    <a href="#"><i class="fa fa-user"></i> <span> Tên Miền </span> <span class="menu-arrow"></span></a>
+                    <ul style="display: none;">
+                        <li><a href="{{route('domainprice.index')}}">Bảng giá</a></li>
+                        <li><a href="{{route('checkdomain.view')}}">Kiểm tra tên miền</a></li>
+                        <li><a href="{{route('view.domain.reg')}}">Đăng kí tên miền</a></li>
+                       
+                    </ul>
+                </li>
                 <li class="submenu">
                     <a href="#"><i class="fa fa-user"></i> <span> Máy Chủ Vật Lí </span> <span class="menu-arrow"></span></a>
                     <ul style="display: none;">
-                        <li><a href="employees.html">Employees List</a></li>
-                        <li><a href="leaves.html">Leaves</a></li>
-                        <li><a href="holidays.html">Holidays</a></li>
-                        <li><a href="attendance.html">Attendance</a></li>
+                        @php 
+                            $servers = DB::table('service_types')->where('service_group_id','1')->where('display','1')->orderby('service_type_id','desc')->get();
+                        @endphp
+                        @foreach ($servers as $server)
+                              <li><a href="">{{$server->service_type_name}}</a></li>
+                        @endforeach
+                      
+                      
                     </ul>
                 </li>
                 <li class="submenu">
                     <a href="#"><i class="fa fa-user"></i> <span> VPS </span> <span class="menu-arrow"></span></a>
                     <ul style="display: none;">
-                        <li><a href="{{route('vps.index')}}">Trang chính</a></li>
-                        <li><a href="{{route('vps.vps-type')}}">Loại hosting</a></li>
+                        @php 
+                            $vpss = DB::table('service_types')->where('service_group_id','2')->where('display','1')->orderby('service_type_id','desc')->get();
+                        @endphp
+                        @foreach ($vpss as $vps)
+                              <li><a href="{{route('vps.vps-type',$vps->slug)}}">{{$vps->service_type_name}}</a></li>
+                        @endforeach
                     </ul>
                 </li>
                 <li class="submenu">
@@ -46,11 +62,10 @@
                     </ul>
                 </li>
                 <li class="submenu">
-                    <a href="#"><i class="fa fa-user"></i> <span> Tên Miền </span> <span class="menu-arrow"></span></a>
+                    <a href="#"><i class="fa fa-user"></i> <span> Tài Khoản </span> <span class="menu-arrow"></span></a>
                     <ul style="display: none;">
-                        <li><a href="{{route('domain.index')}}">Bảng giá</a></li>
-                        <li><a href="{{route('checkdomain.view')}}">Kiểm tra tên miền</a></li>
-                        <li><a href="{{route('view.domain.reg')}}">Đăng kí tên miền</a></li>
+                        <li><a href="{{route('domain.index')}}">Loop loại ra</a></li>
+                     
                        
                     </ul>
                 </li>
@@ -82,12 +97,12 @@
                     </ul>
                 </li> --}}
                 <li>
-                    <a href="doctors.html"><i class="fa fa-user-md"></i> <span>Trang Thanh Toán</span></a>
+                    <a href="doctors.html"><i class="fa fa-user-md"></i> <span>Thanh Toán</span></a>
                 </li>
 
-                <li>
+                {{-- <li>
                     <a href="doctors.html"><i class="fa fa-user-md"></i> <span>Hỗ Trợ</span></a>
-                </li>
+                </li> --}}
                 <li>
                     <a href="{{route('contact')}}"><i class="fa fa-user-md"></i> <span>Liên Hệ</span></a>
                 </li>

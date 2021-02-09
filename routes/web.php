@@ -37,7 +37,7 @@ Route::group(['middleware' => ['auth']], function () {
     });
 //domain
     Route::prefix('ten-mien')->group(function () {
-        Route::get('/', [App\Http\Controllers\HomeController::class, 'domain'])->name('domain.index');
+        Route::get('/', [App\Http\Controllers\HomeController::class, 'domain'])->name('domainprice.index');
         Route::get('/kiem-tra-ten-mien', [App\Http\Controllers\HomeController::class, 'view_check_domain'])->name('checkdomain.view');
         Route::post('/kiem-tra-ten-mien', [App\Http\Controllers\HomeController::class, 'check_domain'])->name('domain.check');
         Route::get('/dang-ki-ten-mien', [App\Http\Controllers\HomeController::class, 'view_reg_domain'])->name('view.domain.reg');
@@ -45,9 +45,9 @@ Route::group(['middleware' => ['auth']], function () {
 //domain
 
 //vps
-    Route::prefix('may-ao')->group(function () {
+    Route::prefix('vps')->group(function () {
         Route::get('/', [App\Http\Controllers\HomeController::class, 'vps'])->name('vps.index');
-        Route::get('/loai-may-ao', [App\Http\Controllers\HomeController::class, 'vps_type'])->name('vps.vps-type');
+        Route::get('{slug}', [App\Http\Controllers\HomeController::class, 'vps_type'])->name('vps.vps-type');
     });
 //end vps
 //hosting
@@ -128,7 +128,7 @@ Route::prefix('admin')->group(function () {
     }); // service
     // SEO ↓
     Route::resource('/seo', App\Http\Controllers\BE\SeoController::class);
-    Route::get('/seo/get-type-pro/{service_group_id}', [App\Http\Controllers\BE\SeoController::class, 'get_type_pro'])->name('get_type_pro');
+    Route::get('/seo/get-type-pro/{service_group_id}', [App\Http\Controllers\BE\SeoController::class, 'get_type_seo'])->name('get_type_seo');
     // Route::post('/change-status-account-service','App\Http\Controllers\BE\AccountController@changeStatus')->name('changeStatus.account-service');
     // Route::post('/account-ajax', [App\Http\Controllers\BE\SeoController::class, 'storeajax'])->name('store.ac.ajax');
 
@@ -148,10 +148,19 @@ Route::prefix('admin')->group(function () {
         Route::post('/os-location-create', [App\Http\Controllers\BE\QuickAddController::class, 'os_system_create'])->name('store.os.ajax');
         /////
         Route::get('/status-invoice', [App\Http\Controllers\BE\QuickAddController::class, 'status_invoice'])->name('status_invoice');
-        Route::post('/statis-invioce-destroy/{id}', [App\Http\Controllers\BE\QuickAddController::class, 'status_invoice_destroy'])->name('status_invoice.destroy');
-        Route::post('/statis-invioce-reset', [App\Http\Controllers\BE\QuickAddController::class, 'reset_status_invoice'])->name('status_invoice.reset');
+        Route::post('/status-invioce-destroy/{id}', [App\Http\Controllers\BE\QuickAddController::class, 'status_invoice_destroy'])->name('status_invoice.destroy');
+        Route::post('/status-invioce-reset', [App\Http\Controllers\BE\QuickAddController::class, 'reset_status_invoice'])->name('status_invoice.reset');
         Route::post('/status-invoice-create', [App\Http\Controllers\BE\QuickAddController::class, 'status_invoice_create'])->name('store.iv.ajax');
+        //////////
+        Route::get('/os-system', [App\Http\Controllers\BE\QuickAddController::class, 'location_system'])->name('hdh');
+        Route::post('/os-system-destroy/{id}', [App\Http\Controllers\BE\QuickAddController::class, 'location_system_destroy'])->name('hdh.destroy');
+        Route::post('/os-system-create', [App\Http\Controllers\BE\QuickAddController::class, 'location_system_create'])->name('hdh.ajax');
+        /////////////
     }); // app
+        /// payment method ////
+        Route::resource('/payment-method', App\Http\Controllers\BE\PaymentMethodController::class);
+        Route::post('/change-status-payment','App\Http\Controllers\BE\PaymentMethodController@changeStatus')->name('changeStatus.payment');
+
 
   }); // admin
 });

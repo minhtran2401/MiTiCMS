@@ -4,6 +4,7 @@ namespace App\Http\Controllers\BE;
 use App\Models\LogAdmin;
 use App\Models\StatusInvoice;
 use App\Models\OSsystem;
+use App\Models\LocationSystem;
 use Auth;
 use Schema;
 
@@ -121,26 +122,26 @@ class QuickAddController extends Controller
     ///////////////////
 
     public function location_system(){
-        $ds = OSsystem::orderby('created_at','desc')->get();
-        return view('BE.quickadd.show_os', compact('ds'));
+        $ds = LocationSystem::orderby('created_at','desc')->get();
+        return view('BE.quickadd.show_location', compact('ds'));
     }
     public function location_system_create(Request $request){
       
-        $ngs = new OSsystem([
-             'name_os' => $request->get('name_os'),
+        $ngs = new LocationSystem([
+             'name_location' => $request->get('name_location'),
             
         ]);
         $name = Auth::user()->name;
-        $namedv = $ngs->name_os;
+        $namedv = $ngs->location;
         $log = new LogAdmin([
            
            'id_user' => Auth::user()->id, 
-            'task' => " $name đã tạo khu vực dịch vụ $namedv ",
+            'task' => " $name đã tạo HĐH $namedv ",
         ]);
         $log->save();
          $ngs->save();
          $data['1'] = $ngs->id;
-         $data['2'] =$ngs->name_os;
+         $data['2'] =$ngs->name_location;
          $data['3'] = '1';
         return response()->json($data);
     }
@@ -152,17 +153,17 @@ class QuickAddController extends Controller
      */
     public function location_system_destroy($id)
     {
-        $nsp = OSsystem::find($id);
+        $nsp = LocationSystem::find($id);
         $name = Auth::user()->name;
-        $namedv1 = OSsystem::find($id)->name_os;
+        $namedv1 = LocationSystem::find($id)->name_location;
         $log = new LogAdmin([
            
            'id_user' => Auth::user()->id, 
-            'task' => " $name đã xóa nhóm khu vực $namedv1 ",
+            'task' => " $name đã xóa HĐH $namedv1 ",
         ]);
         $log->save();
             $nsp->delete();
-            toast('Đã Xóa Khu Vực Thành Công!','success');
+            toast('Đã Xóa Hệ Điều Hành Thành Công!','success');
             return redirect()->back();
         
     }

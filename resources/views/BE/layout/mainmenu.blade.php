@@ -52,6 +52,7 @@
             $linkhost = ['admin/service/hosting','admin/service/hosting/create','admin/service/hosting/*/edit',];
             $linkpost = ['admin/blog','admin/blog-type','admin/blog/*/edit','admin/blog-type/*/edit','admin/blog/create','admin/blog-type/create'];
             $linkgr_ty = ['admin/group-service','admin/type-service','loai-blog/*/edit','loai-blog/create',];
+            $linkquickadd = ['admin/quickadd/status-invoice','admin/quickadd/os-system','admin/quickadd/os-location',];
             $linkuser = ['admin/user','admin/user/*/edit',];
 
             @endphp
@@ -87,15 +88,15 @@
                             </li>
                         </ul>
                     </li>
-                    <li class=" {{ request()->is($linkgr_ty) ? 'has-sub open' : '' }}"><a class="d-flex align-items-center" href="#"><i data-feather='fast-forward'></i><span class="menu-item" > Thêm Nhanh</span></a>
+                    <li class=" {{ request()->is($linkquickadd) ? 'has-sub open' : '' }}"><a class="d-flex align-items-center" href="#"><i data-feather='fast-forward'></i><span class="menu-item" > Thêm Nhanh</span></a>
                         <ul class="menu-content">
-                            <li class="{{ request()->is('admin/group-service') ? 'active' : '' }}"><a class="d-flex align-items-center  " href="{{route('group-service.index')}}"><i data-feather='loader'></i><span class="menu-item" >Tình trạng </span></a>
+                            <li class="{{ request()->is('admin/quickadd/status-invoice') ? 'active' : '' }}"><a class="d-flex align-items-center  " href="{{route('status_invoice')}}"><i data-feather='loader'></i><span class="menu-item" >Tình trạng </span></a>
                                 
                             </li>
-                            <li class="{{ request()->is('admin/group-service') ? 'active' : '' }}"><a class="d-flex align-items-center  " href="{{route('group-service.index')}}"><i data-feather='slack'></i><span class="menu-item" >Khu Vực </span></a>
+                            <li class="{{ request()->is('admin/quickadd/os-location') ? 'active' : '' }}"><a class="d-flex align-items-center  " href="{{route('os_system')}}"><i data-feather='slack'></i><span class="menu-item" >Khu Vực </span></a>
                                 
                             </li>
-                            <li class="{{ request()->is('admin/type-service') ? 'active' : '' }}"><a class="d-flex align-items-center  " href="{{route('type-service.index')}}"><i data-feather='terminal'></i><span class="menu-item" >HĐH</span></a>
+                            <li class="{{ request()->is('admin/quickadd/os-system') ? 'active' : '' }}"><a class="d-flex align-items-center  " href="{{route('hdh')}}"><i data-feather='terminal'></i><span class="menu-item" >HĐH</span></a>
                                
                             </li>
                         </ul>
