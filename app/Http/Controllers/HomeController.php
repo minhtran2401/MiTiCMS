@@ -67,7 +67,7 @@ class HomeController extends Controller
     //dịch vụ vps ↓
     public function vps()
     {
-        return view('FE.service.vps-service.index');
+        return view('FE.home');
     }
     public function vps_type($id)
     {

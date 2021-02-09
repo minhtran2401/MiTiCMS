@@ -46,7 +46,7 @@ Route::group(['middleware' => ['auth']], function () {
 
 //vps
     Route::prefix('vps')->group(function () {
-        Route::get('/', [App\Http\Controllers\HomeController::class, 'vps'])->name('vps.index');
+        Route::get('/', [App\Http\Controllers\HomeController::class, 'vps'])->name('vps.index.FE');
         Route::get('{slug}', [App\Http\Controllers\HomeController::class, 'vps_type'])->name('vps.vps-type');
     });
 //end vps

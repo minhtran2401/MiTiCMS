@@ -125,7 +125,7 @@ class DomainController extends Controller
         if ($fileimg){
             $fileimg = $request->file('image'); // tạo biến lấy dữ liệu từ input
             $filename = $fileimg->getClientOriginalName(); // lấy tên theo tên gốc của file
-            $pathimg = $fileimg->move(public_path().'/Domain/', $filename); //chỗ chứa file
+            $pathimg = $fileimg->move(public_path().'/image/', $filename); //chỗ chứa file
             $sp->domain_image = $filename;
           
             $sp->domain_name = $request->get('name_service');
