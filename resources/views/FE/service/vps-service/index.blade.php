@@ -19,15 +19,6 @@
                                             <div class="row justify-content-center mb-3">
                                                 <div class="">
                                                     <div class="shin-service-menu-type">VPS Amazone</div>
-                                                    <div class="shin-service-menu-type">VPS Azure</div>
-                                                    <div class="shin-service-menu-type">VPS SSD</div>
-                                                    <div class="shin-service-menu-type">VPS GPU</div>
-                                                    <div class="shin-service-menu-type">VPS 1 - 2</div>
-                                                    <div class="shin-service-menu-type">VPS Amazone</div>
-                                                    <div class="shin-service-menu-type">VPS Azure</div>
-                                                    <div class="shin-service-menu-type">VPS SSD</div>
-                                                    <div class="shin-service-menu-type">VPS GPU</div>
-                                                    <div class="shin-service-menu-type">VPS 1 - 2</div>
                                                 </div>
                                             </div>
                                         </div>

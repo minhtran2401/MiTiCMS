@@ -1,7 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\ServiceType;
+use App\Models\VPSService;
+use DB;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
