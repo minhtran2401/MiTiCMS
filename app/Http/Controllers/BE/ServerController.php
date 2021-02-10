@@ -51,7 +51,7 @@ class ServerController extends Controller
             // Save the file locally in the storage/public/ folder under a new folder named /product
             $fileimg = $request->file('image'); // tạo biến lấy dữ liệu từ input
             $filename = $fileimg->getClientOriginalName(); // lấy tên theo tên gốc của file
-            $pathimg = $fileimg->move(public_path().'/server/', $filename); //chỗ chứa file
+            $pathimg = $fileimg->move(public_path().'/image/', $filename); //chỗ chứa file
             $sku = mt_rand(1000000000, 9999999999);
 
             // Store the record, using the new file hashname which will be it's new filename identity.

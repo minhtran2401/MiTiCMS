@@ -1,5 +1,5 @@
 @extends('FE.layout')
-@section('pagetitle', ' Máy Chủ Ảo ')
+@section('pagetitle', ' Hosting ')
 @section('content')
 
 <div class="page-wrapper">
@@ -8,7 +8,7 @@
             <div class="col-lg-12">
                 <div class="card" style="overflow: hidden">
                     <div class="shin-title-page">
-                        <h3>MiTiVPS - Virtual Machine</h3>
+                        <h3>MiTiHost - Hosting</h3>
                     </div>
                     <div class="card-body">
                         <section class="ftco-section">

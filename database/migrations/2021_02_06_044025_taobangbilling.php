@@ -18,11 +18,12 @@ class Taobangbilling extends Migration
             $table->integer('user_id');
             $table->integer('service_group_id');
             $table->integer('service_type_id');
-            $table->integer('sku');
+            $table->string('sku');
             $table->integer('invoice_payment');
-            $table->integer('total_invoice');
+            $table->string('total_invoice');
+            $table->string('pack_price');
             $table->text('invoice_note');
-            $table->integer('status');
+            $table->integer('status')->nullable();
             $table->timestamps();
         });
     }

@@ -32,6 +32,8 @@
     </style>
 <body>
     <div class="main-wrapper">
+        @include('sweetalert::alert')
+
         @include('FE.header')
         @include('FE.menu')
         

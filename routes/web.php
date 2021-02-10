@@ -40,7 +40,6 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/', [App\Http\Controllers\HomeController::class, 'domain'])->name('domainprice.index');
         Route::get('/kiem-tra-ten-mien', [App\Http\Controllers\HomeController::class, 'view_check_domain'])->name('checkdomain.view');
         Route::post('/kiem-tra-ten-mien', [App\Http\Controllers\HomeController::class, 'check_domain'])->name('domain.check');
-        Route::get('/dang-ki-ten-mien', [App\Http\Controllers\HomeController::class, 'view_reg_domain'])->name('view.domain.reg');
 });
 //domain
 
@@ -48,12 +47,17 @@ Route::group(['middleware' => ['auth']], function () {
     Route::prefix('vps')->group(function () {
         Route::get('/', [App\Http\Controllers\HomeController::class, 'vps'])->name('vps.index.FE');
         Route::get('{slug}', [App\Http\Controllers\HomeController::class, 'vps_type'])->name('vps.vps-type');
+        Route::post('/add-cart/{sku}',[App\Http\Controllers\BE\CartController::class, 'add_cart_vps'])->name('addcart.vps');
+        Route::post('/check_out_vps',[App\Http\Controllers\BE\CartController::class, 'check_out'])->name('check_out');
+
     });
 //end vps
 //hosting
     Route::prefix('hosting')->group(function () {
         Route::get('/', [App\Http\Controllers\HomeController::class, 'hosting'])->name('hosting.index');
-        Route::get('/loai-hosting', [App\Http\Controllers\HomeController::class, 'hosting_type'])->name('hosting.hosting-type');
+        Route::get('/{slug}', [App\Http\Controllers\HomeController::class, 'hosting_type'])->name('hosting.hosting-type');
+        Route::post('/add-cart/{sku}',[App\Http\Controllers\BE\CartController::class, 'add_cart_hosting'])->name('addcart.hosting');
+        Route::post('/check_out_hosting',[App\Http\Controllers\BE\CartController::class, 'check_out'])->name('check_out');
     });
 //end hosting
 //account
@@ -62,6 +66,12 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/thong-tin-tai-khoan', [App\Http\Controllers\HomeController::class, 'account_detail'])->name('account.account-detail');
     });
 //end account
+Route::prefix('thanh-toan')->group(function () {
+    Route::get('/vps', [App\Http\Controllers\HomeController::class, 'purchase_vps'])->name('purchase_vps');
+    Route::get('/hosting', [App\Http\Controllers\HomeController::class, 'purchase_hosting'])->name('purchase_hosting');
+    Route::get('/domain', [App\Http\Controllers\HomeController::class, 'view_reg_domain'])->name('view.domain.reg');
+
+});
 
 });
 
@@ -143,18 +153,18 @@ Route::prefix('admin')->group(function () {
     }); // app
 
     Route::prefix('quickadd')->group(function () {
-        Route::get('/os-location', [App\Http\Controllers\BE\QuickAddController::class, 'os_system'])->name('os_system');
-        Route::post('/os-location-destroy/{id}', [App\Http\Controllers\BE\QuickAddController::class, 'os_system_destroy'])->name('os_system.destroy');
-        Route::post('/os-location-create', [App\Http\Controllers\BE\QuickAddController::class, 'os_system_create'])->name('store.os.ajax');
+        Route::get('/os-system', [App\Http\Controllers\BE\QuickAddController::class, 'os_system'])->name('os_system');
+        Route::post('/os-system-destroy/{id}', [App\Http\Controllers\BE\QuickAddController::class, 'os_system_destroy'])->name('os_system.destroy');
+        Route::post('/os-system-create', [App\Http\Controllers\BE\QuickAddController::class, 'os_system_create'])->name('store.os.ajax');
         /////
         Route::get('/status-invoice', [App\Http\Controllers\BE\QuickAddController::class, 'status_invoice'])->name('status_invoice');
         Route::post('/status-invioce-destroy/{id}', [App\Http\Controllers\BE\QuickAddController::class, 'status_invoice_destroy'])->name('status_invoice.destroy');
         Route::post('/status-invioce-reset', [App\Http\Controllers\BE\QuickAddController::class, 'reset_status_invoice'])->name('status_invoice.reset');
         Route::post('/status-invoice-create', [App\Http\Controllers\BE\QuickAddController::class, 'status_invoice_create'])->name('store.iv.ajax');
         //////////
-        Route::get('/os-system', [App\Http\Controllers\BE\QuickAddController::class, 'location_system'])->name('hdh');
-        Route::post('/os-system-destroy/{id}', [App\Http\Controllers\BE\QuickAddController::class, 'location_system_destroy'])->name('hdh.destroy');
-        Route::post('/os-system-create', [App\Http\Controllers\BE\QuickAddController::class, 'location_system_create'])->name('hdh.ajax');
+        Route::get('/os-location', [App\Http\Controllers\BE\QuickAddController::class, 'location_system'])->name('hdh');
+        Route::post('/os-location-destroy/{id}', [App\Http\Controllers\BE\QuickAddController::class, 'location_system_destroy'])->name('hdh.destroy');
+        Route::post('/os-location-create', [App\Http\Controllers\BE\QuickAddController::class, 'location_system_create'])->name('hdh.ajax');
         /////////////
     }); // app
         /// payment method ////

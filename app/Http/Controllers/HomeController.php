@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 use App\Models\ServiceType;
 use App\Models\VPSService;
-use DB;
-use Illuminate\Http\Request;
-use App\Models\VPSService;
+use App\Models\HostingService;
 use App\Models\TypeService;
 use DB;
+use Illuminate\Http\Request;
+
 class HomeController extends Controller
 {
     /**
@@ -59,11 +59,16 @@ class HomeController extends Controller
     // dịch vụ hosting ↓
     public function hosting()
     {
-        return view('FE.service.hosting-service.index');
+        return view('FE.home');
     }
-    public function hosting_type()
+    public function hosting_type($id)
     {
-        return view('FE.service.hosting-service.hosting-type');
+        $hosting_type = TypeService::where('slug',$id)->firstOrFail(); // lấy slug của url
+        $hosting_detail = HostingService::where('service_group_id',$hosting_type->service_group_id)
+        ->where('service_type_id',$hosting_type->service_type_id)
+        ->where('display','1')->orderby('hosting_id','desc')->get();
+       
+        return view('FE.service.hosting-service.hosting-type',compact('hosting_type','hosting_detail'));
     }
 
     //dịch vụ vps ↓
@@ -105,6 +110,23 @@ class HomeController extends Controller
         return response()->json($domain); //không có domain
     }
     public function view_reg_domain(){
-        return view('FE.service.domain-service.reg-domain');
+        $key_domain = "domain";
+        return view('FE.payment',compact('key_domain'));
     }
+
+    // thanh toán
+ 
+
+    public function purchase_vps()
+    {
+        $key_vps = "vps";
+        return view('FE.payment',compact('key_vps'));
+    }
+    public function purchase_hosting()
+    {
+        $key_hosting = "hosting";
+        return view('FE.payment',compact('key_hosting'));
+    }
+
+  
 }

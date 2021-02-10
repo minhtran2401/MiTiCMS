@@ -42,7 +42,8 @@
                                                             <div style="box-shadow: 0 0 3px grey;" class="card block-7">
                                                                 <div class="card-body">
                                                                     <div class="text-center">
-                                                                        
+                                                                        <form class="buy_service" action="{{route('addcart.vps',$detail->sku)}}" method="post">
+                                                                          @csrf
                                                                         <h2 class="heading">{{$detail->vps_name}}</h2>
                                                                         <div class="shin-service-type mb-2">{{$vps_type->service_type_name}}</div>
                                                                         <div class="shin-service-title-info mb-2">Thông tin cấu hình</div>
@@ -56,48 +57,54 @@
                                                             </div>
                                                         </div>
                                                          <!-- Modal -->
-  <div class="modal fade" id="price-{{$detail->sku}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLongTitle">Giá gói</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-            <table class="table">
-                <thead>
-                  <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Thời gian</th>
-                    <th scope="col">Giá</th>
-                    <th scope="col">Chọn</th>
-                  </tr>
-                </thead>
-                <tbody>
-                    @php
-                    $vps_price = DB::table('service_price')->where('sku',$detail->sku)->get();
-                   @endphp
-                    @foreach ($vps_price as $key => $price)
-                  <tr>
-                     
-                    <th scope="row">{{$key +1}}</th>
-                    <td>{{$price->service_time}}</td>
-                    <td>{{number_format($price->service_price)}} đ</td>
-                    <td><button class="btn btn-primary">Mua</button></td>
-                  </tr>
-                  @endforeach
-                </tbody>
-              </table>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-danger" data-dismiss="modal">Đóng</button>
-     
-        </div>
-      </div>
-    </div>
-  </div>
+                                                         <div class="modal fade" id="price-{{$detail->sku}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                                          <div class="modal-dialog modal-dialog-centered" role="document">
+                                                            <div class="modal-content">
+                                                              <div class="modal-header">
+                                                                <h5 class="modal-title" id="exampleModalLongTitle">Giá gói {{$vps_type->service_type_name}}</h5>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                  <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                              </div>
+                                                              <div class="modal-body">
+                                                                  <table class="table tableshow" >
+                                                                      <thead>
+                                                                        <tr>
+                                                                          <th scope="col">#</th>
+                                                                          <th scope="col">Thời gian</th>
+                                                                          <th scope="col">Giá</th>
+                                                                          <th scope="col">Chọn</th>
+                                                                        </tr>
+                                                                      </thead>
+                                                                      <tbody>
+                                                                          @php
+                                                                          $vps_price = DB::table('service_price')->where('sku',$detail->sku)->get();
+                                                                         @endphp
+                                                                          @foreach ($vps_price as $key => $price)
+                                                                        <tr>
+                                                                           
+                                                                          <th scope="row">{{$key +1}}</th>
+                                                                          <td  value="{{$price->service_time}}">{{$price->service_time}}</td>
+                                                                          <td  value="{{$price->service_price}}">{{number_format($price->service_price)}} đ</td>
+                                                                          {{-- <td><button  class="btn btn-primary">Mua</button></td> --}}
+                                                                          <td> <button  class="btn btn-primary buy">Mua</button>
+                                                                          </td>
+                                                                        </tr>
+                                                                        @endforeach
+                                                                      </tbody>
+                                                                    </table>
+                                                              </div>
+                                                              <div class="modal-footer">
+                                                                <button type="button" class="btn btn-danger" data-dismiss="modal">Đóng</button>
+                                                           
+                                                              </div>
+                                                            </div>
+                                                          </div>
+                                                        </div>
+                                                        <input hidden class="time" name="time" type="text" >
+                                                        <input hidden class="price" name="price" type="text">
+                                                                  </form>
+                                                                  
                                                         @endforeach
                                                   </div>
                                                 </div>
@@ -112,4 +119,47 @@
     </div>
 </div>
  
+@endsection
+@section('script')
+    <script>
+//*
+$(document).ready(function(){
+
+// code to read selected table row cell data (values).
+$(".tableshow").on('click','.buy',function(){
+     // get the current row
+     var currentRow=$(this).closest("tr"); 
+     var col1=currentRow.find("td:eq(0)").text(); // get current row 1st TD value
+     var col2=currentRow.find("td:eq(1)").text(); // get current row 2nd TD
+     
+    //  alert(data);
+    $('.price').val(col2);
+    $('.time').val(col1);
+    $(".buy_service").submit(function(e) {
+
+e.preventDefault(); // avoid to execute the actual submit of the form.
+
+var form = $(this);
+var url = form.attr('action');
+var reurl = "{{route('purchase_vps')}}";
+$.ajax({
+       type: "POST",
+       url: url,
+       data: form.serialize(), // serializes the form's elements.
+       success: function(data)
+       {
+        
+        Swal.fire(
+          'Thành công!',
+          'Bạn sẽ được chuyển sang trang thanh toán.',
+          'success'
+        )
+        setTimeout(function() {
+  window.location = reurl;
+},1700);
+       }
+     });});});});
+
+
+    </script>
 @endsection

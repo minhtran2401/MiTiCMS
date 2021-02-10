@@ -13,6 +13,7 @@ class Invoice extends Model
         'service_type_id',
         'sku',
         'invoice_payment',
+        'pack_price',
         'total_invoice',
         'invoice_note',
         'status'

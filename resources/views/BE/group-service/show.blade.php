@@ -133,7 +133,17 @@
                                 <label class="form-label" for="basic-icon-default-fullname">Tên Nhóm</label>
                                 <input type="text" name="name_group_service" class="form-control dt-full-name" id="basic-icon-default-fullname" placeholder="Tên Nhóm" required  />
                             </div>
-                           
+                            <div class="form-group" >
+                                <small>Thêm thêm thứ tự 
+                                    <ul>
+                                        <li>1. Máy chủ vât lí</li>
+                                        <li>2. VPS</li>
+                                        <li>3. Hosting</li>
+                                        <li>4. Domain</li>
+                                        <li>5. Tài khoản các loại</li>
+                                    </ul>
+                                </small>
+                            </div>
                             <button type="submit" class="btn btn-primary data-submit mr-1">Lưu</button>
                             <button type="reset" class="btn btn-outline-secondary" data-dismiss="modal">Hủy</button>
                         </div>

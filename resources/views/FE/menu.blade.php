@@ -57,8 +57,13 @@
                 <li class="submenu">
                     <a href="{{route('hosting.index')}}"><i class="fa fa-user"></i> <span>Hosting </span> <span class="menu-arrow"></span></a>
                     <ul style="display: none;">
-                        <li><a href="{{route('hosting.index')}}">Trang chính</a></li>
-                        <li><a href="{{route('hosting.hosting-type')}}">Loại hosting</a></li>
+                        @php 
+                        $hostings = DB::table('service_types')->where('service_group_id','3')->where('display','1')->orderby('service_type_id','desc')->get();
+                    @endphp
+                    @foreach ($hostings as $hosting)
+                          <li><a href="{{route('hosting.hosting-type',$hosting->slug)}}">{{$hosting->service_type_name}}</a></li>
+                    @endforeach
+                       
                     </ul>
                 </li>
                 <li class="submenu">
