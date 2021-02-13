@@ -41,10 +41,10 @@
                                                     <textarea class="form-control" name="content" rows="3" required></textarea >
                                                 </div>
                                                 <div class="col-sm-12 col-md-8 col-lg-12 form-group">
-                                                    {{-- <input type="submit" class="btn btn-success text-center" value="Gửi"> --}}
-                                                    <button class="g-recaptcha btn btn-success text-cente" data-sitekey="6LceVFYaAAAAACxNACGes6AHiimwVVmE-Gbm5JOR" data-callback="YourOnSubmitFn">
+                                                    <input type="submit" class="btn btn-success text-center" value="Gửi">
+                                                    {{-- <button class="g-recaptcha btn btn-success text-cente" data-sitekey="6LceVFYaAAAAACxNACGes6AHiimwVVmE-Gbm5JOR" data-callback="YourOnSubmitFn">
                                                         Submit
-                                                    </button>
+                                                    </button> --}}
                                                 </div>
                                             </div>
                                         </form>                     
