@@ -183,6 +183,7 @@ $('#summernote2').summernote();
 });
 </script>
 
+
     <!-- END: Page JS-->
 
 @endsection

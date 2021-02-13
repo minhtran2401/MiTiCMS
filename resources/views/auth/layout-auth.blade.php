@@ -14,10 +14,11 @@
     <link rel="shortcut icon" type="image/x-icon" href="{{asset('BE')}}/app-assets/images/ico/favicon.ico">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500;1,600" rel="stylesheet">
 
+
     <!-- BEGIN: Vendor CSS-->
     <link rel="stylesheet" type="text/css" href="{{asset('BE')}}/app-assets/vendors/css/vendors.min.css">
     <!-- END: Vendor CSS-->
-
+    @yield('css1')
     <!-- BEGIN: Theme CSS-->
     <link rel="stylesheet" type="text/css" href="{{asset('BE')}}/app-assets/css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="{{asset('BE')}}/app-assets/css/bootstrap-extended.css">
@@ -25,17 +26,19 @@
     <link rel="stylesheet" type="text/css" href="{{asset('BE')}}/app-assets/css/components.css">
     <link rel="stylesheet" type="text/css" href="{{asset('BE')}}/app-assets/css/themes/dark-layout.css">
     <link rel="stylesheet" type="text/css" href="{{asset('BE')}}/app-assets/css/themes/bordered-layout.css">
-
+    @yield('css2')
     <!-- BEGIN: Page CSS-->
     <link rel="stylesheet" type="text/css" href="{{asset('BE')}}/app-assets/css/plugins/forms/form-validation.css">
     <link rel="stylesheet" type="text/css" href="{{asset('BE')}}/app-assets/css/core/menu/menu-types/vertical-menu.css">
     <link rel="stylesheet" type="text/css" href="{{asset('BE')}}/app-assets/css/plugins/forms/form-validation.css">
     <link rel="stylesheet" type="text/css" href="{{asset('BE')}}/app-assets/css/pages/page-auth.css">
     <!-- END: Page CSS-->
-
+    @yield('css3')
     <!-- BEGIN: Custom CSS-->
     <link rel="stylesheet" type="text/css" href="{{asset('BE')}}/assets/css/style.css">
     <!-- END: Custom CSS-->
+    <script src='https://www.google.com/recaptcha/api.js'></script>
+
 
 </head>
 

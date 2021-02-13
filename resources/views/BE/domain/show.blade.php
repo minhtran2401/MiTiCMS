@@ -67,7 +67,7 @@
                                     <div>Quốc Tế</div>
                                     @endif
                                   </td>
-                                  <td>{{$row->domain_name}}</td>
+                                  <td>{{$row->name}}</td>
                                  
                                   <td>{{number_format($row->price_show)}} đ</td>
                                   <td>
@@ -142,7 +142,7 @@
                         
                             <div class="form-group">
                                 <label class="form-label" for="basic-icon-default-fullname">Tên miền</label>
-                                <input type="text" name="domain_name" class="form-control dt-full-name" placeholder=".com , .net ,..." required  />
+                                <input type="text" name="name" class="form-control dt-full-name" placeholder=".com , .net ,..." required  />
                             </div>
 
                             <div class="form-group">

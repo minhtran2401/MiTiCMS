@@ -80,7 +80,7 @@
                                         
                                         <div class="col-md-12 mb-1">
                                             <label>Tên Tài Khoản</label>
-                                            <input name="account_name" type="text" class="form-control"   placeholder="Tên tài khoản" value="{{$row->account_name}}" />
+                                            <input name="name" type="text" class="form-control"   placeholder="Tên tài khoản" value="{{$row->name}}" />
                                         </div>
                                         <div class="col-md-12 mb-1">
                                         

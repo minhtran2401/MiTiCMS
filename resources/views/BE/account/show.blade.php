@@ -55,7 +55,7 @@
                             <tbody>
                                 @foreach ($ds as $row)
                                 <td>{{$row->account_id}}</td>
-                                  <td>{{$row->account_name}}</td>
+                                  <td>{{$row->name}}</td>
                                  
                                  
                                   <td>
@@ -130,7 +130,7 @@
                         
                             <div class="form-group">
                                 <label class="form-label" for="basic-icon-default-fullname">Tên Tài khoản</label>
-                                <input type="text" name="account_name" class="form-control dt-full-name" placeholder="Google-Drive-Unlimited,..." required  />
+                                <input type="text" name="name" class="form-control dt-full-name" placeholder="Google-Drive-Unlimited,..." required  />
                             </div>
 
                           

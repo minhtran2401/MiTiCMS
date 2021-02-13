@@ -12,7 +12,7 @@ class AccountService extends Model
         'service_type_id',
         'sku',
         'account_image',
-        'account_name',
+        'name',
         'account_info',
         'display',
         'slug'

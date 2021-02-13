@@ -19,7 +19,7 @@ class CreateAccountServiceTable extends Migration
             $table->integer('service_type_id');         // Gmail | Facebook | AWS 
             $table->string('sku');                      // afngheg | anghrje
             $table->string('account_image')->nullable();// Hình ảnh
-            $table->string('account_name');             // Tài khoản drive unlimited
+            $table->string('name');             // Tài khoản drive unlimited
             $table->text('account_info');               // Thông tin chi tiết của tài khoản
             $table->integer('display');                 // Ẩn | Hiện
             $table->string('slug')->nullable()->unique();

@@ -12,7 +12,7 @@ class ServerService extends Model
         'service_type_id',
         'sku',
         'server_image',
-        'server_name',
+        'name',
         'server_profile',
         'display',
         'slug'

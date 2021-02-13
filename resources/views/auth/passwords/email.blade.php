@@ -10,17 +10,17 @@
                     <!-- Forgot password-->
                     <div class="d-flex col-lg-4 align-items-center auth-bg px-2 p-lg-5">
                         <div class="col-12 col-sm-8 col-md-6 col-lg-12 px-xl-2 mx-auto">
-                            <h4 class="card-title mb-1">Forgot Password? 🔒</h4>
-                            <p class="card-text mb-2">Enter your email and we'll send you instructions to reset your password</p>
+                            <h4 class="card-title mb-1">Quên mật khẩu? 🔒</h4>
+                            <p class="card-text mb-2">Nhập địa chỉ email , chúng tôi sẽ gửi link khôi phục cho bạn.</p>
                             <form class="auth-forgot-password-form mt-2" action="{{ route('password.email') }}" method="POST">
                                @csrf
                                 <div class="form-group">
                                     <label class="form-label" for="forgot-password-email">Email</label>
                                     <input class="form-control" id="forgot-password-email" type="text" name="email" placeholder="email@example.com" aria-describedby="forgot-password-email" autofocus="" tabindex="1" />
                                 </div>
-                                <button class="btn btn-primary btn-block" tabindex="2">Send reset link</button>
+                                <button class="btn btn-primary btn-block" tabindex="2">Gửi link khôi phục</button>
                             </form>
-                            <p class="text-center mt-2"><a href="{{route('login')}}"><i data-feather="chevron-left"></i> Back to login</a></p>
+                            <p class="text-center mt-2"><a href="{{route('login')}}"><i data-feather="chevron-left"></i> Về đăng nhập</a></p>
                         </div>
                     </div>
                     <!-- /Forgot password-->

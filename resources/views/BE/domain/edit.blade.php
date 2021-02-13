@@ -80,7 +80,7 @@
                                         
                                         <div class="col-md-12 mb-1">
                                             <label>Tên Miền</label>
-                                            <input name="name_service" type="text" class="form-control" readonly  placeholder="Tên VPS" value="{{$row->domain_name}}" />
+                                            <input name="name_service" type="text" class="form-control" readonly  placeholder="Tên VPS" value="{{$row->name}}" />
                                         </div>
                                         <div class="col-md-12 mb-1">
                                         

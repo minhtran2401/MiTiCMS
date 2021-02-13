@@ -61,7 +61,7 @@ class VPSController extends Controller
                 "service_group_id" => $request->get('getgroup'),
                 "service_type_id" => $request->get('gettype'),
                 "sku" => $sku,
-                "vps_name" => $request->get('name_service'),
+                "name" => $request->get('name_service'),
                 "slug" =>\Str::slug($request->name_service),
                 "vps_image" => $filename,
                 "display" =>$request->get('display'),
@@ -107,7 +107,7 @@ class VPSController extends Controller
 
                 }
                 $name = Auth::user()->name;
-                $namedv = $product->vps_name;
+                $namedv = $product->name;
                 $log = new LogAdmin([
                    
                    'id_user' => Auth::user()->id, 
@@ -161,7 +161,7 @@ class VPSController extends Controller
             $filename = $fileimg->getClientOriginalName(); // lấy tên theo tên gốc của file
             $pathimg = $fileimg->move(public_path().'/image/', $filename); //chỗ chứa file
             $sp->vps_image = $filename;
-            $sp->vps_name = $request->get('name_service');
+            $sp->name = $request->get('name_service');
             $sp->slug =\Str::slug($request->get('name_service'));
             $sp->service_group_id = $request->get('getgroup');
             $sp->service_type_id = $request->get('gettype');
@@ -172,7 +172,7 @@ class VPSController extends Controller
         }
         else{
             $sp->slug =\Str::slug($request->get('name_service'));
-            $sp->vps_name = $request->get('name_service');
+            $sp->name = $request->get('name_service');
             $sp->service_group_id = $request->get('getgroup');
             $sp->service_type_id = $request->get('gettype');
             $sp->sku = VPSService::find($id)->sku;
@@ -195,7 +195,7 @@ class VPSController extends Controller
             $combo->save();
                 }}  
         $name = Auth::user()->name;
-        $namedv = $sp->vps_name;
+        $namedv = $sp->name;
         $log = new LogAdmin([
            'id_user' => Auth::user()->id, 
             'task' => " $name sửa thông tin VPS $namedv ",
@@ -219,7 +219,7 @@ class VPSController extends Controller
         $delprice = DB::table('service_price')->where('sku',$sp->sku)->delete();
         alert()->success('Thành công','Đã xóa VPS');
         $name = Auth::user()->name;
-        $namedv = $sp->vps_name;
+        $namedv = $sp->name;
         $log = new LogAdmin([
            
            'id_user' => Auth::user()->id, 

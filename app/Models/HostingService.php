@@ -12,7 +12,7 @@ class HostingService extends Model
         'service_type_id',
         'sku',
         'hosting_image',
-        'hosting_name',
+        'name',
         'hosting_profile',
         'display',
         'slug'

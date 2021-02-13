@@ -80,7 +80,7 @@
                                         
                                         <div class="col-md-12 mb-1">
                                             <label>Tên Hosting</label>
-                                            <input name="name_service" type="text" class="form-control"  placeholder="Tên Hosting" value="{{$row->hosting_name}}" />
+                                            <input name="name_service" type="text" class="form-control"  placeholder="Tên Hosting" value="{{$row->name}}" />
                                         </div>
                                         <div class="col-md-12 mb-1">
                                         

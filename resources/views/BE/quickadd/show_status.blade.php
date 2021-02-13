@@ -93,9 +93,19 @@
                               <label class="form-label" for="basic-icon-default-fullname">Tên Gọi</label>
                               <input type="text" name="name_status_invoice" class="form-control dt-full-name" id="basic-icon-default-fullname" placeholder="Tên Gọi" required  />
                           </div>
-                         
+                        
                           <button type="submit" class="btn btn-primary data-submit mr-1">Lưu</button>
+                         
                           <button type="reset" class="btn btn-outline-secondary" data-dismiss="modal">Hủy</button>
+                         <div class="mt-2">
+                           <label for="">Thêm theo thứ tự sau:</label>
+                           <ul>
+                            <li>1. Chờ xác nhận</li>
+                            <li>2. Chờ thanh toán</li>
+                            <li>3. Đã thanh toán </li>
+                            <li>4. Đã hủy</li>
+                          </ul>
+                         </div>
                       </div>
                   </form>
               </div>

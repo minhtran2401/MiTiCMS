@@ -12,7 +12,7 @@ class VPSService extends Model {
         'service_type_id',
         'sku',
         'vps_image',
-        'vps_name',
+        'name',
         'vps_profile',
         'display',
         'slug'

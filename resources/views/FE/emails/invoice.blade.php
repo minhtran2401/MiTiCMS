@@ -38,7 +38,7 @@
         <td colspan="2" style="padding:15px;">
           <p style="font-size:14px;margin:0;padding:10px;border:solid 1px #ddd;font-weight:bold;">
             
-              <span style="display:block;font-size:13px;font-weight:normal;">{{Session('Cart')->products['product']->hosting_name}} </span> 
+              <span style="display:block;font-size:13px;font-weight:normal;">{{Session('Cart')->products['product']->name}} </span> 
           
             <span> <b style="font-size:12px;font-weight:300;">Thời gian :</b> {{Session('Cart')->products['time']}} </span>
             <span><b style="font-size:12px;font-weight:300;">Giá tiền : </b> {{Session('Cart')->products['price']}} </span>

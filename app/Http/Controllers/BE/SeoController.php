@@ -48,7 +48,7 @@ class SeoController extends Controller
             $product->save();
 
             $name = Auth::user()->name;
-            $namedv = $product->hosting_name;
+            $namedv = $product->meta_name;
             $log = new LogAdmin([
             
                'id_user' => Auth::user()->id, 
@@ -96,7 +96,7 @@ class SeoController extends Controller
         $sp->meta_content = $request->get('meta_content');
         
         $name = Auth::user()->name;
-        $namedv = $sp->hosting_name;
+        $namedv = $sp->meta_name;
         $log = new LogAdmin([
            'id_user' => Auth::user()->id, 
             'task' => " $name sửa thông tin meta $namedv ",
@@ -121,7 +121,7 @@ class SeoController extends Controller
         $sp-> delete($id);
         alert()->success('Thành công','Đã xóa');
         $name = Auth::user()->name;
-        $namedv = $sp->hosting_name;
+        $namedv = $sp->meta_name;
         $log = new LogAdmin([
            'id_user' => Auth::user()->id, 
             'task' => " $name đã xóa meta $namedv ",

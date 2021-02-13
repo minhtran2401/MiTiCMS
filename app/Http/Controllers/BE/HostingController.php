@@ -59,7 +59,7 @@ class HostingController extends Controller
                 "service_group_id" => $request->get('getgroup'),
                 "service_type_id" => $request->get('gettype'),
                 "sku" => $sku,
-                "hosting_name" => $request->get('name_service'),
+                "name" => $request->get('name_service'),
                 "slug" =>\Str::slug($request->name_service),
                 "hosting_image" => $filename,
                 "display" =>$request->get('display'),
@@ -104,7 +104,7 @@ class HostingController extends Controller
 
                 }
                 $name = Auth::user()->name;
-                $namedv = $product->hosting_name;
+                $namedv = $product->name;
                 $log = new LogAdmin([
                    
                    'id_user' => Auth::user()->id, 
@@ -159,7 +159,7 @@ class HostingController extends Controller
             $pathimg = $fileimg->move(public_path().'/image/', $filename); //chỗ chứa file
             $sp->hosting_image = $filename;
           
-            $sp->hosting_name = $request->get('name_service');
+            $sp->name = $request->get('name_service');
             $sp->slug =\Str::slug($request->get('name_service'));
             $sp->service_group_id = $request->get('getgroup');
             $sp->service_type_id = $request->get('gettype');
@@ -171,7 +171,7 @@ class HostingController extends Controller
         else{
 
             $sp->slug =\Str::slug($request->get('name_service'));
-            $sp->hosting_name = $request->get('name_service');
+            $sp->name = $request->get('name_service');
             $sp->service_group_id = $request->get('getgroup');
             $sp->service_type_id = $request->get('gettype');
             $sp->sku = HostingService::find($id)->sku;
@@ -197,7 +197,7 @@ class HostingController extends Controller
                     $combo->save();
                 }}
         $name = Auth::user()->name;
-        $namedv = $sp->hosting_name;
+        $namedv = $sp->name;
         $log = new LogAdmin([
            
            'id_user' => Auth::user()->id, 
@@ -224,7 +224,7 @@ class HostingController extends Controller
         $delprice = DB::table('service_price')->where('sku',$sp->sku)->delete();
         alert()->success('Thành công','Đã xóa Hosting');
         $name = Auth::user()->name;
-        $namedv = $sp->hosting_name;
+        $namedv = $sp->name;
         $log = new LogAdmin([
            
            'id_user' => Auth::user()->id, 

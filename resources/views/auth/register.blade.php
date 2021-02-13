@@ -45,6 +45,7 @@
                                     </div>
 
                                     <button id="btnSubmitres" name="btnSubmitres" disabled="disabled" class="btn btn-primary btn-block" tabindex="5">Sign up</button>
+                                   
                                 </form>
                                 <p class="text-center mt-2"><span>Đã có tài khoản?</span><a href="{{route('login')}}"><span>&nbsp;Đăng nhập ngay</span></a></p>
                                 <div class="divider my-2">

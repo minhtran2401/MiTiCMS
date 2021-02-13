@@ -59,7 +59,7 @@
                                   <th scope="row">{{$row->server_id}}</th>
                                   <td>
                                     <img src="{{asset('server')}}/{{$row->server_image}}" class="mr-75" height="20" width="20" alt="Angular">
-                                    <span class="font-weight-bold">{{$row->server_name}}</span>
+                                    <span class="font-weight-bold">{{$row->name}}</span>
                                 </td>
                                 <td>
                                   @php

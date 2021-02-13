@@ -139,8 +139,8 @@
                                         <li>1. Máy chủ vât lí</li>
                                         <li>2. VPS</li>
                                         <li>3. Hosting</li>
-                                        <li>4. Domain</li>
-                                        <li>5. Tài khoản các loại</li>
+                                        <li>4. Tài khoản các loại</li>
+                                        <li>5. Domain</li>
                                     </ul>
                                 </small>
                             </div>

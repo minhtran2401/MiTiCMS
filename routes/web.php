@@ -13,33 +13,46 @@ use Illuminate\Support\Facades\Route;
 |
 */
  Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('index');
-    Auth::routes(); 
+    Auth::routes(['verify' => true]); 
         Route::post('/login', [App\Http\Controllers\Auth\LoginController::class, 'process_login'])->name('loginz');
         Route::post('/logout',[App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
         Route::post('/register', [App\Http\Controllers\Auth\LoginController::class,'process_signup'])->name('register');
 
-//     Route::get('/login','LoginController@show_login_form')->name('login');
+    Route::get('/login',[App\Http\Controllers\Auth\LoginController::class,'show_login_form'])->name('login');
 //   Route::get('/register','LoginController@show_signup_form')->name('register');
 
  
   
     
-    Route::get('/home', [App\Http\Controllers\HomeController::class, 'home'])->name('home');
-    Route::get('/contact', [App\Http\Controllers\HomeController::class, 'contact'])->name('contact');
+
     
 
 Route::group(['middleware' => ['auth']], function () {
+    Route::get('/home', [App\Http\Controllers\HomeController::class, 'home'])->name('home');
+    Route::get('/ho-tro', [App\Http\Controllers\HomeController::class, 'contact'])->name('contact');
+    Route::post('/contact', [App\Http\Controllers\HomeController::class, 'send_support'])->name('send_support');
+    Route::get('/huong-dan-thanh-toan', [App\Http\Controllers\HomeController::class, 'how_to_pay'])->name('how_to_pay');
+    Route::post('/searchblog', [App\Http\Controllers\HomeController::class, 'searchblog'])->name('searchblog');
+    Route::get('/chi-tiet-blog/{id}',[App\Http\Controllers\HomeController::class, 'blog_detail'])->name('blog_detail');
+
+
 // trang cá nhân
     Route::prefix('trang-ca-nhan')->group(function(){
         Route::get('/', [App\Http\Controllers\HomeController::class, 'profile'])->name('user-profile.profile');
-        Route::get('/chinh-sua-thong-tin', [App\Http\Controllers\HomeController::class, 'edit_profile'])->name('user-profile.edit-profile');
+        Route::get('/lich-su-mua', [App\Http\Controllers\HomeController::class, 'history_buy'])->name('history-buy');
+        Route::post('/update-info/{id}', [App\Http\Controllers\HomeController::class, 'update_info'])->name('update_info');
         Route::get('/doi-mat-khau', [App\Http\Controllers\HomeController::class, 'changepassword'])->name('user-profile.changepassword');
+        Route::post('/changePassword',[App\Http\Controllers\HomeController::class, 'postCredentials'])->name('postCredentials');
+
     });
 //domain
     Route::prefix('ten-mien')->group(function () {
         Route::get('/', [App\Http\Controllers\HomeController::class, 'domain'])->name('domainprice.index');
         Route::get('/kiem-tra-ten-mien', [App\Http\Controllers\HomeController::class, 'view_check_domain'])->name('checkdomain.view');
         Route::post('/kiem-tra-ten-mien', [App\Http\Controllers\HomeController::class, 'check_domain'])->name('domain.check');
+        Route::post('/add-cart',[App\Http\Controllers\BE\CartController::class, 'add_cart_domain'])->name('addcart.domain');
+        Route::post('/check_out_domain',[App\Http\Controllers\BE\CartController::class, 'check_out_domain'])->name('check_out_domain');
+
 });
 //domain
 
@@ -52,9 +65,18 @@ Route::group(['middleware' => ['auth']], function () {
 
     });
 //end vps
+//server
+Route::prefix('server')->group(function () {
+    Route::get('/', [App\Http\Controllers\HomeController::class, 'server'])->name('server.index.FE');
+    Route::get('{slug}', [App\Http\Controllers\HomeController::class, 'server_type'])->name('server.server-type');
+    Route::post('/add-cart/{sku}',[App\Http\Controllers\BE\CartController::class, 'add_cart_server'])->name('addcart.server');
+    Route::post('/check_out_server',[App\Http\Controllers\BE\CartController::class, 'check_out'])->name('check_out');
+
+});
+//end server
 //hosting
     Route::prefix('hosting')->group(function () {
-        Route::get('/', [App\Http\Controllers\HomeController::class, 'hosting'])->name('hosting.index');
+        Route::get('/', [App\Http\Controllers\HomeController::class, 'hosting'])->name('hosting.index.FE');
         Route::get('/{slug}', [App\Http\Controllers\HomeController::class, 'hosting_type'])->name('hosting.hosting-type');
         Route::post('/add-cart/{sku}',[App\Http\Controllers\BE\CartController::class, 'add_cart_hosting'])->name('addcart.hosting');
         Route::post('/check_out_hosting',[App\Http\Controllers\BE\CartController::class, 'check_out'])->name('check_out');
@@ -62,13 +84,17 @@ Route::group(['middleware' => ['auth']], function () {
 //end hosting
 //account
     Route::prefix('tai-khoan')->group(function () {
-        Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('account.index');
-        Route::get('/thong-tin-tai-khoan', [App\Http\Controllers\HomeController::class, 'account_detail'])->name('account.account-detail');
+        Route::get('/', [App\Http\Controllers\HomeController::class, 'account'])->name('account.index.FE');
+        Route::get('/{slug}', [App\Http\Controllers\HomeController::class, 'account_type'])->name('account.account-type');
+        Route::post('/add-cart/{sku}',[App\Http\Controllers\BE\CartController::class, 'add_cart_account'])->name('addcart.account');
+        Route::post('/check_out_account',[App\Http\Controllers\BE\CartController::class, 'check_out'])->name('check_out');
     });
 //end account
 Route::prefix('thanh-toan')->group(function () {
     Route::get('/vps', [App\Http\Controllers\HomeController::class, 'purchase_vps'])->name('purchase_vps');
     Route::get('/hosting', [App\Http\Controllers\HomeController::class, 'purchase_hosting'])->name('purchase_hosting');
+    Route::get('/server', [App\Http\Controllers\HomeController::class, 'purchase_server'])->name('purchase_server');
+    Route::get('/account', [App\Http\Controllers\HomeController::class, 'purchase_account'])->name('purchase_account');
     Route::get('/domain', [App\Http\Controllers\HomeController::class, 'view_reg_domain'])->name('view.domain.reg');
 
 });
@@ -82,7 +108,7 @@ Route::prefix('admin')->group(function () {
     Route::get('/login', [App\Http\Controllers\BE\AdminLoginController::class, 'show_login_form'])->name('admin.login')->withoutMiddleware('checkadmin');
     Route::post('/login', [App\Http\Controllers\BE\AdminLoginController::class, 'process_login'])->name('admin.login.process')->withoutMiddleware('checkadmin');
     Route::post('/logout', [App\Http\Controllers\BE\AdminLoginController::class, 'logout'])->name('logout.admin');
-    Route::get('/', [App\Http\Controllers\BE\AdminController::class, 'dashboard'])->name('admin.dashboard');
+    Route::get('/', [App\Http\Controllers\BE\DashboardController::class, 'tongquat'])->name('admin.dashboard');
     // Route::get('/register','AdminLoginController@show_signup_form')->name('register');
     // Route::post('/register','AdminLoginController@process_signup');
     Route::resource('/group-service', App\Http\Controllers\BE\GroupServiceController::class);
@@ -152,6 +178,19 @@ Route::prefix('admin')->group(function () {
         
     }); // app
 
+    //check bill
+    Route::resource('/check-bill', App\Http\Controllers\BE\CheckInvoiceController::class);
+    Route::post('/change-status-invoice/{id}','App\Http\Controllers\BE\CheckInvoiceController@quick_update')->name('quick_update_invoice');
+    Route::post('/send_detail_account','App\Http\Controllers\BE\CheckInvoiceController@send_account')->name('send_detail_account');
+
+
+    // reply support
+    Route::get('/reply-support','App\Http\Controllers\BE\ResupController@index')->name('show.case');
+    Route::post('/reply-support','App\Http\Controllers\BE\ResupController@send_resup')->name('send_resup');
+
+    //end check bill
+    
+
     Route::prefix('quickadd')->group(function () {
         Route::get('/os-system', [App\Http\Controllers\BE\QuickAddController::class, 'os_system'])->name('os_system');
         Route::post('/os-system-destroy/{id}', [App\Http\Controllers\BE\QuickAddController::class, 'os_system_destroy'])->name('os_system.destroy');
@@ -170,7 +209,5 @@ Route::prefix('admin')->group(function () {
         /// payment method ////
         Route::resource('/payment-method', App\Http\Controllers\BE\PaymentMethodController::class);
         Route::post('/change-status-payment','App\Http\Controllers\BE\PaymentMethodController@changeStatus')->name('changeStatus.payment');
-
-
   }); // admin
 });

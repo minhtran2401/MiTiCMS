@@ -33,11 +33,11 @@
     <div class="shadow-bottom"></div>
     <div class="main-menu-content">
         <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
-            <li class=" nav-item"><a class="d-flex align-items-center" href="index.html"><i data-feather="home"></i><span class="menu-title text-truncate" data-i18n="Dashboards">Thống kê</span><span class="badge badge-light-warning badge-pill ml-auto mr-1">2</span></a>
+            <li class=" nav-item"><a class="d-flex align-items-center" href="index.html"><i data-feather="home"></i><span class="menu-title text-truncate" >Thống kê</span><span class="badge badge-light-warning badge-pill ml-auto mr-1">2</span></a>
                 <ul class="menu-content">
-                    <li><a class="d-flex align-items-center" href="dashboard-analytics.html"><i data-feather='trending-up'></i><span class="menu-item" data-i18n="Analytics">Tổng Quan</span></a>
+                    <li><a class="d-flex align-items-center" href="dashboard-analytics.html"><i data-feather='trending-up'></i><span class="menu-item">Tổng Quan</span></a>
                     </li>
-                    <li><a class="d-flex align-items-center" href="dashboard-ecommerce.html"><i data-feather='package'></i><span class="menu-item" data-i18n="eCommerce">Kho Hàng</span></a>
+                    <li><a class="d-flex align-items-center" href="dashboard-ecommerce.html"><i data-feather='package'></i><span class="menu-item">Kho Hàng</span></a>
                     </li>
                     
                 </ul>
@@ -54,6 +54,7 @@
             $linkgr_ty = ['admin/group-service','admin/type-service','loai-blog/*/edit','loai-blog/create',];
             $linkquickadd = ['admin/quickadd/status-invoice','admin/quickadd/os-system','admin/quickadd/os-location',];
             $linkuser = ['admin/user','admin/user/*/edit',];
+            $linkkhac = ['admin/payment-method','admin/payment-method/create','admin/payment-method/*/edit','admin/seo','admin/seo/edit/*','admin/seo/create']
 
             @endphp
 
@@ -61,13 +62,13 @@
             </li>
             <li class=" nav-item"><a class="d-flex align-items-center" href="#"><i data-feather='grid'></i><span class="menu-title text-truncate" >Tiện Ích</span></a>
                 <ul class="menu-content">
-                    <li class=" nav-item"><a class="d-flex align-items-center" href="app-email.html"><i data-feather="mail"></i><span class="menu-title text-truncate" >Email</span></a>
+                    <li class=" nav-item"><a class="d-flex align-items-center" href=""><i data-feather="mail"></i><span class="menu-title text-truncate" >Email</span></a>
                     </li>
-                    <li class=" nav-item"><a class="d-flex align-items-center" href="app-chat.html"><i data-feather="message-square"></i><span class="menu-title text-truncate" >Tin nhắn</span></a>
+                    <li class=" nav-item"><a class="d-flex align-items-center" href=""><i data-feather="message-square"></i><span class="menu-title text-truncate" >Tin nhắn</span></a>
                     </li>
-                    <li class=" nav-item"><a class="d-flex align-items-center" href="app-todo.html"><i data-feather="check-square"></i><span class="menu-title text-truncate" >Công việc</span></a>
+                    <li class=" nav-item"><a class="d-flex align-items-center" href=""><i data-feather="check-square"></i><span class="menu-title text-truncate" >Công việc</span></a>
                     </li>
-                    <li class=" nav-item"><a class="d-flex align-items-center" href="app-calendar.html"><i data-feather="calendar"></i><span class="menu-title text-truncate">Lịch</span></a>
+                    <li class=" nav-item"><a class="d-flex align-items-center" href=""><i data-feather="calendar"></i><span class="menu-title text-truncate">Lịch</span></a>
                     </li>
                 </ul>
             </li>
@@ -158,12 +159,13 @@
                 </ul>
             </li>
 
-            <li class=" nav-item"><a class="d-flex align-items-center" href="app-file-manager.html"><i data-feather='file-text'></i><span class="menu-title text-truncate" >Hóa Đơn</span></a>
-                <ul class="menu-content">
-                    <li><a class="d-flex align-items-center" href="app-user-list.html"><i data-feather="circle"></i><span class="menu-item" >Danh sách</span></a>
-                    </li>
-                   
-                </ul>
+            <li class=" nav-item {{ request()->is('admin/check-bill') ? 'active' : '' }}"><a class="d-flex align-items-center" href="{{route('check-bill.index')}}"><i data-feather='file-text'></i><span class="menu-title text-truncate" >Đơn Hàng</span>
+                @php
+                $count_bill = DB::table('invoice')->where('status','1')->get();
+                @endphp
+                <span class="badge badge-light-warning badge-pill ml-auto mr-1">{{count($count_bill)}}</span>
+            </a>
+                
             </li>
 
             <li class=" navigation-header"><span > Khác</span><i data-feather="more-horizontal"></i>
@@ -180,27 +182,29 @@
                 </ul>
             </li>
 
-            <li class=" nav-item"><a class="d-flex align-items-center" href="#"><i data-feather='info'></i><span class="menu-title text-truncate">Thông Tin</span></a>
+            <li class=" nav-item {{ request()->is($linkkhac) ? 'has-sub open' : '' }}"><a class="d-flex align-items-center" href="#"><i data-feather='info'></i><span class="menu-title text-truncate">Thông Tin</span></a>
                 <ul class="menu-content">
-                    <li><a class="d-flex align-items-center" href="app-user-list.html"><i data-feather="circle"></i><span class="menu-item" >Website</span></a>
+                    <li><a class="d-flex align-items-center" href="app-user-list.html"><i data-feather='globe'></i><span class="menu-item" >Website</span></a>
                     </li>
-                    <li><a class="d-flex align-items-center" href="app-user-view.html"><i data-feather="circle"></i><span class="menu-item" >Thanh toán</span></a>
+                    <li class="{{ request()->is('admin/seo','admin/seo/create','admin/seo/*/edit') ? 'active' : '' }}"> <a class="d-flex align-items-center" href="{{route('seo.index')}}"><i data-feather='bar-chart'></i><span class="menu-item" >SEO</span></a>
+                    </li>
+                    <li class="{{ request()->is('admin/payment-method','admin/payment-method/create','admin/payment-method/*/edit') ? 'active' : '' }}"><a class="d-flex align-items-center" href="{{route('payment-method.index')}}"><i data-feather='dollar-sign'></i><span class="menu-item" >Thanh toán</span></a>
                     </li>
                    
                 </ul>
             </li>
-            <li class=" nav-item"><a class="d-flex align-items-center" href="#"><i data-feather='tool'></i><span class="menu-title text-truncate">Hỗ Trợ</span></a>
-                <ul class="menu-content">
-                    <li><a class="d-flex align-items-center" href="#"><i data-feather="circle"></i><span class="menu-item" data-i18n="Authentication">Authentication</span></a>
-                        <ul class="menu-content">
-                            <li><a class="d-flex align-items-center" href="page-auth-login-v1.html" target="_blank"><span class="menu-item" data-i18n="LoginV1">Login v1</span></a>
-                            </li>
-                          
-                        </ul>
-                    </li>
-       
-                </ul>
-            </li>
+            <li class=" nav-item"><a class="d-flex align-items-center" href="{{route('show.case')}}"><i data-feather='tool'></i><span class="menu-title text-truncate">Hỗ Trợ</span>
+                @php
+                $count_case = DB::table('contact')->where('status','0')->get();
+                @endphp
+                @if(count($count_case) > 1)
+                <span class="badge badge-light-warning badge-pill ml-auto mr-1">{{count($count_case)}}</span>
+                @else
+                @endif
+              
+            </a>
+              
+            </li>   
             @php
             $link2 = ['admin/log/admin','admin/type-service','blog/create','loai-blog','loai-blog/*/edit','loai-blog/create',];
             @endphp
@@ -208,8 +212,7 @@
                 <ul class="menu-content">
                     <li class="{{ request()->is('admin/log/admin') ? 'active' : '' }}" ><a class="d-flex align-items-center  " href="{{route('admin.log')}}"><i data-feather='user-check'></i><span class="menu-item " >Quản trị viên</span></a>
                     </li>
-                    <li><a class="d-flex align-items-center" href="#"><i data-feather='users'></i><span class="menu-item" >Khách hàng</span></a>
-                    </li>
+                   
                 </ul>
             </li>
   

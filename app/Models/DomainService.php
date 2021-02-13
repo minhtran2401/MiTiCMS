@@ -12,7 +12,7 @@ class DomainService extends Model
         'price_show',
         'domain_type',
         'domain_image',
-        'domain_name',
+        'name',
         'status',
         'slug',
     ];

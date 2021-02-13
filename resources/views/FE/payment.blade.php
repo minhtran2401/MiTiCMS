@@ -50,7 +50,27 @@
                             {{$os->name_os}}, 
                         @endforeach     
                         </span>  </div>
+                        <div class="d-flex justify-content-between align-items-center">
+                       
+                          <div class="d-flex flex-row mt-2">
+                              <h6>Phương thức thanh toán</h6>
+                              {{-- <h6 class="text-success font-weight-bold ml-1"> $13.24</h6> --}}
+                          </div>
+                          
+                      </div>
+                     
+                      <div class="d-flex flex-row">
+                          <select class="form-control" name="invoice_payment" id="">
+                            @php
+                              $payment_method = DB::table('payment_method')->where('display','1')->get(); 
+                            @endphp
+                            @foreach ($payment_method as $pm)
+                            <option value="{{$pm->id}}">{{$pm->name_payment}} </option>
+                            @endforeach
+                             
 
+                          </select>
+                      </div>
                         <hr>
 
                         <div class="buttons"> <button class="btn btn-success btn-block">Xác nhận thanh toán</button> </div>
@@ -60,36 +80,16 @@
                 <div class="col-md-4">
                     <div class="bg-pay p-3"> <span class="font-weight-bold">Chi tiết hóa đơn</span>
                      
-                        <div class="d-flex justify-content-between mt-2"> <span class="fw-500">{{Session('Cart')->products['product']->vps_name}}</span> <span></span> </div>
+                        <div class="d-flex justify-content-between mt-2"> <span class="fw-500">{{Session('Cart')->products['product']->name}}</span> <span></span> </div>
                         <div class="d-flex justify-content-between mt-2"> <span class="fw-500">Thời hạn</span> <span>{{Session('Cart')->products['time']}}</span> </div>
                         <div class="d-flex justify-content-between mt-2"> <span class="fw-500">Số tiền</span> <span>{{Session('Cart')->products['price']}}</span> </div>
                         <hr>
                         <div class="d-flex justify-content-between mt-2"> <span class="fw-500">Tổng tiền </span> <span class="text-success">{{Session('Cart')->products['price']}}</span> </div>
-                        <div class="d-flex justify-content-between align-items-center">
                        
-                            <div class="d-flex flex-row mt-2">
-                                <h6>Phương thức thanh toán</h6>
-                                {{-- <h6 class="text-success font-weight-bold ml-1"> $13.24</h6> --}}
-                            </div>
-                            
-                        </div>
-                       
-                        <div class="d-flex flex-row">
-                            <select class="form-control" name="invoice_payment" id="">
-                              @php
-                                $payment_method = DB::table('payment_method')->where('display','1')->get(); 
-                              @endphp
-                              @foreach ($payment_method as $pm)
-                              <option value="{{$pm->id}}">{{$pm->name_payment}} </option>
-                              @endforeach
-                               
-
-                            </select>
-                        </div>
                         
                         <input hidden type="text" name="service_group_id" value="{{Session('Cart')->products['product']->service_group_id}}" id="">
                         <input hidden type="text" name="service_type_id" value="{{Session('Cart')->products['product']->service_type_id}}" id="">
-                        <input hidden type="text" name="sku" value="{{Session('Cart')->products['product']->sku}}" id="">
+                        <input hidden type="text" name="sku" value="{{Session('Cart')->products['product']->name}}" id="">
                         <input hidden type="text" name="total_invoice" value="{{Session('Cart')->products['price']}}" id="">
                         <input hidden type="text" name="pack_price" value="{{Session('Cart')->products['time']}} / {{Session('Cart')->products['price']}}" id="">
 
@@ -108,6 +108,93 @@
               
           
       
+                @elseif(isset($key_server))
+   
+                <div class="container">
+                    <div class="row justify-content-center mb-2">
+                  <div class="col-md-7 text-center heading-section ftco-animate">
+                    <h2 class="mb-4">Đăng Kí Mua Máy Chủ Vật Lí</h2>
+                    <p>Mua ngay một Máy chủ vật lí để phục vụ công việc nào.</p>
+                  </div>
+                </div>
+                           
+                <div class="container mt-3 mb-3">
+                    <div class="d-flex justify-content-between align-items-center ">
+                        <div class="d-flex flex-row align-items-center">
+                            <h4 class=" mt-1">Yêu cầu thêm</h4> <span class="ml-2"></span>
+                        </div> <a href="{{route('index')}}" class="cancel com-color"><i class="fa fa-backward"></i>
+        
+                            Hủy và chọn mua dịch vụ khác</a>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                           <form action="{{route('check_out')}}" method="post">
+                            @csrf
+                            <div class="about">
+                                <div class="d-flex justify-content-between">
+                                </div>
+                                <p>Ghi chú khi cài đặt máy chủ vật lí</p>
+                                <textarea class="form-control mb-1" placeholder="Ghi thêm yêu cầu nếu cần." name="invoice_note" id="" cols="30" rows="3" required></textarea>
+                              
+                               
+                   
+                                <div class="d-flex justify-content-between align-items-center">
+                               
+                                  <div class="d-flex flex-row mt-2">
+                                      <h6>Phương thức thanh toán</h6>
+                                      {{-- <h6 class="text-success font-weight-bold ml-1"> $13.24</h6> --}}
+                                  </div>
+                                  
+                              </div>
+                             
+                              <div class="d-flex flex-row">
+                                  <select class="form-control" name="invoice_payment" id="">
+                                    @php
+                                      $payment_method = DB::table('payment_method')->where('display','1')->get(); 
+                                    @endphp
+                                    @foreach ($payment_method as $pm)
+                                    <option value="{{$pm->id}}">{{$pm->name_payment}} </option>
+                                    @endforeach
+                                     
+      
+                                  </select>
+                              </div>
+                                <hr>
+        
+                                <div class="buttons"> <button class="btn btn-success btn-block">Xác nhận thanh toán</button> </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2"> </div>
+                        <div class="col-md-4">
+                            <div class="bg-pay p-3"> <span class="font-weight-bold">Chi tiết hóa đơn</span>
+                             
+                                <div class="d-flex justify-content-between mt-2"> <span class="fw-500">{{Session('Cart')->products['product']->name}}</span> <span></span> </div>
+                                <div class="d-flex justify-content-between mt-2"> <span class="fw-500">Thời hạn</span> <span>{{Session('Cart')->products['time']}}</span> </div>
+                                <div class="d-flex justify-content-between mt-2"> <span class="fw-500">Số tiền</span> <span>{{Session('Cart')->products['price']}}</span> </div>
+                                <hr>
+                                <div class="d-flex justify-content-between mt-2"> <span class="fw-500">Tổng tiền </span> <span class="text-success">{{Session('Cart')->products['price']}}</span> </div>
+                              
+                                
+                                <input hidden type="text" name="service_group_id" value="{{Session('Cart')->products['product']->service_group_id}}" id="">
+                                <input hidden type="text" name="service_type_id" value="{{Session('Cart')->products['product']->service_type_id}}" id="">
+                                <input hidden type="text" name="sku" value="{{Session('Cart')->products['product']->name}}" id="">
+                                <input hidden type="text" name="total_invoice" value="{{Session('Cart')->products['price']}}" id="">
+                                <input hidden type="text" name="pack_price" value="{{Session('Cart')->products['time']}} / {{Session('Cart')->products['price']}}" id="">
+        
+        
+        
+                              </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                                  
+                        
+                                </div>
+                            </div>
+                        </div>
+                      
+                  
 <!--!-------------------------------------------------------------------------------------->
 
 <!--!-------------------------------------------------------------------------------------->
@@ -152,7 +239,27 @@
                     {{$os->name_os}}, 
                 @endforeach     
                 </span>  </div>
+                <div class="d-flex justify-content-between align-items-center">
+               
+                  <div class="d-flex flex-row mt-2">
+                      <h6>Phương thức thanh toán</h6>
+                      {{-- <h6 class="text-success font-weight-bold ml-1"> $13.24</h6> --}}
+                  </div>
+                  
+              </div>
+             
+              <div class="d-flex flex-row">
+                  <select class="form-control" name="invoice_payment" id="">
+                    @php
+                      $payment_method = DB::table('payment_method')->where('display','1')->get(); 
+                    @endphp
+                    @foreach ($payment_method as $pm)
+                    <option value="{{$pm->id}}">{{$pm->name_payment}} </option>
+                    @endforeach
+                     
 
+                  </select>
+              </div>
                 <hr>
 
                 <div class="buttons"> <button class="btn btn-success btn-block">Xác nhận thanh toán</button> </div>
@@ -162,36 +269,16 @@
         <div class="col-md-4">
             <div class="bg-pay p-3"> <span class="font-weight-bold">Chi tiết hóa đơn</span>
              
-                <div class="d-flex justify-content-between mt-2"> <span class="fw-500">{{Session('Cart')->products['product']->hosting_name}}</span> <span></span> </div>
+                <div class="d-flex justify-content-between mt-2"> <span class="fw-500">{{Session('Cart')->products['product']->name}}</span> <span></span> </div>
                 <div class="d-flex justify-content-between mt-2"> <span class="fw-500">Thời hạn</span> <span>{{Session('Cart')->products['time']}}</span> </div>
                 <div class="d-flex justify-content-between mt-2"> <span class="fw-500">Số tiền</span> <span>{{Session('Cart')->products['price']}}</span> </div>
                 <hr>
                 <div class="d-flex justify-content-between mt-2"> <span class="fw-500">Tổng tiền </span> <span class="text-success">{{Session('Cart')->products['price']}}</span> </div>
-                <div class="d-flex justify-content-between align-items-center">
-               
-                    <div class="d-flex flex-row mt-2">
-                        <h6>Phương thức thanh toán</h6>
-                        {{-- <h6 class="text-success font-weight-bold ml-1"> $13.24</h6> --}}
-                    </div>
-                    
-                </div>
-               
-                <div class="d-flex flex-row">
-                    <select class="form-control" name="invoice_payment" id="">
-                      @php
-                        $payment_method = DB::table('payment_method')->where('display','1')->get(); 
-                      @endphp
-                      @foreach ($payment_method as $pm)
-                      <option value="{{$pm->id}}">{{$pm->name_payment}} </option>
-                      @endforeach
-                       
-
-                    </select>
-                </div>
+              
                 
                 <input hidden type="text" name="service_group_id" value="{{Session('Cart')->products['product']->service_group_id}}" id="">
                 <input hidden type="text" name="service_type_id" value="{{Session('Cart')->products['product']->service_type_id}}" id="">
-                <input hidden type="text" name="sku" value="{{Session('Cart')->products['product']->sku}}" id="">
+                <input hidden type="text" name="sku" value="{{Session('Cart')->products['product']->name}}" id="">
                 <input hidden type="text" name="total_invoice" value="{{Session('Cart')->products['price']}}" id="">
                 <input hidden type="text" name="pack_price" value="{{Session('Cart')->products['time']}} / {{Session('Cart')->products['price']}}" id="">
 
@@ -225,18 +312,43 @@
                         <p>Mua ngay cho mình một tên miền ưu thích.</p>
                       </div>
                     </div>
-                          <form action="">
+                          <form action="{{route('check_out_domain')}}" method="post">
+                            @csrf
                             <div class="col-md-12 row">
                              
                                   <div class="col-md-6 ">
                                     <label for="domain-name">Tên Miền</label>
-                                    <input class="form-control mb-2" type="text" name="" id="">
-                                    <label for="domain-name">DNS Cloudflare 1</label>
+                                    <input class="form-control mb-2" type="text" name="sku" id="" value="{{Session('Cart')->products['product']}}">
+                                    <label for="domain-name">DNS Cloudflare 1 & 2</label>
                                     <div> <small>Nếu bạn chưa biết cách xem DNS , <a href="#">Xem hướng dẫn</a></small></div>
-                                    <input class="form-control mb-2" type="text" name="" id="">
-                                    <label for="domain-name">DNS Cloudflare 2</label>
-                                    <input class="form-control mb-2" type="text" name="" id="">
-                                    <button type="submit" class="btn btn-primary ">Đặt mua</button>
+                                    <input class="form-control mb-2" placeholder="ngăn cách nhau bởi dấu phẩy" type="text" name="invoice_note" id="" required>
+                                    {{-- <label for="domain-name">DNS Cloudflare 2</label>
+                                    <input class="form-control mb-2" type="text" name="invoice_note[]" id="" required> --}}
+                                    <input hidden type="text" name="service_group_id" value="5" id="">
+                                    <input hidden type="text" name="service_type_id" value="0" id="">
+                                    <input hidden type="text" name="total_invoice" value="100,000 đ" id="">
+                                    <input hidden type="text" name="pack_price" value="1 năm" id="">
+                                    <div class="d-flex">
+                                      <h6>Phương thức thanh toán</h6>
+                                      {{-- <h6 class="text-success font-weight-bold ml-1"> $13.24</h6> --}}
+                                  </div>
+                                  
+                            
+                             
+                              <div class="d-flex flex-row mb-2">
+                                  <select class="form-control" name="invoice_payment" id="">
+                                    @php
+                                      $payment_method = DB::table('payment_method')->where('display','1')->get(); 
+                                    @endphp
+                                    @foreach ($payment_method as $pm)
+                                    <option value="{{$pm->id}}">{{$pm->name_payment}} </option>
+                                    @endforeach
+                                     
+              
+                                  </select>
+                              </div>
+                              
+                                    <button type="submit" class="btn btn-primary mb-2">Đặt mua</button>
                                   </div>
                               
                                   <div class="col-md-6">
@@ -281,6 +393,96 @@
             </div>
         </div>   
         
+        @elseif(isset($key_account))
+   
+<div class="container">
+    <div class="row justify-content-center mb-2">
+  <div class="col-md-7 text-center heading-section ftco-animate">
+    <h2 class="mb-4">Mua tài khoản</h2>
+    <p>Rất nhiều loại tài khoản cho anh em lựa chọn</p>
+  </div>
+</div>
+           
+<div class="container mt-3 mb-3">
+    <div class="d-flex justify-content-between align-items-center ">
+        <div class="d-flex flex-row align-items-center">
+            <h4 class=" mt-1">Yêu cầu thêm</h4> <span class="ml-2"></span>
+        </div> <a href="{{route('index')}}" class="cancel com-color"><i class="fa fa-backward"></i>
+
+            Hủy và chọn mua dịch vụ khác</a>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+           <form action="{{route('check_out')}}" method="post">
+            @csrf
+            <div class="about">
+                <div class="d-flex justify-content-between">
+                </div>
+                <p>Nếu khách hàng có nhu cầu mua số lượng lớn, hãy điền thông tin vào đây, chúng tôi sẽ liên lạc lại ngay. </p>
+                <textarea class="form-control mb-1" placeholder="Họ tên , Sdt, số lượng cần mua" name="invoice_note" id="" cols="30" rows="3" required></textarea>
+               
+                <div class="d-flex justify-content-between align-items-center">
+               
+                  <div class="d-flex flex-row mt-2">
+                      <h6>Phương thức thanh toán</h6>
+                      {{-- <h6 class="text-success font-weight-bold ml-1"> $13.24</h6> --}}
+                  </div>
+                  
+              </div>
+             
+              <div class="d-flex flex-row">
+                  <select class="form-control" name="invoice_payment" id="">
+                    @php
+                      $payment_method = DB::table('payment_method')->where('display','1')->get(); 
+                    @endphp
+                    @foreach ($payment_method as $pm)
+                    <option value="{{$pm->id}}">{{$pm->name_payment}} </option>
+                    @endforeach
+                     
+
+                  </select>
+              </div>
+                <hr>
+
+                <div class="buttons"> <button class="btn btn-success btn-block">Xác nhận thanh toán</button> </div>
+            </div>
+        </div>
+        <div class="col-md-2"> </div>
+        <div class="col-md-4">
+            <div class="bg-pay p-3"> <span class="font-weight-bold">Chi tiết hóa đơn</span>
+             
+                <div class="d-flex justify-content-between mt-2"> <span class="fw-500">{{Session('Cart')->products['product']->name}}</span> <span></span> </div>
+                <div class="d-flex justify-content-between mt-2"> <span class="fw-500">Thời hạn</span> <span>{{Session('Cart')->products['time']}}</span> </div>
+                <div class="d-flex justify-content-between mt-2"> <span class="fw-500">Số tiền</span> <span>{{Session('Cart')->products['price']}}</span> </div>
+                <hr>
+                <div class="d-flex justify-content-between mt-2"> <span class="fw-500">Tổng tiền </span> <span class="text-success">{{Session('Cart')->products['price']}}</span> </div>
+            
+                
+                <input hidden type="text" name="service_group_id" value="{{Session('Cart')->products['product']->service_group_id}}" id="">
+                <input hidden type="text" name="service_type_id" value="{{Session('Cart')->products['product']->service_type_id}}" id="">
+                <input hidden type="text" name="sku" value="{{Session('Cart')->products['product']->name}}" id="">
+                <input hidden type="text" name="total_invoice" value="{{Session('Cart')->products['price']}}" id="">
+                <input hidden type="text" name="pack_price" value="{{Session('Cart')->products['time']}} / {{Session('Cart')->products['price']}}" id="">
+
+
+
+              </form>
+            </div>
+        </div>
+    </div>
+</div>
+                  
+        
+                </div>
+            </div>
+        </div>
+      
+  
+
+<!--!-------------------------------------------------------------------------------------->
+
+<!--!-------------------------------------------------------------------------------------->
+
         @endif
 
        

@@ -2,6 +2,11 @@
 
 namespace App\Http\Controllers\Auth;
 use App\Models\User;
+use App\Models\Online;
+use App\Models\Counter;
+use Carbon\Carbon;
+use DB;
+use Session;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
@@ -39,10 +44,39 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
     
-    // public function show_login_form()
-    // {
-    //     return view('login');
-    // }
+    public function show_login_form(Request $request)
+    {
+        $time_now = Carbon::now('Asia/Ho_Chi_Minh');
+        $user_online = $request->session()->getId();
+            if (Online::where('session_id', '=', $user_online)->count() > 0) {
+               // user found
+            }else {
+                $online = new Online([
+                    'session_id' => $user_online,
+                ]);
+                $online->save();   
+            }
+            // Online::whereDate('created_at', '>=', date('Y-m-d H:i:s',strtotime('1 minutes')) )->delete();
+            $time_db = Online::get();
+            foreach ($time_db as $item) {
+                $time_old = $item->created_at;
+                $time_id = $item->id;
+                $check_time = $time_now->diffInMinutes($time_old);
+                $check_time_counter = $time_now->diffInMinutes($time_old);
+                $ip_user = $_SERVER['REMOTE_ADDR'];
+                if (Counter::where('time', '=', $time_old)->count() > 0) {
+                    // time session found
+                 } else{
+                DB::table('counters')
+                        ->whereDate('time', '>=', date('Y-m-d H:i:s',strtotime('-1 minutes')) )
+                        ->insert(['time' => $time_old,'ip'=>$ip_user]);
+                        }  // check trùng thời gian session
+                    if ($check_time_counter > 1) { //set 1 phút
+                            $deletedRows = Online::where('id', $time_id)->delete();
+                            }
+                }
+        return view('auth.login');
+    }
     public function process_login(Request $request)
     {
         $request->validate([

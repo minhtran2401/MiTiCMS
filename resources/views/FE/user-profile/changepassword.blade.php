@@ -19,7 +19,7 @@
                                                 <div class="shin-service-info mb-2">
                                                     Mọi thông tin cần hỗ trợ, các bạn có thể liên hệ với Mi bằng nút hỗ trợ bên dưới nhé. <hr>
                                                     <b>Số điện thoại:</b> <br>
-                                                    <p>Bạn chỉ có thể khôi phục mật khẩu bằng số điện thoại của mình</p>
+                                                    <p>Bạn có thể khôi phục mật khẩu bằng số điện thoại của mình</p>
                                                 </div>
                                                 <a href="#"><div class="shin-service-okmuahang text-center">Hỗ trợ</div></a>
                                             </div>
@@ -30,17 +30,18 @@
                                             <div class="card-body">
                                                 <h3 class="text-left">Đổi mật khẩu</h3>
                                         <hr>
-                                        <form action="" class="">
+                                        <form action="{{route('postCredentials')}}" class="" method="post">
+                                            @csrf
                                             <div class="row col-lg-12">
                                                 
                                                 <div class="col-sm-12 col-md-8 col-lg-12 form-group">
                                                     <label for="user_email">Email người dùng</label>
-                                                    <input type="text" readonly class="form-control" value="admin@shin520.com" name="user_email">
+                                                    <input type="text" readonly class="form-control" value="{{Auth::user()->email}}" name="user_email">
                                                 </div>
                                                 
                                                 <div class="col-sm-12 col-md-8 col-lg-12 form-group">
                                                     <label for="password">Mật khẩu cũ</label>
-                                                    <input type="password" class="form-control" placeholder="Mật khẩu cũ" name="password">
+                                                    <input type="password" class="form-control" placeholder="Mật khẩu cũ" name="current-password">
                                                 </div>
                                                 
                                                 <div class="col-sm-12 col-md-8 col-lg-12 form-group">
@@ -50,7 +51,7 @@
 
                                                 <div class="col-sm-12 col-md-8 col-lg-12 form-group">
                                                     <label for="password">Nhập lại mật khẩu mới</label>
-                                                    <input type="password" class="form-control" placeholder="Nhập lại mật khẩu mới" name="password">
+                                                    <input type="password" class="form-control" placeholder="Nhập lại mật khẩu mới" name="password_confirmation">
                                                 </div>
 
                                                 <div class="col-sm-12 col-md-8 col-lg-12 form-group">

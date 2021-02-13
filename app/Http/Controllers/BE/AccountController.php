@@ -55,17 +55,17 @@ class AccountController extends Controller
        
         $sku = mt_rand(1000000000, 9999999999);
         $ngs = new AccountService([
-            'slug' =>\Str::slug($request->account_name),
+            'slug' =>\Str::slug($request->name),
             'service_type_id' => $request->get('gettype'),
             'service_group_id' => $request->get('getgroup'),
             'sku' => $sku,
             'price_show' => $request->get('price_show'),
-            'account_name' => $request->get('account_name'),
+            'name' => $request->get('name'),
             'account_info' => "null",
             'display' => 1,
         ]);
         $name = Auth::user()->name;
-        $namedv = $ngs->account_name;
+        $namedv = $ngs->name;
         $log = new LogAdmin([
            'id_user' => Auth::user()->id, 
             'task' => " $name đã tạo tài khoản $namedv ",
@@ -75,7 +75,7 @@ class AccountController extends Controller
       
         $name = AccountService::find($ngs->account_id);
             // $name = $tl->service_group_name;
-         $data['1'] = $ngs->account_name;
+         $data['1'] = $ngs->name;
          $data['5'] =$ngs->account_id;
          $data['3'] = '1';
         return response()->json($data);
@@ -125,10 +125,10 @@ class AccountController extends Controller
             $fileimg = $request->file('image'); // tạo biến lấy dữ liệu từ input
             $filename = $fileimg->getClientOriginalName(); // lấy tên theo tên gốc của file
             $pathimg = $fileimg->move(public_path().'/image/', $filename); //chỗ chứa file
-            $sp->domain_image = $filename;
+            $sp->account_image = $filename;
           
-            $sp->account_name = $request->get('account_name');
-            $sp->slug =\Str::slug($request->get('account_name'));
+            $sp->name = $request->get('name');
+            $sp->slug =\Str::slug($request->get('name'));
             $sp->service_group_id = $request->get('getgroup');
             $sp->service_type_id = $request->get('gettype');
             $sp->sku = AccountService::find($id)->sku;
@@ -139,8 +139,8 @@ class AccountController extends Controller
         }
         else{
 
-            $sp->account_name = $request->get('account_name');
-            $sp->slug =\Str::slug($request->get('account_name'));
+            $sp->name = $request->get('name');
+            $sp->slug =\Str::slug($request->get('name'));
             $sp->service_group_id = $request->get('getgroup');
             $sp->service_type_id = $request->get('gettype');
             $sp->sku = AccountService::find($id)->sku;
@@ -166,7 +166,7 @@ class AccountController extends Controller
                     $combo->save();
                 }}
         $name = Auth::user()->name;
-        $namedv = $sp->account_name;
+        $namedv = $sp->name;
         $log = new LogAdmin([
            
            'id_user' => Auth::user()->id, 
@@ -193,7 +193,7 @@ class AccountController extends Controller
         $delprice = DB::table('service_price')->where('sku',$sp->sku)->delete();
         alert()->success('Thành công','Đã xóa Tài Khoản');
         $name = Auth::user()->name;
-        $namedv = $sp->account_name;
+        $namedv = $sp->name;
         $log = new LogAdmin([
            
            'id_user' => Auth::user()->id, 

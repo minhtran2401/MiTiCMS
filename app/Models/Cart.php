@@ -25,12 +25,6 @@ class Cart{
 
 
 
-    public function DeleteItemCart($id){
-        $this->totalQuanty -= $this->products[$id]['quanty'];
-        $this->totalPrice -= $this->products[$id]['price'];
-        unset($this->products[$id]);
-    }
-
 
 }
 ?>

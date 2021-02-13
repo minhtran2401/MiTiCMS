@@ -14,7 +14,7 @@ class Taobangbilling extends Migration
     public function up()
     {
         Schema::create('invoice', function (Blueprint $table) {
-            $table->id();
+            $table->id('id_invoice');
             $table->integer('user_id');
             $table->integer('service_group_id');
             $table->integer('service_type_id');

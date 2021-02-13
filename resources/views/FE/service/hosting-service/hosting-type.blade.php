@@ -19,7 +19,7 @@
                                             <div class="row justify-content-center mb-3">
                                                 <div class="">
                                                     @php 
-                            $hostings = DB::table('service_types')->where('service_group_id','3')->where('display','1')->orderby('service_type_id','desc')->get();
+                            $hostings = DB::table('service_types')->where('service_group_id','3')->where('display','1')->get();
                         @endphp
                         @foreach ($hostings as $hosting)
                          <div class="shin-service-menu-type"><a style="color: white" href="{{route('hosting.hosting-type',$hosting->slug)}}">{{$hosting->service_type_name}}</a></div>
@@ -35,7 +35,7 @@
                                             <section class="ftco-section">
                                                 <div class="container">
                                                     <div class="row d-flex">
-
+                                                      
                                                         @foreach ($hosting_detail as $detail)
 
                                                         <div class="col-lg-3 col-md-6 ftco-animate fadeInUp ftco-animated">
@@ -44,7 +44,7 @@
                                                                     <div class="text-center">
                                                                         <form class="buy_service" action="{{route('addcart.hosting',$detail->sku)}}" method="post">
                                                                           @csrf
-                                                                        <h2 class="heading">{{$detail->hosting_name}}</h2>
+                                                                        <h2 class="heading">{{$detail->name}}</h2>
                                                                         <div class="shin-service-type mb-2">{{$hosting_type->service_type_name}}</div>
                                                                         <div class="shin-service-title-info mb-2">Thông tin cấu hình</div>
                                                                         <div class="shin-service-info mb-2">

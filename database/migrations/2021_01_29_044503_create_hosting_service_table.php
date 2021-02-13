@@ -19,7 +19,7 @@ class CreateHostingServiceTable extends Migration
             $table->integer('service_type_id');
             $table->string('sku');
             $table->string('hosting_image')->nullable();
-            $table->string('hosting_name');
+            $table->string('name');
             $table->text('hosting_profile');
             $table->integer('display');
             $table->string('slug')->nullable()->unique();

@@ -448,8 +448,8 @@ $(document).ready(function() {
 
 							$("#esco_doshow"+num1).append('<td>'+kq+'</td><td>Đã kiểm tra xong ✔</td>');// tra ra ket qua khi check xong
 						});
-						replace_whois(link_whois);
-						replace_dk(link_dk);	
+						// replace_whois(link_whois);
+						// replace_dk(link_dk);	
 					});
 				};
 			};
@@ -458,8 +458,18 @@ $(document).ready(function() {
 });
 </script>
 <script>
-$(document).on('click', '.w_dk', function () {
-window.open("{{route('view.domain.reg')}}");
+$(document).on('click', '.w_dk', function (e) {
+	e.preventDefault();
+    e.stopPropagation();
+
+	Swal.fire({
+  position: 'top-end',
+  icon: 'success',
+  title: 'Nhập tên miền vào ô tìm kiếm phía để mua ngay',
+  showConfirmButton: false,
+  timer: 1500
+})
+	
 });
 	
 	</script>

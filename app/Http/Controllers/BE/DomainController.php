@@ -54,17 +54,17 @@ class DomainController extends Controller
        
         $sku = mt_rand(1000000000, 9999999999);
         $ngs = new DomainService([
-            'slug' =>\Str::slug($request->domain_name),
+            'slug' =>\Str::slug($request->name),
             'price_show' => $request->get('price_show'),
             'service_type_id' => $request->get('gettype'),
             'sku' => $sku,
             'price_show' => $request->get('price_show'),
-            'domain_name' => $request->get('domain_name'),
+            'name' => $request->get('name'),
             'domain_type' => $request->get('domain_type'),
             'status' => 1,
         ]);
         $name = Auth::user()->name;
-        $namedv = $ngs->domain_name;
+        $namedv = $ngs->name;
         $log = new LogAdmin([
            'id_user' => Auth::user()->id, 
             'task' => " $name đã tạo loại tên miền $namedv ",
@@ -75,7 +75,7 @@ class DomainController extends Controller
         $name = DomainService::find($ngs->domain_id);
             // $name = $tl->service_group_name;
          $data['4'] = $name->domain_type;
-         $data['1'] = $ngs->domain_name;
+         $data['1'] = $ngs->name;
          $data['2'] =number_format($ngs->price_show);
          $data['5'] =$ngs->domain_id;
          $data['3'] = '1';
@@ -128,7 +128,7 @@ class DomainController extends Controller
             $pathimg = $fileimg->move(public_path().'/image/', $filename); //chỗ chứa file
             $sp->domain_image = $filename;
           
-            $sp->domain_name = $request->get('name_service');
+            $sp->name = $request->get('name_service');
             $sp->slug =\Str::slug($request->get('name_service'));
             // $sp->service_group_id = $request->get('getgroup');
             // $sp->service_type_id = $request->get('gettype');
@@ -139,7 +139,7 @@ class DomainController extends Controller
         }
         else{
 
-            $sp->domain_name = $request->get('name_service');
+            $sp->name = $request->get('name_service');
             $sp->slug =\Str::slug($request->get('name_service'));
             // $sp->service_group_id = $request->get('getgroup');
             // $sp->service_type_id = $request->get('gettype');
@@ -165,7 +165,7 @@ class DomainController extends Controller
                     $combo->save();
                 }}
         $name = Auth::user()->name;
-        $namedv = $sp->domain_name;
+        $namedv = $sp->name;
         $log = new LogAdmin([
            
            'id_user' => Auth::user()->id, 
@@ -192,7 +192,7 @@ class DomainController extends Controller
         $delprice = DB::table('service_price')->where('sku',$sp->sku)->delete();
         alert()->success('Thành công','Đã xóa Domain');
         $name = Auth::user()->name;
-        $namedv = $sp->domain_name;
+        $namedv = $sp->name;
         $log = new LogAdmin([
            
            'id_user' => Auth::user()->id, 

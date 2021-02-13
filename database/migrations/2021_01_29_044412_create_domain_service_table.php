@@ -19,7 +19,7 @@ class CreateDomainServiceTable extends Migration
             $table->string('price_show');                     // ( dabcxyz | dngheyd | ...)
             $table->string('domain_type');              // ( [1] Phổ Biến | [2] VN | [3] Quốc tế )
             $table->string('domain_image')->nullable(); // ( Hình ảnh )
-            $table->string('domain_name');              // ( .com | .net | ... )
+            $table->string('name');              // ( .com | .net | ... )
             $table->integer('status');                  // ( [1] Nổi bật | [2] Khuyến mãi | [3] Ẩn )
             $table->string('slug')->nullable();
             $table->timestamps();
