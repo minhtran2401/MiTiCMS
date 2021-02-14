@@ -21,7 +21,8 @@ class CreateMitiInfoTable extends Migration
             $table->string('phone2');
             $table->string('email1');
             $table->string('email2');
-            $table->integer('protect');
+            $table->text('ads')->nullable();
+            $table->integer('protect')->default(0);
             $table->integer('status')->default(0); // [1] bảo trì | [2] tạm đóng cửa | [3] countdown for event
             $table->timestamps();
         });
