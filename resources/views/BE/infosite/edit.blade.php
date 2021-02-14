@@ -75,7 +75,7 @@
                                         </div>
                                         <div class="col-md-12 mb-1">
                                             <label>Thông báo</label>
-                                            <input name="ads" type="text" class="form-control"  placeholder="Nhập nội dung quảng cáo" value="{{$row->email2}}" />
+                                            <input name="ads" type="text" class="form-control"  placeholder="Nhập nội dung quảng cáo" value="{{$row->ads}}" />
                                         </div>
                                         <div class="col-md-6  mb-1">
                                                 <label>Trạng thái</label>

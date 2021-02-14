@@ -178,9 +178,18 @@ Route::prefix('admin')->group(function () {
 
     //end user
 
+    // ads ↓
+    Route::resource('/ads', App\Http\Controllers\BE\AdsController::class);
+    Route::post('/ads-ajax', [App\Http\Controllers\BE\AdsController::class, 'storeajax'])->name('store.ads.ajax');
+    Route::post('/change-status-ads','App\Http\Controllers\BE\AdsController@changeStatus')->name('changeStatus.ads');
+
+    Route::resource('/ads', App\Http\Controllers\BE\AdsController::class);
+
+
+
+
     // infosite ↓
     Route::resource('/infosite', App\Http\Controllers\BE\InfoSiteController::class);
-    Route::get('/infosite/{id}', [App\Http\Controllers\BE\InfoSiteController::class, 'get_info'])->name('get_info');
     Route::post('/change-status-info-site','App\Http\Controllers\BE\InfoSiteController@changeStatus')->name('changeStatus.info-site');
     Route::post('/change-protect-info-site','App\Http\Controllers\BE\InfoSiteController@changeProtect')->name('changeProtect.info-site');
 

@@ -20,7 +20,7 @@ class AdsController extends Controller
     public function index()
     {
         $ds = Ads::orderby('ads_id','desc')->get();
-        return view('BE.group-service.show', compact('ds'));
+        return view('BE.ads.show', compact('ds'));
     }
 
     /**
@@ -59,7 +59,7 @@ class AdsController extends Controller
        
         toast('Thêm Tên Nhóm Sản Phẩm Thành Công!','success');
         $ngs->save();
-        return redirect ()->route('BE.group-service.show');
+        return redirect ()->route('BE.ads.show');
       
     }
     public function storeajax(Request $request)
@@ -123,8 +123,8 @@ class AdsController extends Controller
     {
         $ngs = Ads ::find($id);
     
-        $ngs->slug =\Str::slug($request->name_group);
-        $ngs->ads_name = $request->get('name_group');
+        $ngs->slug =\Str::slug($request->ads_name);
+        $ngs->ads_name = $request->get('ads_name');
         $ngs->ads_image = $request->get('ads_image');
         $name = Auth::user()->name;
         $namedv1 = Ads ::find($id)->ads_name;
