@@ -46,15 +46,13 @@ class AdsController extends Controller
         ]);
 
         // Save the file locally in the storage/public/ folder under a new folder named /product
-        $fileimg = $request->file('image'); // tạo biến lấy dữ liệu từ input
+        $fileimg = $request->file('ads_iamge'); // tạo biến lấy dữ liệu từ input
         $filename = $fileimg->getClientOriginalName(); // lấy tên theo tên gốc của file
-        $pathimg = $fileimg->move(public_path().'/Ads/', $filename); //chỗ chứa file
+        $pathimg = $fileimg->move(public_path().'/image/', $filename); //chỗ chứa file
        
         $ngs = new Ads([
-            'slug' =>\Str::slug($request->ads_name),
             'ads_name' => $request->get('ads_name'),
-            "ads_image" => $filename,
-            'dislay' => 1,
+            'ads_image' => $filename,
         ]);
        
         toast('Thêm Tên Nhóm Sản Phẩm Thành Công!','success');
@@ -65,12 +63,13 @@ class AdsController extends Controller
     public function storeajax(Request $request)
     {
        
-       
+        $fileimg = $request->file('ads_image'); // tạo biến lấy dữ liệu từ input
+        $filename = $fileimg->getClientOriginalName(); // lấy tên theo tên gốc của file
+        $pathimg = $fileimg->move(public_path().'/image/', $filename); //chỗ chứa file
+
         $ngs = new Ads([
-            'slug' =>\Str::slug($request->ads_name),
             'ads_name' => $request->get('ads_name'),
-            "ads_image" => $filename,
-            'dislay' => 1,
+            'ads_image' => $filename,
         ]);
         $name = Auth::user()->name;
         $namedv = $ngs->ads_name;
@@ -79,13 +78,9 @@ class AdsController extends Controller
            'id_user' => Auth::user()->id, 
             'task' => " $name đã tạo quảng cáo $namedv ",
         ]);
+        $ngs->save();
         $log->save();
-         $ngs->save();
-         $data['1'] = $ngs->ads_id;
-         $data['2'] = $ngs->ads_name;
-         $data['3'] = $ngs->ads_image;
-         $data['4'] = '1';
-             return response()->json($data);
+        return redirect()->back();
        
        
     }
@@ -123,7 +118,6 @@ class AdsController extends Controller
     {
         $ngs = Ads ::find($id);
     
-        $ngs->slug =\Str::slug($request->ads_name);
         $ngs->ads_name = $request->get('ads_name');
         $ngs->ads_image = $request->get('ads_image');
         $name = Auth::user()->name;
@@ -135,15 +129,9 @@ class AdsController extends Controller
             'task' => " $name đã sửa quảng cáo $namedv1 thành $namedv ",
         ]);
         $log->save();
-          $ngs->save();
-          if( $ngs->save()){
-              return response()->json(1);
-          }
-          else{
-            return response()->json(0);
-          }
-        
-        // return redirect()->route('nhom-san-pham.index');
+        $ngs->save();
+        toast('Đã Cập Nhật quảng cáo Thành Công!','success');
+        return redirect()->route('ads.index');
     }
 
     /**
@@ -167,19 +155,5 @@ class AdsController extends Controller
         return redirect()->back();
     }
 
-    function changeStatus(Request $request){
-        //kiểm tra xem có phải ajax gửi request k
-        if($request->ajax()){
-            // không nhận được id thì báo lỗi
-            if(!$request->id){
-                return "error";
-            }
     
-            // hien 1 _____ an 0
-            //lấy nhóm sản phảm dựa theo id và update lai trạng thái
-            Ads::where('ads_id',$request->id)->update(['display'=>$request->status]);
-            // trả về status hiện tại để xử lý front end
-            return $request->status;
-        }
-    }
 }

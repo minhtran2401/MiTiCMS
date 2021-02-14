@@ -56,14 +56,8 @@
                                 <tr>
                                   <th scope="row">{{$row->ads_id}}</th>
                                   <td>{{$row->ads_name}}</td>
-                                  <td><img src="{{asset('Ads')}}/{{$row->ads_image}}"></td>
+                                  <td><img class="rounded" height="64" src="{{asset('image')}}/{{$row->ads_image}}"></td>
 
-                                  <td data-id="{{ $row->ads_id }}">
-                                    <div class="custom-control custom-switch custom-control-inline">
-                                        <input type="checkbox" id="gr-{{$row->ads_id}}"  class="custom-control-input change-status"  {{ $row->display==1?'checked':'' }}>
-                                        <label for="gr-{{$row->ads_id}}" class="custom-control-label content-status" >{{ $row->display==1?'Hiện':'Ẩn'}}</label>
-                                    </div>
-                                  </td>
 
                                   <td >
                                     <div class="modal fade text-left" id="editgr-{{$row->ads_id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel33" aria-hidden="true">
@@ -81,19 +75,10 @@
                                                     <div class="modal-body">
                                                         <label>Tên Mới </label>
                                                         <div class="form-group">
-                                                            <input name="name_group" type="text" value="{{$row->ads_name}}" class="form-control" />
+                                                            <input name="ads_name" type="text" value="{{$row->ads_name}}" class="form-control" />
                                                         </div>
                                                         <div class="form-group">
-                                                            <label  for="">Trạng thái</label>
-                                                            <select name="display" class="form-control" >
-                                                                @if ($row->display == 1)  
-                                                                <option value="0">Ẩn</option>
-                                                                <option value="1" selected>Đang Hiện</option>
-                                                                @else
-                                                                <option value="0" selected>Đang Ẩn</option>
-                                                                <option value="1" >Hiện</option>
-                                                                @endif
-                                                            </select>
+                                                            <input name="ads_image" type="file" class="form-control" />
                                                         </div>
                                                     </div>
                                                     <div class="modal-footer">
@@ -169,75 +154,7 @@
 <script src="{{asset('BE')}}/app-assets/vendors/js/tables/datatable/buttons.print.min.js"></script>
 <script src="{{asset('BE')}}/app-assets/vendors/js/tables/datatable/dataTables.rowGroup.min.js"></script>
 <script src="{{asset('BE')}}/app-assets/vendors/js/pickers/flatpickr/flatpickr.min.js"></script>
-<script>
-    
-  
-$("#table-1").on("click", ".change-status", function(e){
-// $(document).ready(function(){
-    $('.change-status').change(function(e){
-        // ngăn sự kiện change-status này khi click sẽ lan ra các sự kiện khác
-        //thường áp dụng cho các button form hoặc thẻ link ( tag a )
-          e.preventDefault();
 
-          //lấy id nhóm sản phẩm từ thẻ td ( data-id )
-          var id=$(this).parent().parent().data('id');
-
-        
-        var status=$(this).prop('checked')?1:0;
-   
-          //tạo biến global cho element đang click
-          var change=$(this)
-          var content=$(this).parent().find('.content-status')
-          //nếu có id thì mới gửi ajax
-          if(id){
-              $.ajax({
-                  //tên route có url là ....
-                  url:"{{ route('changeStatus.ads') }}",
-                  // kiểu method nên là post
-                  type:"post",
-
-                  //truyền biến id bà status
-                  data:{
-                      id:id,
-                      status:status,
-                      "_token": "{{ csrf_token() }}",
-                    
-                    }
-
-                  //nếu gửi thành công
-              }).done(function(result){
-                //nếu k nhận dc id
-                  if(result=='error'){
-                      alert("Không nhận được id.");
-                  let old= change.prop('checked')?false:true;
-                    change.prop('checked',old)
-                      //k cho chạy lệnh bên dưới nhờ return
-                      return;
-                  }
-
-
-                  //nếu status là 1 ( hiện )
-                  if(result==1){
-                    
-                      change.prop('checked','checked')
-                      content.text('Hiện')
-                      //k cho chạy lệnh bên dưới nhờ return
-                      return;
-                  }
-                  //nếu status là 0 ( ẩn )
-                     
-                      change.prop('checked','')
-                      content.text('Ẩn')
-                    //nếu gửi thất bại
-              }).fail(function(){
-                  let old= change.prop('checked')?false:true;
-                    change.prop('checked',old)
-                  alert("Xảy ra lỗi từ phía server.");
-              })
-          }
-      })
-    })
-</script>
 
 
     <script>
@@ -252,88 +169,7 @@ $("#table-1").on("click", ".change-status", function(e){
 } );
 
     </script>
-    <script>
-        $("#create-ads").submit(function(e) {
-
-e.preventDefault(); // avoid to execute the actual submit of the form.
-
-var form = $(this);
-var url = form.attr('action');
-$.ajax({
-       type: "POST",
-       url: url,
-       data: form.serialize(), // serializes the form's elements.
-       success: function(data){
-        //    alert(data);
-            if(data['3']==1){
-                $('#table-1').append($('<tr>')
-    .append($('<td>').html('<b>' + data['1'] + '</b>'))
-    .append($('<td>').append(data['2']))
-    .append($('<td>').append(" <div class='custom-control custom-switch custom-control-inline'><input type='checkbox' checked  class='custom-control-input change-status'  ><label  class='custom-control-label content-status' >Hiện</label> </div>"))
-                                        
-                                        
-                                   
-    .append($('<td>').html(" <button  class='btn btn-icon btn-primary' >  Sửa</button> <form class='form-check-inline'>  <button  class='btn btn-icon btn-danger xoaha' style='border: 0' onclick='xoaha(event)' ><i class='fa fa-tras' aria-hidden='true'></i> Xóa</button></form>"))
-                                  
-                                  
-                                 
-                                    
-                                     
-  )
-
-
-        Swal.fire(
-        'Thành công!',
-        'Đã thêm nhóm mới!',
-        'success'
-        )}
-        else{
-            Swal.fire(
-        'Thất Bại!',
-        'Đã có lỗi xảy ra',
-        'error'
-        )}}
-     });
-});
-    </script>
-     
-     <script>
-         $(".form-change-group").submit(function(e) {
-
-e.preventDefault(); // avoid to execute the actual submit of the form.
-
-var form = $(this);
-var url = form.attr('action');
-// basic-datatable
-
-$.ajax({
-       type: "POST",
-       url: url,
-       data: form.serialize(), // serializes the form's elements.
-       success: function(data)
-       {
-            if(data==1){
-               
-                Swal.fire(
-  'Thành công',
-  'Đã cập nhật lại nhóm sản phẩm',
-  'success'
-)
-
-            }
-            else{
-                Swal.fire(
-  'Lỗi',
-  'Đã có lỗi xảy ra',
-  'error'
-)
-            }
-    }
-     });
-
-
-});
-     </script>
+   
 
 <script>
     function xoaha(event) {

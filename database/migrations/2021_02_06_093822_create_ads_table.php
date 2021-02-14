@@ -17,7 +17,7 @@ class CreateAdsTable extends Migration
             $table->id('ads_id');
             $table->string('ads_name');
             $table->string('ads_image');
-            $table->integer('display');
+            $table->integer('display')->default(0);
             $table->timestamps();
         });
     }
