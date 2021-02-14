@@ -92,7 +92,7 @@
                                                       </button>
                                                       @else
                                                       <button type="button" class="btn btn-secondary" disabled>
-                                                        Chưa tài khoản
+                                                        Chưa thanh toán
                                                       </button>
                                                       @endif
                                                 </td>
@@ -131,7 +131,7 @@
                                                         @endif
                                                         </div>
                                                          @else
-                                                            đơn hàng chưa thanh toán
+                                                           chưa có thông tin tài khoản, nhắn tin admin để được hỗ trợ
                                                          @endif
                                                         <div class="modal-footer">
                                                        

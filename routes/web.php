@@ -183,6 +183,11 @@ Route::prefix('admin')->group(function () {
     Route::post('/change-status-invoice/{id}','App\Http\Controllers\BE\CheckInvoiceController@quick_update')->name('quick_update_invoice');
     Route::post('/send_detail_account','App\Http\Controllers\BE\CheckInvoiceController@send_account')->name('send_detail_account');
 
+    Route::resource('/storage', App\Http\Controllers\BE\StorageController::class);
+    Route::post('/add-storage','App\Http\Controllers\BE\StorageController@storeajax')->name('add_storage');
+    Route::post('/quickupdate-storage','App\Http\Controllers\BE\StorageController@update')->name('storage.quickupdate');
+
+
 
     // reply support
     Route::get('/reply-support','App\Http\Controllers\BE\ResupController@index')->name('show.case');
@@ -190,6 +195,8 @@ Route::prefix('admin')->group(function () {
 
     //end check bill
     
+    Route::post('short-day', [App\Http\Controllers\BE\DashBoardController::class, 'shortday'])->name('shortday');
+
 
     Route::prefix('quickadd')->group(function () {
         Route::get('/os-system', [App\Http\Controllers\BE\QuickAddController::class, 'os_system'])->name('os_system');
@@ -209,5 +216,9 @@ Route::prefix('admin')->group(function () {
         /// payment method ////
         Route::resource('/payment-method', App\Http\Controllers\BE\PaymentMethodController::class);
         Route::post('/change-status-payment','App\Http\Controllers\BE\PaymentMethodController@changeStatus')->name('changeStatus.payment');
+
+        Route::post('add-incomes', [App\Http\Controllers\BE\DashBoardController::class, 'add_incomes'])->name('add_incomes');
+        Route::post('add-funds', [App\Http\Controllers\BE\DashBoardController::class, 'add_funds'])->name('add_funds');
+
   }); // admin
 });

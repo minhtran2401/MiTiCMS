@@ -173,7 +173,7 @@
                                                                      <!-- Modal to add new record -->
            <div class="modal modal-slide-in fade" id="modals-add-{{$row->id_invoice}}">
             <div class="modal-dialog sidebar-sm">
-                <form id="create-groups-service" method="POST" action="{{route('send_detail_account')}}" class="add-new-record modal-content pt-0">
+                <form  method="POST" action="{{route('send_detail_account')}}" class="add-new-record modal-content pt-0">
                     @csrf
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
                     <div class="modal-header mb-1">
@@ -184,7 +184,7 @@
                         <div class="header text-success">Đơn hàng đã thanh toán thì mới được gửi </div>
                         <div class="form-group">
                             <label class="form-label badge badge-pill badge-light-warning mr-1" for="basic-icon-default-fullname">Thông tin tài khoản</label>
-                            <textarea class="form-control" placeholder="Ghi theo đúng bố cục bên dưới" name="detail_account" id="" cols="30" rows="10"></textarea>
+                            <textarea class="form-control summernote"  name="detail_account" cols="30" rows="10"></textarea>
                         </div>
                         <input  name="id_user" value="{{$row->user_id}}" type="text" hidden>
                         <div class="form-group">
@@ -267,7 +267,7 @@
     <script>
        $(document).ready(function() {
     $('#table-1').DataTable( {
-        "order": [[ 1, "des" ]], // Order on init. # is the column, starting at 0
+        "order": [[ 1, "asc" ]], // Order on init. # is the column, starting at 0
         // dom: 'Bfrtip',
         // buttons: [
         //     'copy', 'csv', 'excel', 'pdf', 'print'

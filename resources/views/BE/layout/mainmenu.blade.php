@@ -30,33 +30,35 @@
             <li class="nav-item nav-toggle"><a class="nav-link modern-nav-toggle pr-0" data-toggle="collapse"><i class="d-block d-xl-none text-primary toggle-icon font-medium-4" data-feather="x"></i><i class="d-none d-xl-block collapse-toggle-icon font-medium-4  text-primary" data-feather="disc" data-ticon="disc"></i></a></li>
         </ul>
     </div>
+    
+    @php
+    $link = ['admin/group-service','admin/type-service','admin/service/*',];
+    $linkvps = ['admin/service/vps','admin/service/vps/create','admin/service/vps/*/edit',];
+    $linkaccount = ['admin/service/account','admin/service/account/create','admin/service/account/*/edit',];
+    $linkdomain = ['admin/service/domain','admin/service/domain/create','admin/service/domain/*/edit',];
+    $linkserver = ['admin/service/server','admin/service/server/create','admin/service/server/*/edit',];
+    $linkhost = ['admin/service/hosting','admin/service/hosting/create','admin/service/hosting/*/edit',];
+    $linkpost = ['admin/blog','admin/blog-type','admin/blog/*/edit','admin/blog-type/*/edit','admin/blog/create','admin/blog-type/create'];
+    $linkgr_ty = ['admin/group-service','admin/type-service','loai-blog/*/edit','loai-blog/create',];
+    $linkquickadd = ['admin/quickadd/status-invoice','admin/quickadd/os-system','admin/quickadd/os-location',];
+    $linkuser = ['admin/user','admin/user/*/edit',];
+    $linkdashboard = ['admin','admin/storage'];
+    $linkkhac = ['admin/payment-method','admin/payment-method/create','admin/payment-method/*/edit','admin/seo','admin/seo/edit/*','admin/seo/create']
+
+    @endphp
     <div class="shadow-bottom"></div>
     <div class="main-menu-content">
         <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
-            <li class=" nav-item"><a class="d-flex align-items-center" href="index.html"><i data-feather="home"></i><span class="menu-title text-truncate" >Thống kê</span><span class="badge badge-light-warning badge-pill ml-auto mr-1">2</span></a>
+            <li class=" nav-item  {{ request()->is($linkdashboard) ? 'has-sub open' : '' }}"><a class="d-flex align-items-center" href="{{route('admin.dashboard')}}"><i data-feather="home"></i><span class="menu-title text-truncate" >Thống kê</span></a>
                 <ul class="menu-content">
-                    <li><a class="d-flex align-items-center" href="dashboard-analytics.html"><i data-feather='trending-up'></i><span class="menu-item">Tổng Quan</span></a>
+                    <li class=" {{ request()->is('admin') ? 'active' : '' }}"><a class="d-flex align-items-center" href="{{route('admin.dashboard')}}"><i data-feather='trending-up'></i><span class="menu-item">Tổng Quan</span></a>
                     </li>
-                    <li><a class="d-flex align-items-center" href="dashboard-ecommerce.html"><i data-feather='package'></i><span class="menu-item">Kho Hàng</span></a>
+                    <li class="{{ request()->is('admin/storage') ? 'active' : '' }}"><a class="d-flex align-items-center" href="{{route('storage.index')}}"><i data-feather='package'></i><span class="menu-item">Kho Hàng</span></a>
                     </li>
                     
                 </ul>
             </li>
 
-            @php
-            $link = ['admin/group-service','admin/type-service','admin/service/*',];
-            $linkvps = ['admin/service/vps','admin/service/vps/create','admin/service/vps/*/edit',];
-            $linkaccount = ['admin/service/account','admin/service/account/create','admin/service/account/*/edit',];
-            $linkdomain = ['admin/service/domain','admin/service/domain/create','admin/service/domain/*/edit',];
-            $linkserver = ['admin/service/server','admin/service/server/create','admin/service/server/*/edit',];
-            $linkhost = ['admin/service/hosting','admin/service/hosting/create','admin/service/hosting/*/edit',];
-            $linkpost = ['admin/blog','admin/blog-type','admin/blog/*/edit','admin/blog-type/*/edit','admin/blog/create','admin/blog-type/create'];
-            $linkgr_ty = ['admin/group-service','admin/type-service','loai-blog/*/edit','loai-blog/create',];
-            $linkquickadd = ['admin/quickadd/status-invoice','admin/quickadd/os-system','admin/quickadd/os-location',];
-            $linkuser = ['admin/user','admin/user/*/edit',];
-            $linkkhac = ['admin/payment-method','admin/payment-method/create','admin/payment-method/*/edit','admin/seo','admin/seo/edit/*','admin/seo/create']
-
-            @endphp
 
             <li class=" navigation-header"><span >Ứng Dụng &amp; Tiện Ích</span><i data-feather="more-horizontal"></i>
             </li>
@@ -163,7 +165,10 @@
                 @php
                 $count_bill = DB::table('invoice')->where('status','1')->get();
                 @endphp
-                <span class="badge badge-light-warning badge-pill ml-auto mr-1">{{count($count_bill)}}</span>
+                 @if(count($count_bill) > 0)
+                 <span class="badge badge-light-warning badge-pill ml-auto mr-1">{{count($count_bill)}}</span>
+                 @else
+                 @endif
             </a>
                 
             </li>
@@ -197,7 +202,7 @@
                 @php
                 $count_case = DB::table('contact')->where('status','0')->get();
                 @endphp
-                @if(count($count_case) > 1)
+                @if(count($count_case) > 0)
                 <span class="badge badge-light-warning badge-pill ml-auto mr-1">{{count($count_case)}}</span>
                 @else
                 @endif

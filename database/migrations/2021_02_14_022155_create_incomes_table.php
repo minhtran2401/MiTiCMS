@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAdminGmailTable extends Migration
+class CreateIncomesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,13 @@ class CreateAdminGmailTable extends Migration
      */
     public function up()
     {
-        Schema::create('admin_gmail', function (Blueprint $table) {
-            $table->id('gmail_id');
-            $table->string('gmail');
-            $table->string('password');
-            $table->string('phone');
+        Schema::create('incomes', function (Blueprint $table) {
+            $table->id();
+            $table->integer('id_user');
+            $table->integer('incomes_value');
+            $table->string('name_incomes');
+            $table->string('detail_incomes')->nullable();
+            $table->date('day_incomes');
             $table->timestamps();
         });
     }
@@ -29,6 +31,6 @@ class CreateAdminGmailTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('admin_gmail');
+        Schema::dropIfExists('incomes');
     }
 }

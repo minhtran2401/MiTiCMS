@@ -17,3 +17,7 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+Route::get('/', function(Request $request){
+    return response()->json(['Get api TiMiHost' => 'success', 'TranNhatMinh' => 'Welcome'], 200);
+})->name('api.index');
+Route::get('/thong-ke-truy-cap', [App\Http\Controllers\BE\DashBoardController::class, 'thong_ke_truy_cap'])->name('api.thong_ke_truy_cap');
