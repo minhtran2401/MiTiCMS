@@ -66,11 +66,13 @@ Version      : 1.0
 	  background-color: #7367F0;
 	  color: white;
   }
-  
+  .card, .card-body{
+	  transition: 0.5s;
+  }
   .shin-hidden-a{
 	  height: 0;
 	  overflow: hidden;
-	  transition: 0.3s;
+	  transition: 0.5s;
   }
   .shin-active-a:hover .shin-hidden-a{
 	height: 100%;

@@ -7,7 +7,7 @@
     @endphp
     @foreach ($seo as $s)
     <meta name="{{$s->meta_name}}" content="{{$s->meta_content}}">
-
+    {{-- <script src="https://unpkg.com/feather-icons"></script> --}}
     @endforeach
     <link rel="shortcut icon" type="image/x-icon" href="{{asset('assets')}}/img/favicon.ico">
     <title>@yield('pagetitle')</title>
@@ -107,7 +107,9 @@
             );
         } );
         </script>
-
+    {{-- <script>
+        feather.replace()
+      </script> --}}
     @yield('script')
 
 </body>
