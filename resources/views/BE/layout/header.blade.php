@@ -11,29 +11,52 @@
                 <li class="nav-item d-none d-lg-block"><a class="nav-link" href="#" data-toggle="tooltip" data-placement="top" title="Todo"><i class="ficon" data-feather="check-square"></i></a></li>
                 
             </ul>
-            <ul class="nav navbar-nav bookmark-icons">
-                <li class="nav-item d-none d-lg-block"><a class="nav-link" href="#" data-toggle="tooltip" data-placement="top" title="Email">
-                    <div class="custom-control custom-switch custom-control-inline">
-                        <input type="checkbox" class="custom-control-input" id="customSwitch1" />
-                        <label class="custom-control-label" for="customSwitch1">Bảo trì trang web</label>
-                    </div>    
-                </a></li>
-            </ul>
-            <ul class="nav navbar-nav bookmark-icons">
-                <li class="nav-item d-none d-lg-block"><a class="nav-link" href="#" data-toggle="tooltip" data-placement="top" title="Email">
-                    <div class="custom-control custom-switch custom-control-inline">
-                        <input type="checkbox" class="custom-control-input" id="customSwitch2" />
-                        <label class="custom-control-label" for="customSwitch2">Bảo vệ trang web</label>
-                    </div>    
-                </a></li>  
-            </ul>
-            <ul class="nav navbar-nav ">
-                <a href="#" class="nav-link  ">
-                    <form action="#" method="get">
-                      <button style="submit" class="btn btn-danger ">Xuất Database <i  data-feather='download'></i></button>
-                  </form>
-                  </a>
-            </ul>
+            @php
+            $timi = DB::table('miti_info')->first();
+            @endphp
+            <a href="#" class="nav-link nav-link-lg ">
+                @if($timi->protect == 1)
+                <div  data-id="{{ $timi->id }}">
+                <div class="pretty p-switch p-fill">
+                  <input type="checkbox"  id="change-status-web" class="change-status" checked }}>
+                  <div class="state p-success">
+                    <label style="color: rgb(18, 230, 28)" class="content-status"> ĐANG BẬT BẢO VỆ TRANG WEB</label>
+                  </div>
+                  @else
+                
+                    <div  data-id="{{ $timi->id }}">
+                    <div class="pretty p-switch p-fill">
+                      <input type="checkbox"  id="change-status-web" class="change-status">
+                      <div class="state p-success">
+                        <label style="color: rgb(18, 230, 28)" class="content-status">ĐANG TẮT BẢO VỆ TRANG WEB</label>
+                      </div>
+                  @endif
+                </div>
+              </div>
+              </a>
+               
+            
+              @if($timi->status == 0)
+              <a href="#" class="nav-link nav-link-lg ">
+                <form action="{{ route('shutdown') }}" method="post">
+                  @csrf
+                  <button onclick="xacnhan(event)" style="submit" class="btn">BẢO TRÌ WEBSITE</button>
+              </form>
+              </a>
+              @else
+              <a href="#" class="nav-link nav-link-lg ">
+                <form action="{{ route('start') }}" method="post">
+                  @csrf
+                  <button onclick="xacnhan2(event)" style="submit" class="btn">KHỞI ĐỘNG WEBSITE</button>
+              </form>
+              </a>
+              @endif
+  
+              <a href="#" class="nav-link nav-link-lg ">
+                <form action="{{ route('our_backup_database') }}" method="get">
+                  <button style="submit" class="btn">XUẤT DATABASE</button>
+              </form>
+              </a>
       
         </div>
         <ul class="nav navbar-nav  align-items-center ml-auto">

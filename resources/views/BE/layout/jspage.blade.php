@@ -2,6 +2,8 @@
     <script src="https://code.highcharts.com/highcharts.js"></script>
     {{-- <script src="https://code.highcharts.com/themes/dark-unica.js"></script> --}} 
     {{-- <script src="https://code.highcharts.com/themes/sand-signika.js"></script> --}}
+    <script src="https://code.highcharts.com/modules/data.js"></script>
+    <script src="https://code.highcharts.com/modules/drilldown.js"></script>
 <script src="https://code.highcharts.com/highcharts-more.js"></script>
 <script src="https://code.highcharts.com/themes/grid-light.js"></script>
 <script src="https://code.highcharts.com/modules/exporting.js"></script>
@@ -348,4 +350,102 @@ Math.easeOutBounce = function (pos) {
   }
   return (7.5625 * (pos -= (2.625 / 2.75)) * pos + 0.984375);
 };
+</script>
+<script>
+    var API_URL = "{{ route('api.index') }}";
+    $.get(API_URL + '/thong-ke-truy-cap').then(function (response){
+        // alert(response);
+    });
+  </script> 
+<script>
+$.get(API_URL + '/khach-hang-tiem-nang').then(function (response){
+Highcharts.chart('khachhangtiemnang', {
+    chart: {
+        type: 'column'
+    },
+    title: {
+        text: 'Top 10 khách hàng tiềm năng'
+    },
+ 
+    accessibility: {
+        announceNewData: {
+            enabled: true
+        }
+    },
+    xAxis: {
+        type: 'category'
+    },
+    yAxis: {
+        title: {
+            text: 'Đơn hàng'
+        }
+
+    },
+    legend: {
+        enabled: false
+    },
+    plotOptions: {
+        series: {
+            borderWidth: 0,
+            dataLabels: {
+                enabled: true,
+                format: '{point.y} đơn'
+            }
+        }
+    },
+
+    tooltip: {
+        headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+        pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y} đơn</b> trong tổng số<br/>'
+    },
+
+    series: [
+        {
+            name: "Khách hàng",
+            colorByPoint: true,
+            data: response
+        }
+    ],
+});
+});
+</script>
+
+<script>
+    $.get(API_URL + '/san-pham-ban-chay').then(function (response){
+    Highcharts.chart('thongkedichvu', {
+    chart: {
+        plotBackgroundColor: null,
+        plotBorderWidth: null,
+        plotShadow: false,
+        type: 'pie'
+    },
+    title: {
+        text: 'Top 10 dịch vụ bán chạy'
+    },
+    tooltip: {
+        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+    },
+    accessibility: {
+        point: {
+            valueSuffix: '%'
+        }
+    },
+    plotOptions: {
+        pie: {
+            allowPointSelect: true,
+            cursor: 'pointer',
+            dataLabels: {
+                enabled: true,
+                format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+            }
+        }
+    },
+    series: [{
+        name: 'Dịch vụ',
+        colorByPoint: true,
+        data: response
+    }]
+});
+});
+
 </script>

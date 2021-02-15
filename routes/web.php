@@ -185,6 +185,10 @@ Route::prefix('admin')->group(function () {
 
     Route::resource('/ads', App\Http\Controllers\BE\AdsController::class);
 
+    // protectweb
+    Route::get('/our_backup_database', 'App\Http\Controllers\BE\DashboardController@our_backup_database')->name('our_backup_database');
+    Route::post('/shutdown', 'App\Http\Controllers\BE\DashboardController@shutdown')->name('shutdown');
+    Route::post('/start', 'App\Http\Controllers\BE\DashboardController@start')->name('start');
 
 
 

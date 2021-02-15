@@ -12,8 +12,10 @@ use App\Models\Counter;
 use App\Models\Invoice;
 use Carbon\Carbon;
 use App\Models\Incomes;
+use App\Models\TypeService;
 use App\Models\Funds;
 use Session;
+use Str;
 use App\Models\LogAdmin;
 use App\Models\DetailAccount;
 use RealRashid\SweetAlert\Facades\Aler;
@@ -154,4 +156,60 @@ class DashboardController extends Controller
         return redirect()->back();
         
     }
+
+    public function khach_hang_tiem_nang(){
+        $data = array();
+        $quanty =  Invoice::select('user_id', DB::raw('count(user_id) as count'))
+        ->where('status',3)
+        ->groupBy('user_id')
+        ->orderBy('count', 'desc')
+        ->limit(10)->get();
+     
+      
+            foreach($quanty as $t){
+                
+                $name = $t->user_id;
+                $namesp = User::where('id',$name)->value('name');
+                $soluong = $t->count ;
+                $data[] = array('name' => $namesp, 'y' => json_decode($soluong));
+            }
+            return response()->json($data);
+    }
+
+    public function san_pham_ban_chay(){
+        $data = array();
+        $quanty =  Invoice::select('service_type_id', DB::raw('count(id_invoice) as count'))
+        ->groupBy('service_type_id')
+        ->orderBy('count', 'desc')
+        ->limit(10)->get();
+        // dd($quanty);
+            foreach($quanty as $t){
+                $name = $t->service_type_id;
+                $namesp = TypeService::where('service_type_id',$name)->value('service_type_name');
+                $soluong = $t->count;
+                $data[] = array('name' => $namesp, 'y' => json_decode($soluong));
+            }
+            return response()->json($data);
+    }
+
+    public function shutdown()
+    {
+      DB::update('update protectweb set status = 1 where id = 2');
+      Artisan::call('down --secret=gfteam');
+      alert()->warning('Cảnh báo','Đã đưa trang web vào trạng thái bảo trì! Chỉ có quản trị viên mới có thể truy cập website.');
+      return redirect('/gfteam');
+     
+    }
+    
+    // khởi động lại web
+    public function start(){
+      Artisan::call('up');
+      DB::update('update protectweb set status = 0 where id = 2');
+      alert()->success('Kích hoạt Thành công','Trang web đã vào trạng thái hoạt động !');
+      return redirect('/dashboard');
+    
+    }
+
+    
+
 }
