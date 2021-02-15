@@ -109,6 +109,8 @@
                                                         @endforeach
                                                   </div>
                                                 </div>
+                                                {{ $account_detail->links() }}
+
                                             </section>
                                         </div>
                                     </div>

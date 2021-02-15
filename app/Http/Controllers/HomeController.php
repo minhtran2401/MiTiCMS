@@ -116,7 +116,7 @@ class HomeController extends Controller
         $hosting_type = TypeService::where('slug',$id)->firstOrFail(); // lấy slug của url
         $hosting_detail = HostingService::where('service_group_id',$hosting_type->service_group_id)
         ->where('service_type_id',$hosting_type->service_type_id)
-        ->where('display','1')->orderby('hosting_id','desc')->get();
+        ->where('display','1')->orderby('hosting_id','desc')->paginate(6);
        
         return view('FE.service.hosting-service.hosting-type',compact('hosting_type','hosting_detail'));
     }
@@ -137,7 +137,7 @@ class HomeController extends Controller
         $vps_type = TypeService::where('slug',$id)->firstOrFail(); // lấy slug của url
         $vps_detail = VPSService::where('service_group_id',$vps_type->service_group_id)
         ->where('service_type_id',$vps_type->service_type_id)
-        ->where('display','1')->orderby('vps_id','desc')->get();
+        ->where('display','1')->orderby('vps_id','desc')->paginate(6);
        
         return view('FE.service.vps-service.vps-type',compact('vps_type','vps_detail'));
     }
@@ -158,7 +158,7 @@ class HomeController extends Controller
         $server_type = TypeService::where('slug',$id)->firstOrFail(); // lấy slug của url
         $server_detail = ServerService::where('service_group_id',$server_type->service_group_id)
         ->where('service_type_id',$server_type->service_type_id)
-        ->where('display','1')->orderby('server_id','desc')->get();
+        ->where('display','1')->orderby('server_id','desc')->paginate(6);
        
         return view('FE.service.server-service.server-type',compact('server_type','server_detail'));
     }
@@ -179,7 +179,7 @@ class HomeController extends Controller
         $account_type = TypeService::where('slug',$id)->firstOrFail(); // lấy slug của url
         $account_detail = AccountService::where('service_group_id',$account_type->service_group_id)
         ->where('service_type_id',$account_type->service_type_id)
-        ->where('display','1')->orderby('account_id','desc')->get();
+        ->where('display','1')->orderby('account_id','desc')->paginate(6);
         return view('FE.service.account-service.account-type',compact('account_type','account_detail'));
         // return view('FE.service.account-service.account-detail');
     }

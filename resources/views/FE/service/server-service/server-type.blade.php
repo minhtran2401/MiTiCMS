@@ -112,6 +112,7 @@
                                         </div>
                                     </div>
                                 </div>
+                                {{ $server_detail->links() }}
                         </section>
                 </div>
            </div>

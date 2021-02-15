@@ -112,6 +112,7 @@
                                         </div>
                                     </div>
                                 </div>
+                                {{ $vps_detail->links() }}
                         </section>
                 </div>
            </div>

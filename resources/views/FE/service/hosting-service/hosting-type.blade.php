@@ -112,6 +112,7 @@
                                         </div>
                                     </div>
                                 </div>
+                                {{ $hosting_detail->links() }}
                         </section>
                 </div>
            </div>

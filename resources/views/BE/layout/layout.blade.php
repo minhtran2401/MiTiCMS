@@ -1,14 +1,18 @@
 <!DOCTYPE html>
-<html class="loading" lang="en" data-textdirection="ltr">
+<html class="loading" lang="vi" data-textdirection="ltr">
 <!-- BEGIN: Head-->
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
-    <meta name="description" content="Vuexy admin is super flexible, powerful, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities.">
-    <meta name="keywords" content="admin template, Vuexy admin template, dashboard template, flat admin template, responsive admin template, web app">
-    <meta name="author" content="PIXINVENT">
+    
+    @php
+    $seo = DB::table('seo')->get();
+    @endphp
+    @foreach ($seo as $s)
+    <meta name="{{$s->meta_name}}" content="{{$s->meta_content}}">
+
+    @endforeach
     <title>@yield('pagetitle')</title>
     <link rel="apple-touch-icon" href="{{asset('BE')}}/app-assets/images/ico/apple-icon-120.png">
     <link rel="shortcut icon" type="image/x-icon" href="{{asset('BE')}}/app-assets/images/ico/favicon.ico">
@@ -56,7 +60,32 @@ else{
 
 <body class="vertical-layout vertical-menu-modern {{$theme}} navbar-floating footer-static  " data-open="click" data-menu="vertical-menu-modern" data-col="">
     @include('sweetalert::alert')
+    <!-- Load Facebook SDK for JavaScript -->
+    <div id="fb-root"></div>
+    <script>
+      window.fbAsyncInit = function() {
+        FB.init({
+          xfbml            : true,
+          version          : 'v9.0'
+        });
+      };
 
+      (function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = 'https://connect.facebook.net/vi_VN/sdk/xfbml.customerchat.js';
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+
+    <!-- Your Chat Plugin code -->
+    <div class="fb-customerchat"
+      attribution="setup_tool"
+      page_id="105967774867347"
+theme_color="#7367F0"
+logged_in_greeting="Xin chào, bạn muốn mua gì ?"
+logged_out_greeting="Xin chào, bạn muốn mua gì ?">
+    </div>
     <!-- BEGIN: Header-->
     @include('BE.layout.header')
     <!-- END: Header-->
