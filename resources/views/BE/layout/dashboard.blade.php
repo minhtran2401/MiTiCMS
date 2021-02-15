@@ -76,7 +76,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-xl-3 col-sm-6 col-12">
+                            <div class="col-xl-3 col-sm-6 col-12 mb-2 mb-sm-0">
                                 <div class="media">
                                     <div class="avatar bg-light-success mr-2">
                                         <div class="avatar-content">
@@ -346,7 +346,7 @@
                                             <div class="modal-body">
                                                <form action="{{route('add_incomes')}}" method="POST">
                                                 @csrf
-                                                   <input hidden value="{{Auth::user()->id}}" type="text" name="id_user" id="">
+                                                   <input hidden value="{{Auth::user()->id}}" type="text" name="id_user">
                                                    <input placeholder="Tên khoản thu" class="form-control mb-1" type="text" name="name_incomes"  required>
                                                    <input placeholder="Chi tiết" class="form-control mb-1" type="text" name="detail_incomes" required>
                                                    <input placeholder="Số tiền" class="form-control mb-1" type="text" name="incomes_value" required>
@@ -390,7 +390,7 @@
                                             <div class="modal-body">
                                                <form action="{{route('add_funds')}}" method="POST">
                                                 @csrf
-                                                   <input hidden value="{{Auth::user()->id}}" type="text" name="id_user" id="">
+                                                   <input hidden value="{{Auth::user()->id}}" type="text" name="id_user">
                                                    <input placeholder="Tên khoản chi" class="form-control mb-1" type="text" name="name_funds"  required>
                                                    <input placeholder="Chi tiết" class="form-control mb-1" type="text" name="detail_funds" required>
                                                    <input placeholder="Số tiền" class="form-control mb-1" type="text" name="funds_value" required>
@@ -643,6 +643,77 @@ $.ajax({
 </script>
 
 
+<script>
+    
+    $.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+    });
+    $(document).ready(function(){
+    $('#change-status-web').change(function(e){
+        // ngăn sự kiện change-status này khi click sẽ lan ra các sự kiện khác
+        //thường áp dụng cho các button form hoặc thẻ link ( tag a )
+          e.preventDefault();
+    
+          //lấy id nhóm sản phẩm từ thẻ td ( data-id )
+          var status=$(this).prop('checked')?1:0;
+         
+          //tạo biến global cho element đang click
+          var change=$(this)
+          var content=$(this).parent().find('.content-status')
+          //nếu có id thì mới gửi ajax
+          if(status){
+              $.ajax({
+                  //tên route có url là ....
+                  url:"{{ route('changeStatus.web') }}",
+                  // kiểu method nên là post
+                  type:"post",
+                    
+                  //truyền biến id bà status
+                  data:{status:status,
+                    "_token": "{{ csrf_token() }}",
 
+                }
+    
+                  //nếu gửi thành công
+              }).done(function(result){
+                //nếu k nhận dc id
+                  if(result=='error'){
+                      alert("Không nhận được id.");
+                  let old= change.prop('checked')?false:true;
+                    change.prop('checked',old)
+                      //k cho chạy lệnh bên dưới nhờ return
+                      return;
+                  }
+    
+    
+                  //nếu status là 1 ( hiện )
+                  if(status==1){
+                      change.prop('checked','checked')
+                      content.text('Đang bật bảo vệ trang web')
+                   
+                      //k cho chạy lệnh bên dưới nhờ return
+                      return;
+                  }
+                  else
+                  //nếu status là 0 ( ẩn )
+                     
+                      change.prop('checked','')
+                      content.text('Đang tắt bảo vệ trang web')
+                    //nếu gửi thất bại
+              }).fail(function(){
+                  let old= change.prop('checked')?false:true;
+                    change.prop('checked',old)
+                  alert("Xảy ra lỗi từ phía server.");
+              })
+          }
+      })
+    }
+    )
+    
+    
+    
+    </script>
 
 @endsection
