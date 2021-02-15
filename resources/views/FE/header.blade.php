@@ -1,12 +1,15 @@
 <div class="header">
+    
     <div class="header-left">
         <a href="{{route('index')}}" class="logo">
-            <img src="{{asset('assets')}}/img/logo.png" width="35" height="35" alt=""> <span>MiTiVPS</span>
+            <img src="{{asset('assets')}}/img/logo.png" width="35" height="35" alt=""> <span>TiMiHost</span>
         </a>
     </div>
-    <a id="toggle_btn" href="javascript:void(0);"><i class="fa fa-bars"></i></a>
+    <a id="toggle_btn" href="javascript:void(0);"><i class="fa fa-bars mt-3"></i></a>
     <a id="mobile_btn" class="mobile_btn float-left" href="#sidebar"><i class="fa fa-bars"></i></a>
+  
     <ul class="nav user-menu float-right">
+       
         @php
         $noti = DB::table('invoice')->where('user_id',Auth::user()->id)->where('status','2')->get();
         @endphp
@@ -76,6 +79,7 @@
             </div>
            
         </li>
+       
     </ul>
     <div class="dropdown mobile-user-menu float-right">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
@@ -84,10 +88,12 @@
             onclick="event.preventDefault();
                           document.getElementById('logout-form').submit();">
              {{ __('Đăng xuất') }}
-</a>
+            </a>
             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                 @csrf
             </form>
         </div>
     </div>
+  
 </div>
+

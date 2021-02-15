@@ -6,22 +6,22 @@
              <div class="col-lg-12 col-md-12 ftco-animate fadeInUp ftco-animated">
                                 <div class="card ">
                                     <div class="card-body">
+                                      @php
+                                      $ads = DB::table('ads')->orderby('ads_id','desc')->get()
+                                      @endphp
                                         <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
                                             <ol class="carousel-indicators">
-                                              <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                                              <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                                              <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                                              @foreach ($ads as $key => $a)
+                                              <li data-target="#carouselExampleIndicators" data-slide-to="{{$key}}" class=" {{ $key==0?'active':'' }}"></li>
+                                              @endforeach
                                             </ol>
                                             <div class="carousel-inner">
-                                              <div class="carousel-item active">
-                                                <img class="d-block w-100" src="https://media.istockphoto.com/photos/child-hands-formig-heart-shape-picture-id951945718?k=6&m=951945718&s=612x612&w=0&h=ih-N7RytxrTfhDyvyTQCA5q5xKoJToKSYgdsJ_mHrv0=" alt="First slide">
+                                              @foreach ($ads as $key => $a)
+                                              <div class="carousel-item {{ $key==0?'active':'' }}">
+                                                <img class="d-block w-100" src="{{asset('image')}}/{{$a->ads_image}}" alt="First slide">
                                               </div>
-                                              <div class="carousel-item">
-                                                <img class="d-block w-100" src="https://chetankejriwal.files.wordpress.com/2011/11/1206131983ikx95fp.jpg" alt="Second slide">
-                                              </div>
-                                              <div class="carousel-item">
-                                                <img class="d-block w-100" src="https://www.webphunudep.com/kcfinder/upload/images/20170826_042858_094877_nhung-cau-noi-hay-ve-.max-600x600.jpg" alt="Third slide">
-                                              </div>
+                                              @endforeach
+
                                             </div>
                                             <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
                                               <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -102,7 +102,7 @@
    }
  });
 
-   $(document).on('click', 'li', function(){  
+   $(document).on('click', '.liz', function(){  
     $('#country_name').val($(this).text());  
     $('#countryList').fadeOut();  
   });  

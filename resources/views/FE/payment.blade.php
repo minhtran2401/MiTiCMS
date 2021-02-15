@@ -27,7 +27,7 @@
             </div>
             <div class="row">
                 <div class="col-md-6">
-                   <form action="{{route('check_out')}}" method="post">
+                   <form class="" action="{{route('check_out')}}" method="post">
                     @csrf
                     <div class="about">
                         <div class="d-flex justify-content-between">
@@ -73,7 +73,7 @@
                       </div>
                         <hr>
 
-                        <div class="buttons"> <button class="btn btn-success btn-block">Xác nhận thanh toán</button> </div>
+                        <div class="buttons checkoutform"> <button class="btn btn-success btn-block">Xác nhận thanh toán</button> </div>
                     </div>
                 </div>
                 <div class="col-md-2"> </div>
@@ -161,7 +161,7 @@
                               </div>
                                 <hr>
         
-                                <div class="buttons"> <button class="btn btn-success btn-block">Xác nhận thanh toán</button> </div>
+                                <div class="buttons checkoutform"> <button class="btn btn-success btn-block">Xác nhận thanh toán</button> </div>
                             </div>
                         </div>
                         <div class="col-md-2"> </div>
@@ -226,7 +226,7 @@
                 <div class="d-flex justify-content-between">
                 </div>
                 <p>Chọn khu vực hosting, mặc định là singapore </p>
-                <textarea class="form-control mb-1" placeholder="Chọn khu vực , có thể ghi thêm yêu cầu nếu cần." name="invoice_note" id="" cols="30" rows="3" required></textarea>
+                <textarea class="form-control mb-1" placeholder="Chọn khu vực , nhập domain của bạn, nếu bạn k nhập domain, chúng tôi sẽ lấy một domain ngẫu nhiên.." name="invoice_note" id="" cols="30" rows="3" required></textarea>
                 <p>Hiện tại đang có khu vực sau : </p>
                
                 @php
@@ -262,7 +262,7 @@
               </div>
                 <hr>
 
-                <div class="buttons"> <button class="btn btn-success btn-block">Xác nhận thanh toán</button> </div>
+                <div class="buttons checkoutform"> <button class="btn btn-success btn-block">Xác nhận thanh toán</button> </div>
             </div>
         </div>
         <div class="col-md-2"> </div>
@@ -348,7 +348,7 @@
                                   </select>
                               </div>
                               
-                                    <button type="submit" class="btn btn-primary mb-2">Đặt mua</button>
+                                    <button type="submit checkoutform" class="btn btn-primary mb-2">Đặt mua</button>
                                   </div>
                               
                                   <div class="col-md-6">
@@ -363,20 +363,20 @@
                                       </thead>
                                       <tbody>
                                         <tr>
-                                          <td>Mark giá 100k</td>
-                                          <td>Otto/100k</td>
-                                          <td>@mdo/100k</td>
+                                          <td>.com giá 100k</td>
+                                          <td>.vn giá 100k</td>
+                                          <td>.net giá 100k</td>
                                         </tr>
                                         <tr>
-                                          <td>Mark/100k</td>
-                                          <td>Otto/100k</td>
-                                          <td>@mdo/100k</td>
+                                          <td>vn giá 100k</td>
+                                          <td>.name.vn giá 100k</td>
+                                          <td>.us giá 100k</td>
                                         </tr>
                                         </tr>
                                         <tr>
-                                          <td>Mark/100k</td>
-                                          <td>Otto/100k</td>
-                                          <td>@mdo/100k</td>
+                                          <td>.net giá 100k</td>
+                                          <td>.com.vn giá 100k</td>
+                                          <td>.info giá 100k</td>
                                         </tr>
                                         </tr>
                                       </tbody>
@@ -413,7 +413,7 @@
     </div>
     <div class="row">
         <div class="col-md-6">
-           <form action="{{route('check_out')}}" method="post">
+           <form  action="{{route('check_out')}}" method="post">
             @csrf
             <div class="about">
                 <div class="d-flex justify-content-between">
@@ -444,7 +444,7 @@
               </div>
                 <hr>
 
-                <div class="buttons"> <button class="btn btn-success btn-block">Xác nhận thanh toán</button> </div>
+                <div class="buttons checkoutform"> <button class="btn btn-success btn-block">Xác nhận thanh toán</button> </div>
             </div>
         </div>
         <div class="col-md-2"> </div>
@@ -508,4 +508,39 @@
       </div>
           </div></div></div></div>
   @endif
+@endsection
+@section('script')
+    <script>
+      $(".checkoutform").click(function() {
+
+let timerInterval
+Swal.fire({
+  title: 'Đang xử lí',
+  html: 'Vui lòng đợi một lát',
+  timer: 9000,
+  timerProgressBar: true,
+  didOpen: () => {
+    Swal.showLoading()
+    timerInterval = setInterval(() => {
+      const content = Swal.getContent()
+      if (content) {
+        const b = content.querySelector('b')
+        if (b) {
+          b.textContent = Swal.getTimerLeft()
+        }
+      }
+    }, 100)
+  },
+  willClose: () => {
+    clearInterval(timerInterval)
+  }
+}).then((result) => {
+  /* Read more about handling dismissals below */
+  if (result.dismiss === Swal.DismissReason.timer) {
+    // console.log('I was closed by the timer')
+  }
+})
+});
+
+    </script>
 @endsection

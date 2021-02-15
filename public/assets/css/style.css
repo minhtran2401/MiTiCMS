@@ -4948,4 +4948,45 @@ blockquote p {
 		margin: 0 auto;
 		margin-bottom: 10px;
 	}
+	.displayfooter{
+		display: hidden;
+	}
 }
+
+.fixed-footer{
+	width: 100%;
+	position: fixed;        
+	background: #7367F0;
+	padding-left: 6%;
+	color: white;
+	box-shadow: 0 1px 1px rgb(0 0 0 / 10%);
+	height: 75px;
+	z-index: 999;
+	padding-top: 12px;
+
+}
+
+.fixed-footer{
+        bottom: 0;
+    }  
+
+	.copyright {
+		background-color: #7367F0; }
+		.copyright span,
+		.copyright a {
+		  color: white;
+		  -webkit-transition: all 0.3s linear;
+		  -o-transition: all 0.3s linear;
+		  transition: all 0.3s linear; }
+		.copyright a:hover {
+		  color:#000; }
+	  
+	  .copyright-menu ul {
+		text-align: right;
+		margin: 0; }
+	  
+	  .copyright-menu li {
+		display: inline-block;
+		padding-left: 20px; }
+	  
+	

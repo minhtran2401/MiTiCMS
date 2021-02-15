@@ -58,11 +58,14 @@
 								}
 								</style>
                                 <p class="domain-price mt-2">
-                                    <span class="shin-domain-break"><sup>.com</sup> $9.75</span> 
-                                    <span class="shin-domain-break"><sup>.net</sup> $9.50</span> 
-                                    <span class="shin-domain-break"><sup>.biz</sup> $8.95</span> 
-                                    <span class="shin-domain-break"><sup>.co</sup> $7.80</span>
-                                    <span class="shin-domain-break"><sup>.me</sup> $7.95</span>
+									@php
+									$domaindemo = DB::table('domain_service')->where('domain_type','1')->limit(4)->get();
+									@endphp
+									@foreach ($domaindemo as $dm)
+										   <span class="shin-domain-break"><sup>.{{$dm->name}}</sup> {{number_format($dm->price_show)}} đ</span> 
+									@endforeach
+                                 
+                                   
                                 </p>
                                 <div id="mutext" class="mutex mb-2"><p id="alert-domain"></p></div>
                                     </div>
@@ -92,30 +95,18 @@
 										</div>
 										<div style="border: solid 1px #7673F0; border-radius:0 0 3px 3px; " class="col-lg-12 col-md-12">
 											<div class="shin-domain-group">
+												@php
+												$domainpb = DB::table('domain_service')->where('domain_type','1')->get();
+												@endphp
+												@foreach ($domainpb as $dpb)
 												<div class="shin-domain-multi-break">
-													<input id="com" title=".com" class="pb" name="com" type="checkbox" value=".com" />
-													<label for="com">.com</label>
-												</div>
-												<div class="shin-domain-multi-break">
-													<input id="net" title=".net" class="pb" name="net" type="checkbox" value=".net" />
-													<label for="net">.net</label>
-												</div>
-												<div class="shin-domain-multi-break">
-													<input id="org" title=".org" class="pb" name="org" type="checkbox" value=".org" />
-													<label for="org">.org</label>
-												</div>
-												<div class="shin-domain-multi-break">
-													<input id="vn" title=".vn" class="pb" name="vn" type="checkbox" value=".vn" />
-													<label for="vn">.vn</label>
-												</div>
-												<div class="shin-domain-multi-break">
-													<input id="comvn" title=".com.vn" class="pb" name="comvn" type="checkbox" value=".com.vn" />
-													<label for="comvn">.com.vn</label>
-												</div>
-												<div class="shin-domain-multi-break">
-													<input id="netvn" title=".net.vn" class="pb" name="netvn" type="checkbox" value=".net.vn" />
-													<label for="netvn">.net.vn</label>
-												</div>
+													<input id="{{$dpb->name}}" title=".{{$dpb->name}}" class="pb" name="{{$dpb->name}}" type="checkbox" value=".{{$dpb->name}}" />
+													<label for="{{$dpb->name}}">.{{$dpb->name}}</label>
+												</div>	
+												@endforeach
+												
+												
+											
 											</div>
 										</div>
 									</div>
@@ -127,17 +118,15 @@
 											</div>
 										</div>
 										<div style="border: solid 1px #7673F0; border-radius:0 0 3px 3px; " class="col-lg-12 col-md-12">
-											<div class="shin-domain-group">
+											@php
+												$domainpb = DB::table('domain_service')->where('domain_type','2')->get();
+												@endphp
+												@foreach ($domainpb as $dpb)
 												<div class="shin-domain-multi-break">
-													<input title="ac.vn" class="dvn" name="acvn" type="checkbox" value=".ac.vn"/>
-													<label for="acvn">.ac.vn</label>
-												</div>
-												<div class="shin-domain-multi-break">
-													<input title=".edu.vn" class="dvn" name="eduvn" type="checkbox" value=".edu.vn" />
-													<label for="eduvn">.edu.vn</label>
-												</div>
-												
-											</div>
+													<input id="{{$dpb->name}}" title=".{{$dpb->name}}" class="dvn" name="{{$dpb->name}}" type="checkbox" value=".{{$dpb->name}}" />
+													<label for="{{$dpb->name}}">.{{$dpb->name}}</label>
+												</div>	
+												@endforeach
 										</div>
 									</div>
 									<div class="col-lg-9 col-md-12 mb-3">
@@ -149,14 +138,15 @@
 										</div>
 										<div style="border: solid 1px #7673F0; border-radius:0 0 3px 3px; " class="col-lg-12 col-md-12">
 											<div class="shin-domain-group">
+												@php
+												$domainpb = DB::table('domain_service')->where('domain_type','3')->get();
+												@endphp
+												@foreach ($domainpb as $dpb)
 												<div class="shin-domain-multi-break">
-													<input title=".asia" class="qt" name="asia" type="checkbox" value=".asia" />
-													<label for="asia">.asia</label>
-												</div>
-												<div class="shin-domain-multi-break">
-													<input title=".jp" class="qt" name="jp" type="checkbox" value=".jp" />
-													<label for="jp">.jp</label>
-												</div>
+													<input id="{{$dpb->name}}" title=".{{$dpb->name}}" class="qt" name="{{$dpb->name}}" type="checkbox" value=".{{$dpb->name}}" />
+													<label for="{{$dpb->name}}">.{{$dpb->name}}</label>
+												</div>	
+												@endforeach
 											</div>
 										</div>
 									</div>
@@ -189,86 +179,7 @@
 					</div>
 				</div>
 				
-				
-    <section class="ftco-section">
-    	<div class="container">
-    		<div class="row justify-content-center mb-5">
-          <div class="col-md-7 text-center heading-section ftco-animate">
-            <h2 class="mb-4">Domain Pricing</h2>
-            <p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
-          </div>
-        </div>
-    		<div class="row">
-    			<div class="col-md-12 ftco-animate">
-    				<div class="table-responsive">
-	    				<table class="table">
-						    <thead class="thead-primary">
-						      <tr>
-						        <th>TLD</th>
-						        <th>Duration</th>
-						        <th>Registration</th>
-						        <th>Renewal</th>
-						        <th>Transfer</th>
-						        <th>Register</th>
-						      </tr>
-						    </thead>
-						    <tbody>
-						      <tr>
-						        <td class="color">.com</td>
-						        <td>1 Year</td>
-						        <td>$70.00</td>
-						        <td>$5.00</td>
-						        <td>$5.00</td>
-						        <td><a href="#" class="btn btn-primary">Sign Up</a></td>
-						      </tr>
-						      <tr>
-						        <td class="color">.net</td>
-						        <td>1 Year</td>
-						        <td>$75.00</td>
-						        <td>$5.00</td>
-						        <td>$5.00</td>
-						        <td><a href="#" class="btn btn-primary">Sign Up</a></td>
-						      </tr>
-						      <tr>
-						        <td class="color">.org</td>
-						        <td>1 Year</td>
-						        <td>$65.00</td>
-						        <td>$5.00</td>
-						        <td>$5.00</td>
-						        <td><a href="#" class="btn btn-primary">Sign Up</a></td>
-						      </tr>
-						      <tr>
-						        <td class="color">.biz</td>
-						        <td>1 Year</td>
-						        <td>$60.00</td>
-						        <td>$5.00</td>
-						        <td>$5.00</td>
-						        <td><a href="#" class="btn btn-primary">Sign Up</a></td>
-						      </tr>
-						      <tr>
-						        <td class="color">.info</td>
-						        <td>1 Year</td>
-						        <td>$50.00</td>
-						        <td>$5.00</td>
-						        <td>$5.00</td>
-						        <td><a href="#" class="btn btn-primary">Sign Up</a></td>
-						      </tr>
-						      <tr>
-						        <td class="color">.me</td>
-						        <td>1 Year</td>
-						        <td>$45.00</td>
-						        <td>$5.00</td>
-						        <td>$5.00</td>
-								<td><a href="#" class="btn btn-primary">Sign Up</a></td>
-							
-						      </tr>
-						    </tbody>
-						  </table>
-					  </div>
-    			</div>
-    		</div>
-    	</div>
-	</section>
+
 	
 
             </div>

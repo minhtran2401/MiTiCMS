@@ -119,7 +119,7 @@ class AdsController extends Controller
         $ngs = Ads ::find($id);
     
         $ngs->ads_name = $request->get('ads_name');
-        $ngs->ads_image = $request->get('ads_image');
+        // $ngs->ads_image = $request->get('ads_image');
         $name = Auth::user()->name;
         $namedv1 = Ads ::find($id)->ads_name;
         $namedv = $ngs->ads_name;

@@ -40,7 +40,7 @@ class HomeController extends Controller
     //trang chủ ↓
     public function index(Request $request)
     {
- 
+        
         return view('FE.home');
     }
     public function home()
@@ -102,10 +102,17 @@ class HomeController extends Controller
     // dịch vụ hosting ↓
     public function hosting()
     {
+        
         return view('FE.home');
     }
     public function hosting_type($id)
     {
+        if(Auth::user()->facebook == null && Auth::user()->phone == null){
+            alert('Yêu cầu cập nhật','Bổ sung thông tin cá nhân để tiếp tục', 'warning');
+            return redirect()->route('user-profile.profile');
+
+        }
+        else
         $hosting_type = TypeService::where('slug',$id)->firstOrFail(); // lấy slug của url
         $hosting_detail = HostingService::where('service_group_id',$hosting_type->service_group_id)
         ->where('service_type_id',$hosting_type->service_type_id)
@@ -121,6 +128,12 @@ class HomeController extends Controller
     }
     public function vps_type($id)
     {
+        if(Auth::user()->facebook == null && Auth::user()->phone == null){
+            alert('Yêu cầu cập nhật','Bổ sung thông tin cá nhân để tiếp tục', 'warning');
+            return redirect()->route('user-profile.profile');
+
+        }
+        else
         $vps_type = TypeService::where('slug',$id)->firstOrFail(); // lấy slug của url
         $vps_detail = VPSService::where('service_group_id',$vps_type->service_group_id)
         ->where('service_type_id',$vps_type->service_type_id)
@@ -136,6 +149,12 @@ class HomeController extends Controller
     }
     public function server_type($id)
     {
+        if(Auth::user()->facebook == null && Auth::user()->phone == null){
+            alert('Yêu cầu cập nhật','Bổ sung thông tin cá nhân để tiếp tục', 'warning');
+            return redirect()->route('user-profile.profile');
+
+        }
+        else
         $server_type = TypeService::where('slug',$id)->firstOrFail(); // lấy slug của url
         $server_detail = ServerService::where('service_group_id',$server_type->service_group_id)
         ->where('service_type_id',$server_type->service_type_id)
@@ -151,6 +170,12 @@ class HomeController extends Controller
     }
     public function account_type($id)
     {
+        if(Auth::user()->facebook == null && Auth::user()->phone == null){
+            alert('Yêu cầu cập nhật','Bổ sung thông tin cá nhân để tiếp tục', 'warning');
+            return redirect()->route('user-profile.profile');
+
+        }
+        else
         $account_type = TypeService::where('slug',$id)->firstOrFail(); // lấy slug của url
         $account_detail = AccountService::where('service_group_id',$account_type->service_group_id)
         ->where('service_type_id',$account_type->service_type_id)
@@ -166,6 +191,12 @@ class HomeController extends Controller
     }
     public function view_check_domain()
     {
+        if(Auth::user()->facebook == null && Auth::user()->phone == null){
+            alert('Yêu cầu cập nhật','Bổ sung thông tin cá nhân để tiếp tục', 'warning');
+            return redirect()->route('user-profile.profile');
+
+        }
+        else
         return view('FE.service.domain-service.check-domain');
     }
     public function check_domain(Request $request){

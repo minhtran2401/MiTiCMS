@@ -20,7 +20,7 @@ use RealRashid\SweetAlert\Facades\Aler;
 class DashboardController extends Controller
 {
     public function tongquat(){
-        $day = Carbon::now()->day;
+        $day = Carbon::now('Asia/Ho_Chi_Minh')->day;
         $data['incomes'] = DB::table('incomes')->orderby('id','desc')->limit(3)->get();
         $data['funds'] = DB::table('funds')->orderby('id','desc')->limit(3)->get();
         $data['tomtatthuchi']= array($data['incomes'],$data['funds']);

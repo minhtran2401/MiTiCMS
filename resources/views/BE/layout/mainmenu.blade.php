@@ -189,7 +189,9 @@
 
             <li class=" nav-item {{ request()->is($linkkhac) ? 'has-sub open' : '' }}"><a class="d-flex align-items-center" href="#"><i data-feather='info'></i><span class="menu-title text-truncate">Thông Tin</span></a>
                 <ul class="menu-content">
-                    <li><a class="d-flex align-items-center" href="app-user-list.html"><i data-feather='globe'></i><span class="menu-item" >Website</span></a>
+                    <li class="{{ request()->is('admin/ads','admin/ads/create','admin/ads/*/edit') ? 'active' : '' }}"><a class="d-flex align-items-center" href="{{route('ads.index')}}"><i data-feather='twitch'></i><span class="menu-item" >Banner</span></a>
+                    </li>
+                    <li class="{{ request()->is('admin/infosite','admin/infosite/create','admin/infosite/*/edit') ? 'active' : '' }}"><a class="d-flex align-items-center" href="{{route('infosite.index')}}"><i data-feather='globe'></i><span class="menu-item" >Website</span></a>
                     </li>
                     <li class="{{ request()->is('admin/seo','admin/seo/create','admin/seo/*/edit') ? 'active' : '' }}"> <a class="d-flex align-items-center" href="{{route('seo.index')}}"><i data-feather='bar-chart'></i><span class="menu-item" >SEO</span></a>
                     </li>

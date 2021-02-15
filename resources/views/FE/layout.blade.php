@@ -2,7 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+    @php
+    $seo = DB::table('seo')->get();
+    @endphp
+    @foreach ($seo as $s)
+    <meta name="{{$s->meta_name}}" content="{{$s->meta_content}}">
+
+    @endforeach
     <link rel="shortcut icon" type="image/x-icon" href="{{asset('assets')}}/img/favicon.ico">
     <title>@yield('pagetitle')</title>
     <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -44,9 +50,41 @@
 
        
     </div>
-  
     <div class="sidebar-overlay" data-reff=""></div>
-   
+    <div class="fixed-footer">
+        <div class="copyright">
+            <div class="container">
+                <div class="row">
+                    <!-- End col -->
+                    <div class="col-md-6 p-1">
+                        <span>Facebook Admin : <a href="https://www.facebook.com/profile.php?id=100005567533403">TNM</a> - 
+                        <a href="https://www.facebook.com/ereiai">Shin</a>
+                        </span>
+                    </div>
+                    <!-- End Col -->
+                    <div class="col-md-6 p-1 displayfooter">
+                        <div class="copyright-menu">
+                            <ul>
+                                <li>
+                                    <a href="{{route('index')}}">Trang chủ</a>
+                                </li>
+                                <li>
+                                    <a href="#">Điều khoản & Chính sách</a>
+                                </li>
+                               
+                                <li>
+                                    <a href="{{route('contact')}}">Liên hệ</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                   
+                </div>
+                <!-- End Row -->
+            </div>
+            <!-- End Copyright Container -->
+        </div>
+    </div>
     <script src="{{asset('assets')}}/js/jquery-3.2.1.min.js"></script>
     <script src="{{asset('assets')}}/js/sweetalert2@10.js"></script>
 	<script src="{{asset('assets')}}/js/popper.min.js"></script>

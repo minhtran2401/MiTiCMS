@@ -142,7 +142,7 @@
                         
                             <div class="form-group">
                                 <label class="form-label" for="basic-icon-default-fullname">Tên miền</label>
-                                <input type="text" name="name" class="form-control dt-full-name" placeholder=".com , .net ,..." required  />
+                                <input type="text" name="name" class="form-control dt-full-name" placeholder="com , net ,... ( không chấm )" required  />
                             </div>
 
                             <div class="form-group">

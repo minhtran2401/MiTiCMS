@@ -35,14 +35,14 @@
                                             <div class="row col-lg-12">
                                                 <div class="col-sm-12 col-md-8 col-lg-12">
                                                     <p>
-                                                        <b>Tên : </b><input id="namechangeinfo" required placeholder="nhập tên của bạn" style="border:none" type="text" name="name" value=" {{ Auth::user()->name }}" ><br> 
+                                                        <b>Tên : </b><input id="namechangeinfo" required placeholder="nhập tên của bạn" style="border:rgb(212, 188, 188) 1px solid" type="text" name="name" value=" {{ Auth::user()->name }}" ><br> 
                                                         {{-- <span style="display: block; margin-top: 10px; color: grey;"> [ Bạn sẽ nhận được thông tin dịch vụ, hóa đơn thanh toán dịch vụ bằng Email của mình ]</span> --}}
                                                     </p>
                                                     <hr>
                                                 </div>
                                                 <div class="col-sm-12 col-md-8 col-lg-12">
                                                     <p>
-                                                        <b>Email : </b><input readonly style="border:none" type="text"  value=" {{ Auth::user()->email }}"> <br> 
+                                                        <b>Email : </b><input readonly disabled style="border:rgb(212, 188, 188) 1px solid" type="text"  value=" {{ Auth::user()->email }}"> <br> 
                                                         <span style="display: block; margin-top: 10px; color: grey;"> (Bạn sẽ nhận được thông tin dịch vụ, đơn hàng và hóa đơn thanh toán dịch vụ bằng Email này</span>
                                                         <span style="display: block; margin-top: 5px; color: grey;" >Để đổi email, vui lòng nhắn tin vào hỗ trợ.)</span>
                                                     </p>
@@ -50,14 +50,14 @@
                                                 </div>
                                                 <div class="col-sm-12 col-md-8 col-lg-12">
                                                     <p>
-                                                        <b>Link facebook : </b><input name="facebook" placeholder="điền link facebook" required style="border:none" type="text"  value=" {{ Auth::user()->facebook }}"> <br> 
+                                                        <b>Link facebook : </b><input name="facebook" placeholder="điền link facebook" required style="border:rgb(212, 188, 188) 1px solid" type="text"  value=" {{ Auth::user()->facebook }}"> <br> 
                                                         <span style="display: block; margin-top: 10px; color: grey;"> (Chúng tôi sẽ dễ dàng liên lạc với bạn hơn qua facebook)</span>
                                                     </p>
                                                     <hr>
                                                 </div>
                                                 <div class="col-sm-12 col-md-8 col-lg-12">
                                                     <p>
-                                                        <b>Số điện thoại:</b> <input id="phonechangeinfo" required placeholder="vui lòng nhập sđt" style="border:none" class="form" type="text" value="{{ Auth::user()->phone }}" name="phone" id=""> <br> 
+                                                        <b>Số điện thoại:</b> <input id="phonechangeinfo" required placeholder="vui lòng nhập sđt" style="border:rgb(212, 188, 188) 1px solid" class="form" type="text" value="{{ Auth::user()->phone }}" name="phone" id=""> <br> 
                                                         <span style="display: block; margin-top: 10px; color: grey;"> (Bạn có thể khôi phục mật khẩu bằng số điện thoại này)</span>
                                                     </p>
                                                     <hr>
