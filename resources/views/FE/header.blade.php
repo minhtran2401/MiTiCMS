@@ -2,7 +2,7 @@
     
     <div class="header-left">
         <a href="{{route('index')}}" class="logo">
-            <img src="{{asset('assets')}}/img/logo.png" width="35" height="35" alt=""> <span>TiMiHost</span>
+            <img src="{{asset('image')}}/logo-timi-site.png" height="35" alt="">
         </a>
     </div>
     <a id="toggle_btn" href="javascript:void(0);"><i class="fa fa-bars mt-3"></i></a>
