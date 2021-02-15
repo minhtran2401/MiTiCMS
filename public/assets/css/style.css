@@ -66,6 +66,30 @@ Version      : 1.0
 	  background-color: #7367F0;
 	  color: white;
   }
+  
+  .shin-hidden-a{
+	  height: 0;
+	  overflow: hidden;
+	  transition: 0.3s;
+  }
+  .shin-active-a:hover .shin-hidden-a{
+	height: 100%;
+  }
+  .shin-fixed-footer{
+	width: 100%;
+	bottom: -30px;
+    position: fixed;
+    background: #7367F0;
+    padding-left: 6%;
+    color: white;
+    height: 50px;
+    z-index: 999;
+    padding-top: 12px;
+	transition: 0.4s;
+  }
+  .shin-fixed-footer:hover{
+	bottom: 0;
+  }
 .shin-service-title{
 	background: #7367F0; padding: 5px; border-radius: 3px; color: white;
 }

@@ -51,7 +51,7 @@
        
     </div>
     <div class="sidebar-overlay" data-reff=""></div>
-    <div class="fixed-footer">
+    <div class="shin-fixed-footer">
         <div class="copyright">
             <div class="container">
                 <div class="row">
