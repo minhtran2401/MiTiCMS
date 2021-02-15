@@ -23,5 +23,7 @@ Route::get('/', function(Request $request){
 Route::get('/thong-ke-truy-cap', [App\Http\Controllers\BE\DashBoardController::class, 'thong_ke_truy_cap'])->name('api.thong_ke_truy_cap');
 Route::get('/khach-hang-tiem-nang', [App\Http\Controllers\BE\DashBoardController::class, 'khach_hang_tiem_nang'])->name('api.khach_hang_tiem_nang');
 Route::get('/san-pham-ban-chay', [App\Http\Controllers\BE\DashBoardController::class, 'san_pham_ban_chay'])->name('api.san_pham_ban_chay');
+Route::get('/status-web', [App\Http\Controllers\BE\DashBoardController::class, 'status_web'])->name('api.status_web');
+
 
 

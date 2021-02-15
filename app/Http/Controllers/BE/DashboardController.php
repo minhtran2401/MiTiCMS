@@ -16,6 +16,7 @@ use App\Models\TypeService;
 use App\Models\Funds;
 use Session;
 use Str;
+use Artisan;
 use App\Models\LogAdmin;
 use App\Models\DetailAccount;
 use RealRashid\SweetAlert\Facades\Aler;
@@ -194,22 +195,112 @@ class DashboardController extends Controller
 
     public function shutdown()
     {
-      DB::update('update protectweb set status = 1 where id = 2');
-      Artisan::call('down --secret=gfteam');
+      DB::update('update miti_info set status = 1 where id = 1');
+      Artisan::call('down --secret=timiteam');
       alert()->warning('Cảnh báo','Đã đưa trang web vào trạng thái bảo trì! Chỉ có quản trị viên mới có thể truy cập website.');
-      return redirect('/gfteam');
+      return redirect('/timiteam');
      
     }
     
     // khởi động lại web
     public function start(){
       Artisan::call('up');
-      DB::update('update protectweb set status = 0 where id = 2');
+      DB::update('update miti_info set status = 0 where id = 1');
       alert()->success('Kích hoạt Thành công','Trang web đã vào trạng thái hoạt động !');
-      return redirect('/dashboard');
+      return redirect('/admin');
     
     }
 
-    
+    public function our_backup_database(){
 
+        //ENTER THE RELEVANT INFO BELOW
+        $mysqlHostName      = env('DB_HOST');
+        $mysqlUserName      = env('DB_USERNAME');
+        $mysqlPassword      = env('DB_PASSWORD');
+        $DbName             = env('DB_DATABASE');
+
+           $conn = mysqli_connect($mysqlHostName, $mysqlUserName, $mysqlPassword, $DbName);
+           $conn->set_charset("utf8");
+           // Get All Table Names From the Database
+           $tables = array();
+           $sql = "SHOW TABLES";
+           $result = mysqli_query($conn, $sql);
+           while ($row = mysqli_fetch_row($result)) {
+               $tables[] = $row[0];
+           }
+           $sqlScript = "";
+           foreach ($tables as $table) {
+               // Prepare SQLscript for creating table structure
+           $query = "SHOW CREATE TABLE $table";
+           $result = mysqli_query($conn, $query);
+           $row = mysqli_fetch_row($result);
+           $sqlScript .= "\n\n" . $row[1] . ";\n\n";
+           $query = "SELECT * FROM $table";
+           $result = mysqli_query($conn, $query);
+           $columnCount = mysqli_num_fields($result);
+           // Prepare SQLscript for dumping data for each table
+           for ($i = 0; $i < $columnCount; $i ++) {
+               while ($row = mysqli_fetch_row($result)) {
+                   $sqlScript .= "INSERT INTO $table VALUES(";
+                   for ($j = 0; $j < $columnCount; $j ++) {
+                       $row[$j] = $row[$j];
+                    if (isset($row[$j])) {
+                           $sqlScript .= '"' . $row[$j] . '"';
+                       } else {
+                           $sqlScript .= '""';
+                       }
+                       if ($j < ($columnCount - 1)) {
+                           $sqlScript .= ',';
+                       }
+                   }
+                   $sqlScript .= ");\n";
+               }
+           }
+           
+           $sqlScript .= "\n"; 
+       }
+
+       if(!empty($sqlScript))
+       {
+           // Save the SQL script to a backup file
+           $backup_file_name = $DbName . '_backup_' . time() . '.sql';
+           $fileHandler = fopen($backup_file_name, 'w+');
+           $number_of_lines = fwrite($fileHandler, $sqlScript);
+           fclose($fileHandler); 
+        // Download the SQL backup file to the browser
+           header('Content-Description: File Transfer');
+           header('Content-Type: application/octet-stream');
+           header('Content-Disposition: attachment; filename=' . basename($backup_file_name));
+           header('Content-Transfer-Encoding: binary');
+           header('Expires: 0');
+           header('Cache-Control: must-revalidate');
+           header('Pragma: public');
+           header('Content-Length: ' . filesize($backup_file_name));
+           ob_clean();
+           flush();
+readfile($backup_file_name);
+           exec('rm ' . $backup_file_name); 
+       }                       
+    }
+
+
+    function changeStatusWeb(Request $request){
+       
+        if($request->ajax()){
+            DB::update("update miti_info set protect = '$request->status' where id = 1");
+            return $request->status;
+        }
+    }
+  
+    public function status_web(){
+      $data = array();
+      $status =  DB::select('select * from miti_info where id = 1');
+      // $data[] = array($status);
+      foreach ($status as $t){
+        $tt['protect'] = $t->protect;
+  
+  
+      }
+      return response()->json($tt);
+    }
 }

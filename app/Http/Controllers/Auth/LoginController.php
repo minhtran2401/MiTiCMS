@@ -68,7 +68,7 @@ class LoginController extends Controller
                     // time session found
                  } else{
                 DB::table('counters')
-                        ->whereDate('time', '>=', date('Y-m-d H:i:s',strtotime('-1 minutes')) )
+                        ->whereDate('time', '>=', date('Y-m-d H:i:s',strtotime('1 minutes')) )
                         ->insert(['time' => $time_old,'ip'=>$ip_user]);
                         }  // check trùng thời gian session
                     if ($check_time_counter > 1) { //set 1 phút

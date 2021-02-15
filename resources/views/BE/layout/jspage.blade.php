@@ -449,3 +449,104 @@ Highcharts.chart('khachhangtiemnang', {
 });
 
 </script>
+
+<script>
+    $(document).ready(function () {
+      $.get('{{route('index')}}/api/status-web').then(function (response) {
+        if (response.protect == 1) {
+          truee();
+        }
+      });
+
+    })
+
+    function thongbao() {
+      
+ Swal.fire({
+icon: 'error',
+title: 'Bị chặn',
+text: 'Đừng phá , Cảm ơn ♥',
+footer: '<a href = {{route('contact')}}>Có thắc mắc? Hãy liên hệ để được hỗ trợ !</a>',
+confirmButtonText:
+   '<i class="fa fa-thumbs-up"></i> Đồng Ý',
+})
+
+      }
+
+  function truee() {
+
+    $(window).on('keydown',function(event)
+  {
+  if(event.keyCode==123)
+  {
+    thongbao();
+      return false;
+  }
+  else if(event.ctrlKey && event.shiftKey && event.keyCode==73 )
+  {      thongbao();
+
+      return false;  //Prevent from ctrl+shift+i
+  }
+  else if(event.ctrlKey && event.keyCode==73)
+  {      thongbao();
+
+      return false;  //Prevent from ctrl+shift+i
+  }
+  else if(event.ctrlKey && event.keyCode==18)
+  {      thongbao();
+
+      return false;  //Prevent from ctrl+shift+i
+  }
+  else if(event.ctrlKey && event.keyCode==83)
+  {      thongbao();
+
+      return false;  //Prevent from ctrl+shift+i
+  }
+  
+  else if(event.ctrlKey && event.shiftKey && event.keyCode==67 )
+  {      thongbao();
+
+      return false;  //Prevent from ctrl+shift+c
+  }
+  else if(event.ctrlKey && event.keyCode==67)
+  {      thongbao();
+
+      return false;  //Prevent from ctrl+shift+c
+  }
+  else if(event.ctrlKey && event.shiftKey && event.keyCode==85 )
+  {      thongbao();
+
+      return false;  //Prevent from ctrl+shift+u
+  }
+  else if(event.ctrlKey && event.keyCode==85)
+  {      thongbao();
+
+      return false;  //Prevent from ctrl+shift+u
+  }
+  else if(event.ctrlKey && event.shiftKey && event.keyCode==74 )
+  {        thongbao();
+
+      return false;  //Prevent from ctrl+shift+j
+  }
+  else if(event.ctrlKey && event.shiftKey && event.keyCode==83 )
+  {        thongbao();
+
+      return false;  //Prevent from ctrl+shift+j
+  }
+  else if(event.ctrlKey && event.shiftKey && event.keyCode==70 )
+  {        thongbao();
+
+      return false;  //Prevent from ctrl+shift+j
+  }
+  else if(event.ctrlKey && event.keyCode==74)
+  {      thongbao();
+
+      return false;  //Prevent from ctrl+shift+j
+  }
+});
+$(document).on("contextmenu",function(e)
+{
+e.preventDefault();
+});
+  }
+  </script>

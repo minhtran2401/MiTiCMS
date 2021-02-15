@@ -120,7 +120,7 @@
     <script src="{{asset('BE')}}/app-assets/js/scripts/forms/form-validation.js"></script>
 
     <!-- END: Page JS-->
-
+ 
     <script>
         $(window).on('load', function() {
             if (feather) {
@@ -131,6 +131,7 @@
             }
         })
     </script>
+
 </body>
 <!-- END: Body-->
 
