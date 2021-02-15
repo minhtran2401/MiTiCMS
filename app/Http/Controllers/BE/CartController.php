@@ -121,7 +121,7 @@ class CartController extends Controller
 
            
         // toast('Đặt hàng thành công','success');
-        alert()->success('Thành công','Kiểm tra email để hoàn tất đơn hàng.');
+        alert()->success('Thành công','Kiểm tra email ( có thể trong thư mục spam ) để hoàn tất đơn hàng.');
             
      
 
@@ -170,7 +170,7 @@ class CartController extends Controller
 
        
     // toast('Đặt hàng thành công','success');
-    alert()->success('Thành công','Kiểm tra email để hoàn tất đơn hàng.');
+    alert()->success('Thành công','Kiểm tra email ( có thể trong thư mục spam ) để hoàn tất đơn hàng.');
         
 
     $customer_email = Auth::user()->email;

@@ -332,7 +332,7 @@ class HomeController extends Controller
             'content' => $request->get('content'),
             'status' => 0,
         ]);
-        toast('Đã gửi hỗ trợ, chúng tôi sẽ phản hồi qua mail','success');
+        toast('Đã gửi hỗ trợ, chúng tôi sẽ phản hồi qua mail ( kiểm tra trong thư mục spam )','success');
         $lt->save();
         return redirect()->back();
     }
