@@ -108,7 +108,7 @@ Route::prefix('admin')->group(function () {
     Route::get('/login', [App\Http\Controllers\BE\AdminLoginController::class, 'show_login_form'])->name('admin.login')->withoutMiddleware('checkadmin');
     Route::post('/login', [App\Http\Controllers\BE\AdminLoginController::class, 'process_login'])->name('admin.login.process')->withoutMiddleware('checkadmin');
     Route::post('/logout', [App\Http\Controllers\BE\AdminLoginController::class, 'logout'])->name('logout.admin');
-    Route::get('/', [App\Http\Controllers\BE\DashboardController::class, 'tongquat'])->name('admin.dashboard');
+    Route::get('/', [App\Http\Controllers\BE\DashBoardController::class, 'tongquat'])->name('admin.dashboard');
     // Route::get('/register','AdminLoginController@show_signup_form')->name('register');
     // Route::post('/register','AdminLoginController@process_signup');
     Route::resource('/group-service', App\Http\Controllers\BE\GroupServiceController::class);
@@ -186,9 +186,9 @@ Route::prefix('admin')->group(function () {
     Route::resource('/ads', App\Http\Controllers\BE\AdsController::class);
 
     // protectweb
-    Route::get('/our_backup_database', 'App\Http\Controllers\BE\DashboardController@our_backup_database')->name('our_backup_database');
-    Route::post('/shutdown', 'App\Http\Controllers\BE\DashboardController@shutdown')->name('shutdown');
-    Route::post('/start', 'App\Http\Controllers\BE\DashboardController@start')->name('start');
+    Route::get('/our_backup_database', 'App\Http\Controllers\BE\DashBoardController@our_backup_database')->name('our_backup_database');
+    Route::post('/shutdown', 'App\Http\Controllers\BE\DashBoardController@shutdown')->name('shutdown');
+    Route::post('/start', 'App\Http\Controllers\BE\DashBoardController@start')->name('start');
     Route::post('/change-status-web','App\Http\Controllers\BE\DashBoardController@changeStatusWeb')->name('changeStatus.web');
 
 

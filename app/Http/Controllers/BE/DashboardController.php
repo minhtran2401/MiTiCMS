@@ -20,7 +20,7 @@ use Artisan;
 use App\Models\LogAdmin;
 use App\Models\DetailAccount;
 use RealRashid\SweetAlert\Facades\Aler;
-class DashboardController extends Controller
+class DashBoardController extends Controller
 {
     public function tongquat(){
         $day = Carbon::now('Asia/Ho_Chi_Minh')->day;
