@@ -19,14 +19,16 @@
             @endphp
             <ul class="nav navbar-nav nav-item d-none d-lg-block">
             <div class="custom-control custom-switch custom-control-inline ">
-                <input type="checkbox"  id="change-status-web" class="custom-control-input change-special change-status "{{ $timi->protect==1?'checked':'' }} >
+                <input type="checkbox"  id="change-status-web" class="custom-control-input change-special change-status " checked >
                 <label for="change-status-web" class="custom-control-label content-status" >Bảo vệ web</label>
             </div>
             </ul>
             
                
             <ul class="nav navbar-nav bookmark-icons">
-               
+                    @isset($timi)
+                        
+                   
                     @if($timi->status == 0)
               <a href="#" class="nav-link nav-link-lg ">
                 <form action="{{ route('shutdown') }}" method="post">
@@ -42,7 +44,7 @@
               </form>
               </a>
               @endif
-              
+              @endisset
             </ul>
               @if(Auth::user()->id == 1 && 2 )
             <ul class="nav navbar-nav bookmark-icons">

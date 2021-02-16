@@ -40,7 +40,6 @@
     <!-- BEGIN: Custom CSS-->
     <link rel="stylesheet" type="text/css" href="{{asset('BE')}}/assets/css/style.css">
     <!-- END: Custom CSS-->
-    <script src='https://www.google.com/recaptcha/api.js'></script>
 
 
 </head>

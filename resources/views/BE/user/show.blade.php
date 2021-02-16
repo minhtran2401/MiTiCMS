@@ -46,6 +46,7 @@
                                     <th>#</th>
                                     <th>Tên</th>
                                     <th>Email</th>
+                                    <th>Facebook</th>
                                     <th>Số điện thoại</th>
                                     <th>Trạng thái</th>
                                     <th>Lịch sử mua</th>
@@ -57,6 +58,7 @@
                                 <td>{{$row->id}}</td>
                                 <td>{{$row->name}}</td>
                                  <td>{{$row->email}}  </td>
+                                 <td><a href="{{$row->facebook}}">Link</a></td>
                                  <td>{{$row->phone}}</td>
                                 
                                   <td data-id="{{ $row->id }}">
